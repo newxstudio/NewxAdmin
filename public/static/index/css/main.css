@@ -1,0 +1,210 @@
+/**
+ * 跨屏滚动样式
+ */
+body,
+html {
+	padding: 0;
+	margin: 0;
+}
+
+body,
+html {
+	height: 100%;
+	overflow: hidden;
+}
+
+#container,
+.section {
+	height: 100%;
+}
+
+.section {
+	background-color: #ccc;
+	background-size: cover;
+	background-position: 50% 50%;
+}
+
+#section1 {
+	background-color: #ccc;
+}
+
+#section2 {
+	/*background-color: #764d39;*/
+	background-color: #ccc;
+}
+
+#section3 {
+	background-color: #ff9000;
+}
+
+#section4 {
+	background-color: #380d31;
+}
+#section5 {
+	background-color: #3C763D;
+}
+/**
+ * 导航栏
+ */
+#nav{
+	height: 90px;
+	width: 100%;
+	background-color: rgba(102, 104, 106,1);
+	position: fixed;
+	z-index: 9999;
+	left: 0;
+	top: 0;
+	color: #ccc;
+	overflow: hidden;
+	
+}
+#nav img{
+	width: 80px;
+	margin: 5px 20px 10px 30px;
+	height: auto;
+	float: left;
+	/* border: 1px solid #fff;
+	border-radius: 50%; */
+}
+#nav #logo,#nav ul{
+	float: left;
+}
+#nav p{
+	float: left;
+	margin-right: 100px;
+}
+#nav li{
+	float: left;
+	margin-left: 35px;
+}
+#nav .account {
+	float: right;
+}
+#nav ul,#nav #logo p,#nav .account{
+	height: 50px;
+	font-size: 16px;
+	line-height: 50px;
+	margin-top: 20px;
+} 
+#nav .account .sign_in,#nav .account .sign_up{
+	float: left;
+	margin-right: 20px;
+}
+/**
+ * 第一屏
+ */
+#section1{
+	overflow: hidden;
+	color: #000;
+	font-size: 17px;
+	font-weight: 200;
+}
+#section1 p{
+	width: 600px;
+	margin: 200px auto;
+}
+
+/**
+ * 第二屏
+ */
+#section2{
+	overflow: hidden;
+	color: #000;
+	font-size: 17px;
+	font-weight: 200;
+	padding-top: 90px;
+}
+#section2 .team{
+	padding-top: 30px;
+	border: 1px solid  red;
+	height: 600px;
+}
+#section2 .team_title{
+	color: #380D31;
+	font-size: 18px;
+	font-weight: 300;
+	border-left: 3px solid #8C44A2;
+}
+
+#section2 .operation,#section2 .technology{
+	float: left;
+	margin-left: 50px;
+}
+#section2 .team_box{
+	margin-top: 20px;
+	width: 200px;
+	height: 235px;
+	margin-right: 80px;
+	background-color: #fff;
+	border: 1px solid red;
+	transition: all 0.6s;
+	float: left;
+	position: relative;
+}
+#section2 .team_box:hover{
+	box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+	transform: translateY(-10px);
+}
+#section2 .team_box span{
+	width: 100%;
+	position: absolute;
+	bottom: 10px;
+	text-align: center;
+}
+/**
+ * 第三屏
+ */
+
+/**
+ * 第四屏
+ */
+#section4{
+	width: 100%;
+	position: relative;
+}
+#section4 a{
+	display: inline-block;
+	background: #000 url("http://localhost/newx/public/static/index/images/newx_chri.jpeg") no-repeat center center;
+	background-size: cover;
+	padding-top: 90px;
+	width: 100%;
+	height: 100%;
+	font-size: 20px;
+	text-indent: -9999px;
+}
+#section4 p{
+	position: absolute;
+	font-size: 25px;
+	font-weight: normal;
+	color: red;
+	top: 300px;
+	left: 700px;
+}
+#section4 button{
+	position: absolute;
+	bottom: 200px;
+	left: 50%;
+	font-size: 25px;
+	color: #000;
+	background-color: #009900;
+	border-radius: 10px;
+	border: none;
+}
+/**
+ * 第五屏
+ */
+#section5{
+	padding-top: 90px;
+	position: relative;
+}
+#section5 .copyright{
+	width: 100%;
+	height: 100px;
+	line-height: 100px;
+	position: absolute;
+	background-color: rgb(64, 64, 64);
+	color: #fff;
+	font-size: 16px;
+	bottom: 0;
+	text-align: center;
+}
