@@ -102,8 +102,16 @@ html {
 #section1 p{
 	width: 600px;
 	margin: 200px auto;
+	transition: all 2s;
 }
-
+#section1 p:hover{
+	transform: translateX(500px);
+	-ms-transform: translateX(500px); /* IE 9 */
+	-webkit-transform: translateX(500px); /* Safari and Chrome */
+}
+#section1 p span{
+	
+}
 /**
  * 第二屏
  */
@@ -207,4 +215,10 @@ html {
 	font-size: 16px;
 	bottom: 0;
 	text-align: center;
+}
+#section5  span a{
+	color: #fff;
+}
+#section5  span a:hover{
+	color:#c81623;
 }

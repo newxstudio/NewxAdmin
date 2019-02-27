@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html><head>
 	    <meta charset="utf-8">
-    <title>NEWX·后台管理 - 添加管理员</title>
+    <title>NEWX·后台管理 - 注册</title>
 
     <meta name="description" content="Dashboard">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -66,49 +66,95 @@
                 <div id="horizontal-form">
                     <form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
                         <div class="form-group">
-                            <label for="username" class="col-sm-2 control-label no-padding-right">管理员登录名</label>
+                            <label for="username" class="col-sm-2 control-label no-padding-right">登录名</label>
                             <div class="col-sm-6">
                                 <input class="form-control" id="username" placeholder="登录名" name="username"  type="text">
+                            
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="password" class="col-sm-2 control-label no-padding-right">登录密码</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="password" placeholder="登录名" name="password"  type="text">
+                            
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label no-padding-right">姓名</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="name" placeholder="登录名" name="name"  type="text">
+                            
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="sex" class="col-sm-2 control-label no-padding-right">性别</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="sex" placeholder="登录名" name="sex"  type="text">
+                            
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="date" class="col-sm-2 control-label no-padding-right">出生日期</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="date" placeholder="登录名" name="date"  type="text">
+                            
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone" class="col-sm-2 control-label no-padding-right">电话</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="phone" placeholder="登录名" name="phone"  type="text">
+                            
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="department" class="col-sm-2 control-label no-padding-right">院系</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="department" placeholder="登录名" name="department"  type="text">
+                            
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="class" class="col-sm-2 control-label no-padding-right">班级</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="class" placeholder="登录名" name="class"  type="text">
+                            
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="bedroom" class="col-sm-2 control-label no-padding-right">寝室</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="bedroom" placeholder="登录名" name="bedroom"  type="text">
+                            
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="id_number" class="col-sm-2 control-label no-padding-right">学号</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="id_number" placeholder="登录名" name="id_number"  type="text">
+                            
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label no-padding-right">邮箱</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="email" placeholder="登录名" name="email"  type="text">
+                            
                             </div>
                             <p class="help-block col-sm-4 red">* 必填</p>
                         </div>
 
-                        <div class="form-group">
-                            <label for="password" class="col-sm-2 control-label no-padding-right">管理员密码</label>
-                            <div class="col-sm-6">
-                                <input class="form-control" id="password" placeholder="密码" name="password"  type="text">  
-                            </div>
-                            <p class="help-block col-sm-4 red">* 必填</p>
-                        </div>  
-                        <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label no-padding-right">管理员昵称</label>
-                            <div class="col-sm-6">
-                                <input class="form-control" id="name" placeholder="昵称" name="name"  type="text">  
-                            </div>
-                            <p class="help-block col-sm-4 red">* 必填</p>
-                        </div>  
-                        <div class="form-group">
-                            <label for="email" class="col-sm-2 control-label no-padding-right">管理员邮箱</label>
-                            <div class="col-sm-6">
-                                <input class="form-control" id="email" placeholder="邮箱" name="email"  type="text">  
-                            </div>
-                            <p class="help-block col-sm-4 red">* 必填</p>
-                        </div>  
-                        <div class="form-group">
-                            <label for="desca" class="col-sm-2 control-label no-padding-right">管理员描述</label>
-                            <div class="col-sm-6">
-                                <input class="form-control" id="desca" placeholder="描述" name="desca"  type="text">  
-                            </div>
-                            <p class="help-block col-sm-4 red">* 必填</p>
-                        </div>  
-                       
-                        <div class="form-group">
-                            <label for="pic" class="col-sm-2 control-label no-padding-right">管理员头像</label>
-                            <div class="col-sm-6">
-                             <input  id="pic" placeholder="" name="pic" required="required" type="file">
-                            </div>
-                          
-                        </div>  
+                        
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-default">保存信息</button>

@@ -64,7 +64,11 @@
                         <thead class="">
                             <tr>
                                 <th class="text-center">ID</th>
-                                <th class="text-center">管理员名称</th>
+                                <th class="text-center">用户名称</th>
+                                <th class="text-center">姓名</th>
+                                <th class="text-center">性别</th>
+                                <th class="text-center">院系</th>
+                                <th class="text-center">班级</th>
                                 <th class="text-center">操作</th>
                             </tr>
                         </thead>
@@ -73,15 +77,20 @@
                             <tr>
                                 <td align="center">{$vo.id}</td>
                                 <td align="center">{$vo.username}</td>
+                                <td align="center">{$vo.name}</td>
+                                <td align="center">{$vo.sex}</td>
+                                <td align="center">{$vo.department}</td>
+                                <td align="center">{$vo.class}</td>
+                                
                                 <td align="center">
                                     <a href="{:url('admin/edit',array('id'=>$vo['id']))}" class="btn btn-primary btn-sm shiny">
                                         <i class="fa fa-edit"></i> 编辑
                                     </a>
-                                    {if condition="$vo.id neq 1"}
+                                   
                                     <a href="#" onClick="warning('确实要删除吗', '{:url("admin/del",array('id'=>$vo['id']))}')" class="btn btn-danger btn-sm shiny">
                                         <i class="fa fa-trash-o"></i> 删除
                                     </a>
-                                    {/if}
+                                    
                                 </td>
                             </tr>
                             
