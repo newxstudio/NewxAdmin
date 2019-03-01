@@ -7,7 +7,8 @@ class Login extends controller
    
     public function index()
     {
-    	if(request()->isPost()){
+    	
+    	if(request()->isAjax()){
     		$admin = new Admin();
     		$data = input('post.');
     		if($admin->login($data)==3)
@@ -22,6 +23,7 @@ class Login extends controller
     		}
     	}
         return $this->fetch('login');
+        
     }
 	
    

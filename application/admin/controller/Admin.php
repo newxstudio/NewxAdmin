@@ -20,7 +20,7 @@ class Admin extends Base
     		
     		$data=[
     			'username'=>input('username'),
-    			'password'=>input('password'),
+    			'password'=>md5(input('password')),
     			'email'=>input('email'),
     			'desca'=>input('desca'),
     			'name'=>input('name'),
@@ -116,7 +116,7 @@ class Admin extends Base
    }
    public function logout(){
    		session(null);
-   		$this->success('退出成功!','login/index');
+   		$this->redirect('login/index');
    }
 }
 

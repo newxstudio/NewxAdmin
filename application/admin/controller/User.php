@@ -20,7 +20,7 @@ class User extends Base
     		
     		$data=[
     			'username'=>input('username'),
-    			'password'=>input('password'),
+    			'password'=>md5(input('password')),
     			'name'=>input('name'),
     			'sex'=>input('sex'),
     			'date'=>input('date'),
@@ -79,14 +79,22 @@ class User extends Base
 	public function edit()
     {
     	$id = input('id');
-    	$admins = db('admin')->find($id);
+    	$users = db('user')->find($id);
     	if(request()->isPost())
     	{
     		$data = [
     			'id'=>input('id'),
-    			'email'=>input('email'),
-    			'desca'=>input('desca'),
+    			'username'=>input('username'),
+    			'password'=>input('password'),
     			'name'=>input('name'),
+    			'sex'=>input('sex'),
+    			'date'=>input('date'),
+    			'phone'=>input('phone'),
+    			'department'=>input('department'),
+    			'class'=>input('class'),
+    			'id_number'=>input('id_number'),
+    			'bedroom'=>input('bedroom'),
+    			'email'=>input('email'),
     		
     		];
     		if(input('password'))
@@ -96,19 +104,7 @@ class User extends Base
     			$data['password'] = $admins['password'];
     		}
     		
-    		if($_FILES['pic']['tmp_name']){
-    			$file = request()->file('pic');
-    			$info = $file->move( 'static/uploads');
-    			$data['pic'] =  'uploads/'.$info->getSaveName();
-    			
-    		}
-    		$validate = new \app\admin\validate\Admin;
-
-	        if (!$validate->scene('edit')->check($data)) {
-	        	$this->error($validate->getError());
-	            die();
-	        }
-    		$save = db('admin')->update($data);
+    		$save = db('user')->update($data);
     		
     		if($save !== false)
     		{
@@ -119,7 +115,7 @@ class User extends Base
     		return;
     	}
     	
-    	$this->assign('admins',$admins);
+    	$this->assign('users',$users);
         return $this->fetch();
     }
    
@@ -127,18 +123,14 @@ class User extends Base
    {
    	
    		$id = input('id');
-   		if($id != 1)
+   		
+   		if(db('user')->delete($id))
    		{
-   			if(db('admin')->delete($id))
-   			{
-   				$this->success("删除管理员成功",'admin/lst');
-   			}else{
-   				$this->error("删除管理员失败");
-   			}
+   			$this->success("删除用户成功",'user/lst');
    		}else{
-   			$this->error("初始管理员不可删除");
+   			$this->error("删除用户失败");
    		}
-   	
+   		
    	
    }
    public function logout(){

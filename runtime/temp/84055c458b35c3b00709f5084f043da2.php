@@ -1,4 +1,4 @@
-<?php /*a:3:{s:56:"D:\wamp64\www\NEWX\application\admin\view\admin\lst.html";i:1551267192;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551069475;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551274307;}*/ ?>
+<?php /*a:3:{s:56:"D:\wamp64\www\NEWX\application\admin\view\admin\lst.html";i:1551439905;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551428493;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551335181;}*/ ?>
 <!DOCTYPE html>
 <html><head>
 	    <meta charset="utf-8">
@@ -18,7 +18,8 @@
     <link href="http://localhost/newx/public/static/admin/style/demo.css" rel="stylesheet">
     <link href="http://localhost/newx/public/static/admin/style/typicons.css" rel="stylesheet">
     <link href="http://localhost/newx/public/static/admin/style/animate.css" rel="stylesheet">
-    
+    <link rel="shortcut icon" href="http://localhost/newx/public/static/admin/images/newx.ico" /> 
+    <link rel="stylesheet" href="http://localhost/newx/public/static/layui/css/layui.css">
 </head>
 <body>
 	<!-- 头部 -->
@@ -56,7 +57,7 @@
                             <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
                                 <li class="username"><a>David Stevenson</a></li>
                                 <li class="dropdown-footer">
-                                    <a href="<?php echo url('admin/logout'); ?>">
+                                    <a href="<?php echo url('admin/logout'); ?>" id="logout">
                                             退出登录
                                         </a>
                                 </li>
@@ -89,9 +90,7 @@
             <div class="page-sidebar" id="sidebar">
                 <!-- Page Sidebar Header-->
                 <div class="sidebar-header-wrapper">
-                    <input class="searchinput" type="text">
-                    <i class="searchicon fa fa-search"></i>
-                    <div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>
+                    <input class="searchinput" type="text" disabled="disabled">
                 </div>
                 <!-- /Page Sidebar Header -->
                 <!-- Sidebar Menu -->
@@ -137,14 +136,14 @@
                         </a>
                         <ul class="submenu">
                             <li>
-                                <a href="<?php echo url('article/lst'); ?>">
+                                <a href="<?php echo url('apply/lst'); ?>">
                                     <span class="menu-text">
                                         报名列表                                    </span>
                                     <i class="menu-expand"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="<?php echo url('article/lst'); ?>">
+                                <a href="<?php echo url('apply/count'); ?>">
                                     <span class="menu-text">
                                         报名统计                                    </span>
                                     <i class="menu-expand"></i>
@@ -249,7 +248,15 @@
                                         <i class="fa fa-edit"></i> 编辑
                                     </a>
                                     <?php if($vo['id'] != 1): ?>
-                                    <a href="#" onClick="warning('确实要删除吗', '<?php echo url("admin/del",array('id'=>$vo['id'])); ?>')" class="btn btn-danger btn-sm shiny">
+                                    <!--
+                                    	作者：1570128795@qq.com
+                                    	时间：2019-03-01
+                                    	描述：
+                                    
+                                    <a href="#" id="del" onClick="warning('确实要删除吗', '<?php echo url("admin/del",array('id'=>$vo['id'])); ?>')" class="btn btn-danger btn-sm shiny">
+                                        <i class="fa fa-trash-o"></i> 删除
+                                    </a>-->
+                                    <a href="#" id="del"  class="btn btn-danger btn-sm shiny">
                                         <i class="fa fa-trash-o"></i> 删除
                                     </a>
                                     <?php endif; ?>
@@ -285,6 +292,29 @@
     <!--Beyond Scripts-->
     <script src="http://localhost/newx/public/static/admin/style/beyond.js"></script>
     
-
-
+    <script>
+			$(function() {
+				$('#del').click(function() {
+					$.ajax({
+						url: "<?php echo url('admin/edit',array('id'=>$vo['id'])); ?>}",
+						type: 'post',
+						data: '',
+						dataType: 'json',
+						success: function(data) {
+							if(data.code == 1) {
+								layer.msg('删除成功');
+							} else {
+								layer.open({
+									title: '登录失败',
+									content: data.msg,
+									icon: 5,
+									anim: 6
+								});
+							}
+						}
+					});
+					return false;
+				});
+			});
+		</script>
 </body></html>

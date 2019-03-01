@@ -1,4 +1,4 @@
-<?php /*a:3:{s:58:"D:\wamp64\www\NEWX\application\admin\view\user\signin.html";i:1551275854;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551069475;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551274307;}*/ ?>
+<?php /*a:3:{s:58:"D:\wamp64\www\NEWX\application\admin\view\user\signin.html";i:1551425287;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551069475;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551335181;}*/ ?>
 <!DOCTYPE html>
 <html><head>
 	    <meta charset="utf-8">
@@ -18,7 +18,7 @@
     <link href="http://localhost/newx/public/static/admin/style/demo.css" rel="stylesheet">
     <link href="http://localhost/newx/public/static/admin/style/typicons.css" rel="stylesheet">
     <link href="http://localhost/newx/public/static/admin/style/animate.css" rel="stylesheet">
-    
+    <link rel="shortcut icon" href="http://localhost/newx/public/static/admin/images/newx.ico" /> 
 </head>
 <body>
 	<!-- 头部 -->
@@ -89,9 +89,7 @@
             <div class="page-sidebar" id="sidebar">
                 <!-- Page Sidebar Header-->
                 <div class="sidebar-header-wrapper">
-                    <input class="searchinput" type="text">
-                    <i class="searchicon fa fa-search"></i>
-                    <div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>
+                    <input class="searchinput" type="text" disabled="disabled">
                 </div>
                 <!-- /Page Sidebar Header -->
                <!-- Sidebar Menu -->
@@ -137,14 +135,14 @@
                         </a>
                         <ul class="submenu">
                             <li>
-                                <a href="<?php echo url('article/lst'); ?>">
+                                <a href="<?php echo url('apply/lst'); ?>">
                                     <span class="menu-text">
                                         报名列表                                    </span>
                                     <i class="menu-expand"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="<?php echo url('article/lst'); ?>">
+                                <a href="<?php echo url('apply/count'); ?>">
                                     <span class="menu-text">
                                         报名统计                                    </span>
                                     <i class="menu-expand"></i>
@@ -217,9 +215,9 @@
                         <a href="#">系统</a>
                     </li>
                                         <li>
-                        <a href="<?php echo url('admin/lst'); ?>">管理员管理</a>
+                        <a href="<?php echo url('user/lst'); ?>">用户管理</a>
                     </li>
-                                        <li class="active">添加管理员</li>
+                                        <li class="active">添加用户</li>
                                         </ul>
                 </div>
                 <!-- /Page Breadcrumb -->
@@ -247,7 +245,7 @@
                         <div class="form-group">
                             <label for="password" class="col-sm-2 control-label no-padding-right">登录密码</label>
                             <div class="col-sm-6">
-                                <input class="form-control" id="password" placeholder="登录名" name="password"  type="text">
+                                <input class="form-control" id="password" placeholder="登录密码" name="password"  type="text">
                             
                             </div>
                             <p class="help-block col-sm-4 red">* 必填</p>
@@ -255,7 +253,7 @@
                         <div class="form-group">
                             <label for="name" class="col-sm-2 control-label no-padding-right">姓名</label>
                             <div class="col-sm-6">
-                                <input class="form-control" id="name" placeholder="登录名" name="name"  type="text">
+                                <input class="form-control" id="name" placeholder="姓名" name="name"  type="text">
                             
                             </div>
                             <p class="help-block col-sm-4 red">* 必填</p>
@@ -263,7 +261,7 @@
                         <div class="form-group">
                             <label for="sex" class="col-sm-2 control-label no-padding-right">性别</label>
                             <div class="col-sm-6">
-                                <input class="form-control" id="sex" placeholder="登录名" name="sex"  type="text">
+                                <input class="form-control" id="sex" placeholder="性别" name="sex"  type="text">
                             
                             </div>
                             <p class="help-block col-sm-4 red">* 必填</p>
@@ -271,7 +269,7 @@
                         <div class="form-group">
                             <label for="date" class="col-sm-2 control-label no-padding-right">出生日期</label>
                             <div class="col-sm-6">
-                                <input class="form-control" id="date" placeholder="登录名" name="date"  type="text">
+                                <input class="form-control" id="date" placeholder="出生日期" name="date"  type="text">
                             
                             </div>
                             <p class="help-block col-sm-4 red">* 必填</p>
@@ -279,7 +277,7 @@
                         <div class="form-group">
                             <label for="phone" class="col-sm-2 control-label no-padding-right">电话</label>
                             <div class="col-sm-6">
-                                <input class="form-control" id="phone" placeholder="登录名" name="phone"  type="text">
+                                <input class="form-control" id="phone" placeholder="电话" name="phone"  type="text">
                             
                             </div>
                             <p class="help-block col-sm-4 red">* 必填</p>
@@ -287,7 +285,7 @@
                         <div class="form-group">
                             <label for="department" class="col-sm-2 control-label no-padding-right">院系</label>
                             <div class="col-sm-6">
-                                <input class="form-control" id="department" placeholder="登录名" name="department"  type="text">
+                                <input class="form-control" id="department" placeholder="院系" name="department"  type="text">
                             
                             </div>
                             <p class="help-block col-sm-4 red">* 必填</p>
@@ -295,7 +293,7 @@
                         <div class="form-group">
                             <label for="class" class="col-sm-2 control-label no-padding-right">班级</label>
                             <div class="col-sm-6">
-                                <input class="form-control" id="class" placeholder="登录名" name="class"  type="text">
+                                <input class="form-control" id="class" placeholder="班级" name="class"  type="text">
                             
                             </div>
                             <p class="help-block col-sm-4 red">* 必填</p>
@@ -303,7 +301,7 @@
                         <div class="form-group">
                             <label for="bedroom" class="col-sm-2 control-label no-padding-right">寝室</label>
                             <div class="col-sm-6">
-                                <input class="form-control" id="bedroom" placeholder="登录名" name="bedroom"  type="text">
+                                <input class="form-control" id="bedroom" placeholder="寝室" name="bedroom"  type="text">
                             
                             </div>
                             <p class="help-block col-sm-4 red">* 必填</p>
@@ -311,7 +309,7 @@
                         <div class="form-group">
                             <label for="id_number" class="col-sm-2 control-label no-padding-right">学号</label>
                             <div class="col-sm-6">
-                                <input class="form-control" id="id_number" placeholder="登录名" name="id_number"  type="text">
+                                <input class="form-control" id="id_number" placeholder="学号" name="id_number"  type="text">
                             
                             </div>
                             <p class="help-block col-sm-4 red">* 必填</p>
@@ -319,7 +317,7 @@
                         <div class="form-group">
                             <label for="email" class="col-sm-2 control-label no-padding-right">邮箱</label>
                             <div class="col-sm-6">
-                                <input class="form-control" id="email" placeholder="登录名" name="email"  type="text">
+                                <input class="form-control" id="email" placeholder="邮箱" name="email"  type="text">
                             
                             </div>
                             <p class="help-block col-sm-4 red">* 必填</p>

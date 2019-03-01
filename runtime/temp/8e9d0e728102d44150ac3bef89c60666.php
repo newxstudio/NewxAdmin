@@ -1,4 +1,4 @@
-<?php /*a:3:{s:56:"D:\wamp64\www\NEWX\application\admin\view\admin\add.html";i:1551268207;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551069475;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551069936;}*/ ?>
+<?php /*a:3:{s:56:"D:\wamp64\www\NEWX\application\admin\view\admin\add.html";i:1551425154;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551428493;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551335181;}*/ ?>
 <!DOCTYPE html>
 <html><head>
 	    <meta charset="utf-8">
@@ -18,7 +18,7 @@
     <link href="http://localhost/newx/public/static/admin/style/demo.css" rel="stylesheet">
     <link href="http://localhost/newx/public/static/admin/style/typicons.css" rel="stylesheet">
     <link href="http://localhost/newx/public/static/admin/style/animate.css" rel="stylesheet">
-    
+    <link rel="shortcut icon" href="http://localhost/newx/public/static/admin/images/newx.ico" /> 
 </head>
 <body>
 	<!-- 头部 -->
@@ -56,7 +56,7 @@
                             <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
                                 <li class="username"><a>David Stevenson</a></li>
                                 <li class="dropdown-footer">
-                                    <a href="<?php echo url('admin/logout'); ?>">
+                                    <a href="<?php echo url('admin/logout'); ?>" id="logout">
                                             退出登录
                                         </a>
                                 </li>
@@ -89,9 +89,7 @@
             <div class="page-sidebar" id="sidebar">
                 <!-- Page Sidebar Header-->
                 <div class="sidebar-header-wrapper">
-                    <input class="searchinput" type="text">
-                    <i class="searchicon fa fa-search"></i>
-                    <div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>
+                    <input class="searchinput" type="text" disabled="disabled">
                 </div>
                 <!-- /Page Sidebar Header -->
                <!-- Sidebar Menu -->
@@ -121,7 +119,7 @@
                         </a>
                         <ul class="submenu">
                             <li>
-                                <a href="<?php echo url('cate/lst'); ?>">
+                                <a href="<?php echo url('user/lst'); ?>">
                                     <span class="menu-text">
                                         用户列表                                    </span>
                                     <i class="menu-expand"></i>
@@ -137,14 +135,14 @@
                         </a>
                         <ul class="submenu">
                             <li>
-                                <a href="<?php echo url('article/lst'); ?>">
+                                <a href="<?php echo url('apply/lst'); ?>">
                                     <span class="menu-text">
                                         报名列表                                    </span>
                                     <i class="menu-expand"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="<?php echo url('article/lst'); ?>">
+                                <a href="<?php echo url('apply/count'); ?>">
                                     <span class="menu-text">
                                         报名统计                                    </span>
                                     <i class="menu-expand"></i>

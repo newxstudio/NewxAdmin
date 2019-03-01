@@ -1,4 +1,4 @@
-<?php /*a:3:{s:58:"D:\wamp64\www\NEWX\application\admin\view\index\index.html";i:1551085820;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551069475;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551274307;}*/ ?>
+<?php /*a:3:{s:58:"D:\wamp64\www\NEWX\application\admin\view\index\index.html";i:1551085820;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551428493;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551335181;}*/ ?>
 <!DOCTYPE html>
 <html><head>
 	    <meta charset="utf-8">
@@ -56,7 +56,7 @@
                             <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
                                 <li class="username"><a>David Stevenson</a></li>
                                 <li class="dropdown-footer">
-                                    <a href="<?php echo url('admin/logout'); ?>">
+                                    <a href="<?php echo url('admin/logout'); ?>" id="logout">
                                             退出登录
                                         </a>
                                 </li>
@@ -135,14 +135,14 @@
                         </a>
                         <ul class="submenu">
                             <li>
-                                <a href="<?php echo url('article/lst'); ?>">
+                                <a href="<?php echo url('apply/lst'); ?>">
                                     <span class="menu-text">
                                         报名列表                                    </span>
                                     <i class="menu-expand"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="<?php echo url('article/lst'); ?>">
+                                <a href="<?php echo url('apply/count'); ?>">
                                     <span class="menu-text">
                                         报名统计                                    </span>
                                     <i class="menu-expand"></i>
