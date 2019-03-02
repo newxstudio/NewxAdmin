@@ -1,10 +1,10 @@
-<?php /*a:3:{s:60:"D:\wamp64\www\NEWX\application\admin\view\apply\select1.html";i:1551421707;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551069475;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551335181;}*/ ?>
+<?php /*a:3:{s:58:"D:\wamp64\www\NEWX\application\admin\view\apply\chart.html";i:1551498513;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551428493;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551451623;}*/ ?>
 <!DOCTYPE html>
 <html>
 
 	<head>
 		<meta charset="utf-8">
-		<title>NEWX·后台管理 -报名列表-查询 </title>
+		<title>NEWX·后台管理 -报名统计 </title>
 
 		<meta name="description" content="Dashboard">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,7 +20,16 @@
 		<link href="http://localhost/newx/public/static/admin/style/demo.css" rel="stylesheet">
 		<link href="http://localhost/newx/public/static/admin/style/typicons.css" rel="stylesheet">
 		<link href="http://localhost/newx/public/static/admin/style/animate.css" rel="stylesheet">
-
+		<link rel="shortcut icon" href="http://localhost/newx/public/static/admin/images/newx.ico" />
+		<link rel="stylesheet" href="http://localhost/newx/public/static/layui/css/layui.css">
+		<style type="text/css">
+			#main1,
+			#main2,
+			#main3,
+			#main4 {
+				float: left;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -59,7 +68,7 @@
                             <ul class="pull-right dropdown-menu dropdown-arrow dropdown-login-area">
                                 <li class="username"><a>David Stevenson</a></li>
                                 <li class="dropdown-footer">
-                                    <a href="<?php echo url('admin/logout'); ?>">
+                                    <a href="<?php echo url('admin/logout'); ?>" id="logout">
                                             退出登录
                                         </a>
                                 </li>
@@ -92,9 +101,7 @@
 				<div class="page-sidebar" id="sidebar">
 					<!-- Page Sidebar Header-->
 					<div class="sidebar-header-wrapper">
-						<input class="searchinput" type="text">
-						<i class="searchicon fa fa-search"></i>
-						<div class="searchhelper">Search Reports, Charts, Emails or Notifications</div>
+						<input class="searchinput" type="text" disabled="disabled">
 					</div>
 					<!-- /Page Sidebar Header -->
 					 <!-- Sidebar Menu -->
@@ -147,7 +154,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="<?php echo url('apply/count'); ?>">
+                                <a href="<?php echo url('apply/chart'); ?>">
                                     <span class="menu-text">
                                         报名统计                                    </span>
                                     <i class="menu-expand"></i>
@@ -219,99 +226,17 @@
 								<li>
 									<a href="#">系统</a>
 								</li>
-								<li class="active">报名管理</li>
+								<li class="active">报名统计</li>
 							</ul>
 						</div>
 						<!-- /Page Breadcrumb -->
 
 						<!-- Page Body -->
 						<div class="page-body">
-
-							<form action="<?php echo url('apply/select1'); ?>" method="post">
-								<span>第一志愿:</span>
-								<select name="department1" id="select1"  style="margin-bottom: 10px;">
-									<option value="">全部</option>
-									<option value="视频部">视频部</option>
-									<option value="采风部">采风部</option>
-									<option value="图文部">图文部</option>
-									<option value="采编部">采编部</option>
-									<option value="运营部">运营部</option>
-									<option value="网站部">网站部</option>
-									<option value="办公室">办公室</option>
-								</select>
-								<span style="margin-left: 15px;">第二志愿:</span>
-								<select name="department2" id="select2"  style="margin-bottom: 10px;">
-									<option value="">全部</option>
-									<option value="视频部">视频部</option>
-									<option value="采风部">采风部</option>
-									<option value="图文部">图文部</option>
-									<option value="采编部">采编部</option>
-									<option value="运营部">运营部</option>
-									<option value="网站部">网站部</option>
-									<option value="办公室">办公室</option>
-								</select>
-								<button class="btn btn-primary btn-sm shiny" type="submit">筛选</button>
-							</form>
-							<div class="row">
-								<div class="col-lg-12 col-sm-12 col-xs-12">
-									<div class="widget">
-										<div class="widget-body">
-											<div class="flip-scroll">
-												<table class="table table-bordered table-hover">
-													<thead class="">
-														<tr>
-															<th class="text-center">ID</th>
-															<th class="text-center">姓名</th>
-															<th class="text-center">性别</th>
-															<th class="text-center">院系</th>
-															<th class="text-center">班级</th>
-															<th class="text-center">第一志愿</th>
-															<th class="text-center">第二志愿</th>
-															<th class="text-center">是否服从调剂</th>
-															<th class="text-center">操作</th>
-														</tr>
-													</thead>
-													<tbody>
-														<?php if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-														<tr>
-															<td align="center"><?php echo htmlentities($vo['id']); ?></td>
-															<td align="center"><?php echo htmlentities($vo['user']['name']); ?></td>
-															<td align="center"><?php echo htmlentities($vo['user']['sex']); ?></td>
-															<td align="center"><?php echo htmlentities($vo['user']['department']); ?></td>
-															<td align="center"><?php echo htmlentities($vo['user']['class']); ?></td>
-															<td align="center"><?php echo htmlentities($vo['volunteer1']); ?></td>
-															<td align="center"><?php echo htmlentities($vo['volunteer2']); ?></td>
-															<td align="center"><?php echo htmlentities($vo['adjust']); ?></td>
-
-															<td align="center">
-																<a href="<?php echo url('apply/search',array('id'=>$vo['id'])); ?>" class="btn btn-primary btn-sm shiny">
-																	<i class="fa fa-edit"></i> 查看
-																</a>
-
-																<a href="#" onClick="warning('确实要删除吗', '<?php echo url(" apply/del ",array('id'=>$vo['id'])); ?>')" class="btn btn-danger btn-sm shiny">
-																	<i class="fa fa-trash-o"></i> 删除
-																</a>
-
-															</td>
-														</tr>
-
-														<?php endforeach; endif; else: echo "" ;endif; ?>
-													</tbody>
-
-												</table>
-
-											</div>
-
-											<div style="text-align: right;margin-top: 10px;">
-												
-												<?php echo $list; ?>
-												
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
+							<div id="main1" style="width: 600px;height:300px;"></div>
+							<div id="main2" style="width: 600px;height:300px;"></div>
+							<div id="main3" style="width: 600px;height:300px;"></div>
+							<div id="main4" style="width: 600px;height:300px;"></div>
 						</div>
 						<!-- /Page Body -->
 					</div>
@@ -325,35 +250,225 @@
 			<script src="http://localhost/newx/public/static/admin/style/jquery.js"></script>
 			<!--Beyond Scripts-->
 			<script src="http://localhost/newx/public/static/admin/style/beyond.js"></script>
-			<script type="text/javascript">
-				function adddhm() {
-					var $select1 = $("#select1").val();
-					var $select2 = $("#select2").val();
-					
-					/*console.log($select1);
-					console.log($select2);
-					*/
-					if($select1 == "全部"){
-						$select1 = "*";
-					}
-					if($select2 == "全部"){
-						$select2 = "*";
-					}
-					
+			<script src="https://cdn.bootcss.com/echarts/4.2.1-rc1/echarts-en.common.js"></script>
+			<script src="http://localhost/newx/public/static/admin/style/shine.js"></script>
+			<script>
+				// 第二个参数可以指定前面引入的主题
+				var chart1 = echarts.init(document.getElementById('main1'));
+				var chart2 = echarts.init(document.getElementById('main2'));
+				var chart3 = echarts.init(document.getElementById('main3'));
+				var chart4 = echarts.init(document.getElementById('main4'));
+
+				//异步加载后台数据， 通过定时器在实现
+				var i = 0;
+
+				function run() {
+					i++;
 					$.ajax({
-						type: "POST",
-						dataType:"json",
-						data: {
-							$select1:$select1,
-							$select2:$select2,
-						},
-						url: "<?php echo url('apply/select1'); ?>",
+						url: "<?php echo url('apply/data'); ?>",
+						type: 'POST',
+						dataType: 'JSON',
+						data: {},
 						success: function(data) {
-							alert(data.msg);
+
+							chart1.setOption({
+								title: {
+									text: '第一志愿报名统计',
+									//subtext: '纯属虚构',
+									x: 'center'
+								},
+								tooltip: {
+									trigger: 'item',
+									formatter: "{a} <br/>{b} : {c} ({d}%)"
+								},
+								legend: {
+									orient: 'vertical',
+									left: 'left',
+									data: ['视频部', '采风部', '图文部', '网站部', '办公室', '运营部', '采编部']
+								},
+								series: [{
+									name: '一志愿人数',
+									type: 'pie',
+									radius: '55%',
+									center: ['50%', '60%'],
+									data: [{
+											value: data[0],
+											name: '视频部'
+										},
+										{
+											value: data[1],
+											name: '采风部'
+										},
+										{
+											value: data[2],
+											name: '图文部'
+										},
+										{
+											value: data[3],
+											name: '网站部'
+										},
+										{
+											value: data[4],
+											name: '办公室'
+										},
+										{
+											value: data[5],
+											name: '运营部'
+										},
+										{
+											value: data[6],
+											name: '采编部'
+										}
+									],
+									itemStyle: {
+										emphasis: {
+											shadowBlur: 10,
+											shadowOffsetX: 0,
+											shadowColor: 'rgba(0, 0, 0, 0.5)'
+										}
+									}
+								}]
+
+							})
+							chart2.setOption({
+								title: {
+									text: '第一志愿报名统计',
+									//subtext: '纯属虚构',
+									x: 'center'
+								},
+								tooltip: {
+									trigger: 'item',
+									formatter: "{a} <br/>{b} : {c} ({d}%)"
+								},
+								legend: {
+									orient: 'vertical',
+									left: 'left',
+									data: ['视频部', '采风部', '图文部', '网站部', '办公室', '运营部', '采编部']
+								},
+								series: [{
+									name: '一志愿人数',
+									type: 'pie',
+									radius: '55%',
+									center: ['50%', '60%'],
+									data: [{
+											value: data[7],
+											name: '视频部'
+										},
+										{
+											value: data[8],
+											name: '采风部'
+										},
+										{
+											value: data[9],
+											name: '图文部'
+										},
+										{
+											value: data[10],
+											name: '网站部'
+										},
+										{
+											value: data[11],
+											name: '办公室'
+										},
+										{
+											value: data[12],
+											name: '运营部'
+										},
+										{
+											value: data[13],
+											name: '采编部'
+										}
+									],
+									itemStyle: {
+										emphasis: {
+											shadowBlur: 10,
+											shadowOffsetX: 0,
+											shadowColor: 'rgba(0, 0, 0, 0.5)'
+										}
+									}
+								}]
+
+							})
+							
+							chart3.setOption({
+								title: {
+									text: '第一志愿男女比',
+									//subtext: '纯属虚构',
+									x: 'left'
+								},
+								legend: {},
+								tooltip: {},
+								dataset: {
+									source: [
+										['男女比', '男', '女'],
+										['视频部', data[14], data[21] ],
+										['采风部', data[15], data[22] ],
+										['图文部', data[16], data[23] ],
+										['网站部', data[17], data[24] ],
+										['办公室', data[18], data[25] ],
+										['运营部', data[19], data[26] ],
+										['采编部', data[20], data[27] ],
+									]
+								},
+								xAxis: {
+									type: 'category'
+								},
+								yAxis: {},
+								// Declare several bar series, each will be mapped
+								// to a column of dataset.source by default.
+								series: [{
+										type: 'bar',
+										color: ['#334B5C']
+									},
+									{
+										type: 'bar',
+										color: ['#D53A35']
+									},
+								]
+							})
+							
+							chart4.setOption({
+								title: {
+									text: '第二志愿男女比',
+									//subtext: '纯属虚构',
+									x: 'left'
+								},
+								legend: {},
+								tooltip: {},
+								dataset: {
+									source: [
+										['男女比', '男', '女'],
+										['视频部', data[28], data[35] ],
+										['采风部', data[29], data[36] ],
+										['图文部', data[30], data[37] ],
+										['网站部', data[31], data[38] ],
+										['办公室', data[32], data[39] ],
+										['运营部', data[33], data[40] ],
+										['采编部', data[34], data[41] ],
+									]
+								},
+								xAxis: {
+									type: 'category'
+								},
+								yAxis: {},
+								// Declare several bar series, each will be mapped
+								// to a column of dataset.source by default.
+								series: [{
+										type: 'bar',
+										color: ['#334B5C']
+									},
+									{
+										type: 'bar',
+										color: ['#D53A35']
+									},
+								]
+							})
+							
+							
 						}
-					});
-					return false;
-				}
+					})
+				};
+				var time = setInterval(run, 500);
 			</script>
 
 	</body>

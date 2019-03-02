@@ -82,6 +82,52 @@ class Apply extends Base
 		
 		return $this->redirect('apply/lst');
    }
+   public function data()
+    {
+    	$count1=['视频部', '采风部', '图文部', '网站部', '办公室', '运营部', '采编部'];
+    	$data[]=array();
+    	for($i = 0; $i < count($count1); $i++){
+    		$data[$i] = db('apply')->where('volunteer1','=',$count1[$i])->count();
+    	}
+    	for($i = 7; $i < 14; $i++){
+    		$data[$i] = db('apply')->where('volunteer2','=',$count1[$i-7])->count();
+    	}
+    	for($i = 14; $i < 21; $i++){
+    		
+    		$data[$i] = ApplyModel::hasWhere('user', ['sex'=>'男'])->where('volunteer1','=',$count1[$i-14])->count();
+    		
+    	}
+    	for($i = 21; $i < 28; $i++){
+    		
+    		$data[$i] = ApplyModel::hasWhere('user', ['sex'=>'女'])->where('volunteer1','=',$count1[$i-21])->count();
+    	}
+    	for($i = 28; $i < 35; $i++){
+    		
+    		$data[$i] = ApplyModel::hasWhere('user', ['sex'=>'男'])->where('volunteer2','=',$count1[$i-28])->count();
+    		
+    	}
+    	for($i = 35; $i < 42; $i++){
+    		
+    		$data[$i] = ApplyModel::hasWhere('user', ['sex'=>'女'])->where('volunteer2','=',$count1[$i-35])->count();
+    	}
+    	//dump($data);
+    	return json($data);
+    	/*
+    	$list = db('apply')->where('')
+		// 把分页数据赋值给模板变量list
+		$this->assign('list', $list);
+		
+        return $this->fetch();
+        */
+    }
+   public function chart()
+    {
+    	
+    
+        return $this->fetch();
+        
+    }
+    
   
 }
 

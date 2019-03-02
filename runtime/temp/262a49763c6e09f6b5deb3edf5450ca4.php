@@ -1,4 +1,4 @@
-<?php /*a:3:{s:56:"D:\wamp64\www\NEWX\application\admin\view\apply\lst.html";i:1551440629;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551428493;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551335181;}*/ ?>
+<?php /*a:3:{s:56:"D:\wamp64\www\NEWX\application\admin\view\apply\lst.html";i:1551440629;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551428493;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551451623;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -146,7 +146,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="<?php echo url('apply/count'); ?>">
+                                <a href="<?php echo url('apply/chart'); ?>">
                                     <span class="menu-text">
                                         报名统计                                    </span>
                                     <i class="menu-expand"></i>
