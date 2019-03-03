@@ -1,3 +1,4 @@
+<?php /*a:1:{s:58:"D:\wamp64\www\NEWX\application\index\view\index\index.html";i:1551583315;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -5,10 +6,10 @@
 		<meta charset="UTF-8">
 		<title>NEWX·大学生网络文化工作室</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-		<link href="__PUBLIC__/index/css/main.css" rel="stylesheet">
-		<link href="__PUBLIC__/index/css/initial.css" rel="stylesheet">
-		<link rel="shortcut icon" href="__PUBLIC__/admin/images/newx.ico" />
-		<link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css">
+		<link href="http://localhost/newx/public/static/index/css/main.css" rel="stylesheet">
+		<link href="http://localhost/newx/public/static/index/css/initial.css" rel="stylesheet">
+		<link rel="shortcut icon" href="http://localhost/newx/public/static/admin/images/newx.ico" />
+		<link rel="stylesheet" href="http://localhost/newx/public/static/layui/css/layui.css">
 		<!-- 新 Bootstrap 核心 CSS 文件 -->
 		<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 
@@ -17,7 +18,7 @@
 
 		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script src="__PUBLIC__/layui/layui.js"></script>
+		<script src="http://localhost/newx/public/static/layui/layui.js"></script>
 
 		<style type="text/css">
 			.layui-anim {
@@ -30,7 +31,7 @@
 		<!--导航栏
 		<div id="nav">
 			<div id="logo">
-				<img src="__PUBLIC__/index/images/newx1.png" title="NEWX" alt="logo"/>
+				<img src="http://localhost/newx/public/static/index/images/newx1.png" title="NEWX" alt="logo"/>
 				<p>NEWX网络文化工作室</p>
 			</div>
 			<ul>
@@ -211,7 +212,7 @@
 			</div>
 		</div>
 		<script src="http://code.jquery.com/jquery-latest.js"></script>
-		<script src="__PUBLIC__/index/js/main.js"></script>
+		<script src="http://localhost/newx/public/static/index/js/main.js"></script>
 
 		<script type="text/javascript">
 			$(function() {

@@ -1,4 +1,4 @@
-<?php /*a:3:{s:58:"D:\wamp64\www\NEWX\application\admin\view\index\index.html";i:1551085820;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551428493;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551451623;}*/ ?>
+<?php /*a:3:{s:58:"D:\wamp64\www\NEWX\application\admin\view\index\index.html";i:1551085820;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551428493;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551628184;}*/ ?>
 <!DOCTYPE html>
 <html><head>
 	    <meta charset="utf-8">
@@ -106,6 +106,20 @@
                                 <a href="<?php echo url('admin/lst'); ?>">
                                     <span class="menu-text">
                                         管理员列表                                    </span>
+                                    <i class="menu-expand"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo url('auth_group/lst'); ?>">
+                                    <span class="menu-text">
+                                        用户组列表                                   </span>
+                                    <i class="menu-expand"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="<?php echo url('admin/lst'); ?>">
+                                    <span class="menu-text">
+                                        权限列表                                    </span>
                                     <i class="menu-expand"></i>
                                 </a>
                             </li>

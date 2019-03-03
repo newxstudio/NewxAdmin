@@ -3,6 +3,8 @@
  */
 var curIndex = 0;
 var container = $("#container");
+var $li = $("#nav_collapse li");
+console.log($li);
 var sumCount = $(".section").length;
 var $window = $(window);
 var duration = 500;
@@ -41,12 +43,39 @@ function moveNext() {
 	//获取动画开始时的时间
 	aniTime = new Date().getTime();
 	container.css("transform", "translate3D(0, -" + (++curIndex) * $window.height() + "px, 0)");
+	console.log($li[curIndex]);
+	$li.removeClass('active');
+	$($li[curIndex]).addClass('active');
+	switch(curIndex) {
+		case 0:
+			
+		case 1:
+
+			$("#section" + (curIndex + 1) + " .team_box").addClass("layui-anim layui-anim-upbit");
+			break;
+		case 3:
+
+			$("#section" + (curIndex + 1) + " p").addClass("layui-anim layui-anim-up");
+			$("#section" + (curIndex + 1) + " button").addClass("layui-anim layui-anim-up");
+			break;
+
+		default:
+
+	}
+	if(curIndex == 0) {
+		$("#section" + curIndex + "p").css("transition", "all 1s ");
+	}
+
+	$("#section" + curIndex + "p").css("transform", "translateY(-30px)");
 }
 
 function movePrev() {
 	//获取动画开始时的时间
 	aniTime = new Date().getTime();
 	container.css("transform", "translate3D(0, -" + (--curIndex) * $window.height() + "px, 0)");
+	$li.removeClass('active');
+	$($li[curIndex]).addClass('active');
+
 }
 
 function init() {
