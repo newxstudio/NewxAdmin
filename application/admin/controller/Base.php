@@ -12,7 +12,7 @@ class Base extends Controller
         $con=$request->controller();
         $action=$request->action();
         $name=$con.'/'.$action;
-        $notCheck=array('Index/index','Admin/edit1','Base/initialize','Admin/logout','Apply/data','Common/left','Apply/search','Apply/select1');
+        $notCheck=array('Index/index','Admin/edit1','Admin/logout','Apply/data','Common/left','Apply/search','Apply/select1');
         if(session('id')!=1){
        		if(!in_array($name, $notCheck)){
          		if(!$auth->check($name,session('id'))){

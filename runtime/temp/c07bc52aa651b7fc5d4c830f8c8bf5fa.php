@@ -1,4 +1,4 @@
-<?php /*a:3:{s:58:"D:\wamp64\www\NEWX\application\admin\view\index\index.html";i:1551085820;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551705548;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551706216;}*/ ?>
+<?php /*a:3:{s:58:"D:\wamp64\www\NEWX\application\admin\view\index\index.html";i:1551085820;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551705548;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551707380;}*/ ?>
 <!DOCTYPE html>
 <html><head>
 	    <meta charset="utf-8">
@@ -101,14 +101,10 @@
 
 		<?php if($vo['level'] == 0): ?>
 		<a href="#" class="menu-dropdown">
-			<i class="menu-icon 
-				<?php switch($vo['id']): case "8": ?>fa fa-user<?php break; case "13": ?>fa fa-vcard<?php break; default: ?>默认情况
-				<?php endswitch; ?>
-				"></i>
+			<i class="menu-icon <?php switch($vo['id']): case "8": ?>fa fa-user<?php break; case "13": ?>fa fa-vcard<?php break; ?><?php endswitch; ?>"></i>
 			<span class="menu-text"><?php echo htmlentities($vo['title']); ?></span>
 			<i class="menu-expand"></i>
 		</a>
-		
 
 		<ul class="submenu">
 			<?php foreach($itemRes as $k=>$vo1): if($vo1['pid'] == $vo['id']): ?>
@@ -118,11 +114,9 @@
 					<i class="menu-expand"></i>
 				</a>
 			</li>
-			<?php endif; ?>
-			<?php endforeach; ?>
+			<?php endif; ?> <?php endforeach; ?>
 		</ul>
 
-		
 	</li>
 	<?php endif; ?> <?php endforeach; endif; else: echo "" ;endif; ?>
 

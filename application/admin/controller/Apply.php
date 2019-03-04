@@ -123,8 +123,6 @@ class Apply extends Base
     }
    public function chart()
     {
-    	
-    
         return $this->fetch();
         
     }
