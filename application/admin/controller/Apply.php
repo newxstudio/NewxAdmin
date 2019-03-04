@@ -9,6 +9,7 @@ class Apply extends Base
 
     public function lst()
     {
+        	
     	$list = ApplyModel::paginate(5);
 		// 把分页数据赋值给模板变量list
 		$this->assign('list', $list);
@@ -69,7 +70,7 @@ class Apply extends Base
    
    public function del()
    {
-   	
+   		
    		$id = input('id');
    		if (db('apply')->delete($id)) {
 			$code['msg'] = '删除成功';

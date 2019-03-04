@@ -81,8 +81,8 @@ class Auth {
     );
     
     public function __construct() {
-        if (Config::get('auth_config')) {
-            $this->config = array_merge($this->config, Config::get('auth_config')); //可设置配置项 auth_config, 此配置项为数组。
+        if (config('auth_config')) {
+            $this->config = array_merge($this->config, config('auth_config')); //可设置配置项 auth_config, 此配置项为数组。
         }
     }
     /**
@@ -161,7 +161,7 @@ class Auth {
         if (isset($_authList[$uid . $t])) {
             return $_authList[$uid . $t];
         }
-        if ($this->config['auth_type'] == 2 && Session::has('_auth_list_' . $uid . $t)) {
+        if ($this->config['auth_type'] == 2 && session('_auth_list_' . $uid . $t)) {
             return Session::get('_auth_list_' . $uid . $t);
         }
         //读取用户所属用户组
@@ -176,12 +176,12 @@ class Auth {
             return [];
         }
         $map = [
-            'id' => ['in', $ids],
-            'type' => $type,
+            //'id' => ['in', $ids],
+            //'type' => $type,
             'status' => 1,
         ];
         //读取用户组所有权限规则
-        $rules = Db::name($this->config['auth_rule'])->where($map)->field('condition,name')->select();
+        $rules = Db::name($this->config['auth_rule'])->where('id','in',$ids)->where($map)->field('condition,name')->select();
         //循环规则，判断结果。
         $authList = [];   //
         foreach ($rules as $rule) {

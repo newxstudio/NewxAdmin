@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html><head>
 	    <meta charset="utf-8">
-    <title>NEWX·后台管理 - 用户组列表</title>
+    <title>NEWX·后台管理 - 管理员列表</title>
 
     <meta name="description" content="Dashboard">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -36,7 +36,7 @@
                 <!-- /Page Sidebar Header -->
                {include file="common/left" /}
             <!-- /Page Sidebar -->
-             <!-- Page Content -->
+           <!-- Page Content -->
             <div class="page-content">
                 <!-- Page Breadcrumb -->
                 <div class="page-breadcrumbs">
@@ -44,7 +44,7 @@
                                         <li>
                         <a href="#">系统</a>
                     </li>
-                                        <li class="active">用户组管理</li>
+                                        <li class="active">权限管理</li>
                                         </ul>
                 </div>
                 <!-- /Page Breadcrumb -->
@@ -52,7 +52,7 @@
                 <!-- Page Body -->
                 <div class="page-body">
                     
-<button type="button" tooltip="添加用户组" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url('add')}'"> <i class="fa fa-plus"></i> Add
+<button type="button" tooltip="添加权限" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '{:url('add')}'"> <i class="fa fa-plus"></i> Add
 </button>
 <div class="row">
     <div class="col-lg-12 col-sm-12 col-xs-12">
@@ -64,28 +64,26 @@
                             <thead class="">
                                 <tr>
                                     <th class="text-center" width="10%">ID</th>
-                                    <th class="text-center">用户组名称</th>
-                                    <th class="text-center">启用状态</th>
+                                    <th class="text-center" width="10%">排序</th>
+                                    <th class="text-center">权限名称</th>
+                                    <th class="text-center">控/方</th>
+                                    <th class="text-center">级别</th>
                                     <th class="text-center" width="20%">操作</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {volist name="authGroupRes" id="authGroup"}
+                                {volist name="authRuleRes" id="authRule"}
                                     <tr>
-                                        <td align="center">{$authGroup.id}</td>
-                                        <td align="center">{$authGroup.title}</td>
+                                        <td align="center">{$authRule.id}</td>
+                                        <td align="center"><input name="{$authRule.id}" type="text" style="width:50px; text-align:center;" value="{$authRule.sort}"></td>
+                                        <td><?php if($authRule['level']!=0){echo '|';} echo str_repeat('—', $authRule['level']*3)?>{$authRule.title}</td>
+                                        <td>{$authRule.name}</td>
+                                        <td align="center">{$authRule.level+1}级</td>
                                         <td align="center">
-                                            {if condition="$authGroup['status'] eq 1"}
-                                            <a class="btn btn-success btn-sm" href="javascript:void(0);">启用</a>
-                                            {else /}
-                                            <a class="btn btn-darkorange btn-sm" href="javascript:void(0);">禁用</a>
-                                            {/if}
-                                        </td>
-                                        <td align="center">
-                                            <a href="{:url('edit',array('id'=>$authGroup['id']))}" class="btn btn-primary btn-sm shiny">
+                                            <a href="{:url('edit',array('id'=>$authRule['id']))}" class="btn btn-primary btn-sm shiny">
                                                 <i class="fa fa-edit"></i> 编辑
                                             </a>
-                                            <a href="#" onClick="warning('确实要删除吗', '{:url('del',array('id'=>$authGroup['id']))}')" class="btn btn-danger btn-sm shiny">
+                                            <a href="#" onClick="warning('确实要删除吗', '{:url('del',array('id'=>$authRule['id']))}')" class="btn btn-danger btn-sm shiny">
                                                 <i class="fa fa-trash-o"></i> 删除
                                             </a>
                                         </td>
@@ -93,10 +91,8 @@
                                 {/volist}
                             </tbody>
                         </table>
+                        <div><input class="btn btn-primary btn-sm shiny" style="margin-left:224px; margin-top:10px;" type="submit" value="排序" ></div>
                     </form>
-                </div>
-                <div style="padding-top:10px;">
-                {$authGroupRes->render()}
                 </div>
                 <div>
                 	                </div>
@@ -119,5 +115,5 @@
     <!--Beyond Scripts-->
     <script src="__PUBLIC__/admin/style/beyond.js"></script>
     
-   
+    
 </body></html>

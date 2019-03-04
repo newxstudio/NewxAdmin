@@ -44,9 +44,9 @@
                         <a href="#">系统</a>
                     </li>
                                         <li>
-                        <a href="{:url('admin/lst')}">管理员管理</a>
+                        <a href="{:url('lst')}">用户组管理</a>
                     </li>
-                                        <li class="active">编辑管理员</li>
+                                        <li class="active">修改用户组</li>
                                         </ul>
                 </div>
                 <!-- /Page Breadcrumb -->
@@ -58,56 +58,64 @@
     <div class="col-lg-12 col-sm-12 col-xs-12">
         <div class="widget">
             <div class="widget-header bordered-bottom bordered-blue">
-                <span class="widget-caption">编辑管理员</span>
+                <span class="widget-caption">修改用户组</span>
             </div>
             <div class="widget-body">
                 <div id="horizontal-form">
-                    <form class="form-horizontal" role="form" action="" enctype="multipart/form-data" method="post">
-                    	<input type="hidden" name="id" value="{$admins.id}" />
-                        <div class="form-group">
-                            <label for="username" class="col-sm-2 control-label no-padding-right">管理员登录名</label>
+                    <form class="form-horizontal" role="form" action="" method="post">
+                        <input type="hidden" name="id" value="{$authgroups.id}" />
+                       <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label no-padding-right">用户组名称</label>
                             <div class="col-sm-6">
-                                <input class="form-control" id="username" placeholder="" name="username" disabled="disabled" value="{$admins.username}" type="text">
+                                <input class="form-control"  placeholder="" value="{$authgroups.title}" name="title" required="" type="text">
                             </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
                         </div>
-
-                       
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label no-padding-right">管理员昵称</label>
+                            <label for="username" class="col-sm-2 control-label no-padding-right">启用状态</label>
                             <div class="col-sm-6">
-                                <input class="form-control" id="name" placeholder="昵称" name="name" value="{$admins.name}" type="text">  
+                            <p class="help-block col-sm-4 red">
+                                <label>
+                                    <input class="checkbox-slider colored-darkorange" name="status" value="1"  {if condition="$authgroups['status'] eq 1"}checked="checked"{/if} type="checkbox">
+                                    <span class="text"></span>
+                                </label>
+                            </p>
                             </div>
-                        </div>  
-                        <div class="form-group">
-                            <label for="email" class="col-sm-2 control-label no-padding-right">管理员邮箱</label>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                       	<div class="form-group">
+                            <label for="username" class="col-sm-2 control-label no-padding-right"></label>
                             <div class="col-sm-6">
-                                <input class="form-control" id="email" placeholder="邮箱" name="email" value="{$admins.email}"  type="text">  
+                               <table class="table table-hover">
+                                    <thead class="bordered-darkorange">
+                                        <tr>
+                                            <th>
+                                                配置权限
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {volist name="authRuleRes" id="authRule"}
+                                            <tr>
+                                                <td>
+                                                    <label>
+                                                        <?php echo str_repeat('&nbsp;', $authRule['level']*3);?>
+                                                        <input name="rules[]" value="{$authRule.id}"
+                                                        <?php $arr=explode(',', $authgroups['rules']); if(in_array($authRule['id'], $arr)){echo 'checked="checked"';} ?>
+                                                         dataid="id-{$authRule.dataid}" class="inverted checkbox-parent {if condition="$authRule['level'] neq 0"} checkbox-child {/if} " type="checkbox">
+                                                        <span {if condition="$authRule['level'] eq 0"} style="font-weight:bold; font-size:14px;" {/if} class="text">{$authRule.title}</span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        {/volist}
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>  
-                        <div class="form-group">
-                            <label for="desca" class="col-sm-2 control-label no-padding-right">管理员描述</label>
-                            <div class="col-sm-6">
-                                <input class="form-control" id="desca" placeholder="描述" name="desca" value="{$admins.desca}" type="text">  
-                            </div>
-                        </div>  
-                        <div class="form-group">
-                            <label for="group_id" class="col-sm-2 control-label no-padding-right">管理员密码</label>
-                            <div class="col-sm-6">
-                                <input class="form-control" id="password" placeholder="" name="password"  type="text">  
-                            </div>
-                        </div>  
-                        <div class="form-group">
-                            <label for="pic" class="col-sm-2 control-label no-padding-right">管理员头像</label>
                             
-                            <div class="col-sm-6">
-                             <input  id="pic" placeholder="" name="pic" required="required" type="file" style="display: inline">
-                             <img src="__PUBLIC__/{$admins.pic}" / width="60" height="60" >
-                            </div>
                         </div>
-                        
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-default">更新信息</button>
+                                <button type="submit" class="btn btn-default">保存信息</button>
                             </div>
                         </div>
                     </form>
@@ -130,7 +138,43 @@
     <script src="__PUBLIC__/admin/style/jquery.js"></script>
     <!--Beyond Scripts-->
     <script src="__PUBLIC__/admin/style/beyond.js"></script>
-    
+    <script type="text/javascript">
+				/* 权限配置 */
+				$(function() {
+					//动态选择框，上下级选中状态变化
+					$('input.checkbox-parent').on('change', function() {
+						var dataid = $(this).attr("dataid");
+						$('input[dataid^=' + dataid + ']').prop('checked', $(this).is(':checked'));
+					});
+					$('input.checkbox-child').on('change', function() {
+						var dataid = $(this).attr("dataid");
+						dataid = dataid.substring(0, dataid.lastIndexOf("-"));
+						var parent = $('input[dataid=' + dataid + ']');
+						if($(this).is(':checked')) {
+							parent.prop('checked', true);
+							//循环到顶级
+							while(dataid.lastIndexOf("-") != 2) {
+								dataid = dataid.substring(0, dataid.lastIndexOf("-"));
+								parent = $('input[dataid=' + dataid + ']');
+								parent.prop('checked', true);
+							}
+						} else {
+							//父级
+							if($('input[dataid^=' + dataid + '-]:checked').length == 0) {
+								parent.prop('checked', false);
+								//循环到顶级
+								while(dataid.lastIndexOf("-") != 2) {
+									dataid = dataid.substring(0, dataid.lastIndexOf("-"));
+									parent = $('input[dataid=' + dataid + ']');
+									if($('input[dataid^=' + dataid + '-]:checked').length == 0) {
+										parent.prop('checked', false);
+									}
+								}
+							}
+						}
+					});
+				});
+			</script>
 
 
 </body></html>

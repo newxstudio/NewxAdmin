@@ -8,115 +8,67 @@ class AuthGroup extends Base
    
     public function lst()
     {
-    	
+    	$authGroupRes = AuthGroupModel::paginate(2);
+    	$this->assign('authGroupRes',$authGroupRes);
         return $this->fetch();
     }
 	public function add()
     {
     	if(request()->isPost()){
-    		
-    		$data=[
-    		
-    			'title'=>input('title'),
-    			'author'=>input('author'),
-    			'keywords'=>str_replace('，',',',input('keywords')) ,
-    			'desca'=>input('desca'),
-    			'editorValue'=>input('editorValue'),
-    			'cateid'=>input('cateid'),
-    			'time'=>time(),
-    		];
-    		if(input('state') == 'on'){
-    			$data['state'] = 1;
-    		}
-    		if($_FILES['pic']['tmp_name']){
-    			$file = request()->file('pic');
-    			$info = $file->move( 'static/uploads');
-    			$data['pic'] =  'uploads/'.$info->getSaveName();
-    			
-    		}
-    		$validate = new \app\admin\validate\Article;
-
-	        if (!$validate->scene('add')->check($data)) {
-	        	$this->error($validate->getError());
-	            die();
-	        }
-    		if(Db::name('article')->insert($data)){
-    			return $this->success('添加文章成功！','lst');
+    		$data = input('post.');
+    		if($data['rules']){
+                $data['rules']=implode(',', $data['rules']);
+            }
+    		$add = db('auth_group')->insert($data);
+    		if($add){
+    			$this->success('添加成功','lst');
     		}else{
-    			return $this->error('添加文章失败！');
+    			$this->error('添加失败');
     		}
     	}
-    	$cateres = db('cate')->select();
-    	$this->assign("cateres",$cateres);
+    	$authRule=new \app\admin\model\AuthRule();
+        $authRuleRes=$authRule->authRuleTree();
+        $this->assign('authRuleRes',$authRuleRes);
         return $this->fetch();
     }
-	public function edit()
-    {
-    	$id = input('id');
-    	$articles= db('article')->find($id);
-    	if(request()->isPost())
-    	{
-    		$data = [
-    		    'id'=>input('id'),
-    			'title'=>input('title'),
-    			'author'=>input('author'),
-    			'keywords'=>str_replace('，',',',input('keywords')) ,
-    			'desca'=>input('desca'),
-    			'editorValue'=>input('editorValue'),
-    			'cateid'=>input('cateid'),
-    			
-    		
-    		];
-    		
-    		if(input('state') == 'on'){
-    			$data['state'] = 1;
-    		}else{
-    			$data['state'] = 0;
-    		}
-    		
-    		if($_FILES['pic']['tmp_name']){
-    			//@unlink(SITE_URL.'/public/static/'.$articles['pic']);
-    			
-    			$file = request()->file('pic');
-    			$info = $file->move( 'static/uploads');
-    			$data['pic'] =  'uploads/'.$info->getSaveName();
-    			
-    		}
-    		
-    		
-    		$validate = new \app\admin\validate\Article;
+	public function edit(){
+        if(request()->isPost()){
+            $data=input('post.');
+            if($data['rules']){
+                $data['rules']=implode(',', $data['rules']);
+            }
+            $_data=array();
+            foreach ($data as $k => $v) {
+                $_data[]=$k;
+            }
+            if(!in_array('status', $_data)){
+                $data['status']=0;
+            }
+            $save=db('auth_group')->update($data);
+            if($save!==false){
+                $this->success('修改用户组成功！',url('lst'));
+            }else{
+                $this->error('修改用户组失败！');
+            }
+            return;
+        }
+        $authgroups=db('auth_group')->find(input('id'));
+        $this->assign('authgroups',$authgroups);
+       	$authRule=new \app\admin\model\AuthRule();
+        $authRuleRes=$authRule->authRuleTree();
+        $this->assign('authRuleRes',$authRuleRes);
+        return view();
+    }
 
-	        if (!$validate->scene('edit')->check($data)) {
-	        	$this->error($validate->getError());
-	            die();
-	        }
-    		
-    		if(db('article')->update($data))
-    		{
-    			$this->success('修改文章成功！','lst');
-    		}else{
-    			$this->error('修改文章失败！');
-    		}
-    		return;
-    	}
-    	$cateres = db('cate')->select();
-    	$this->assign("cateres",$cateres);
-    	$this->assign('articles',$articles);
-        return $this->fetch();
-    }
    
-   public function del()
-   {
-   	
-   		$id = input('id');
-   		
-   		if(db('article')->delete($id))
-   		{
-   			$this->success("删除文章成功",'links/lst');
-   		}else{
-   			$this->error("删除文章失败");
-   		}
-   }
+    public function del(){
+            $del=db('auth_group')->delete(input('id'));
+            if($del){
+                $this->success('删除用户组成功！',url('lst'));
+            }else{
+                $this->error('删除用户组失败！');
+            }
+    }
    
    
 }

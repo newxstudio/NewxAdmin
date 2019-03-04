@@ -1,4 +1,4 @@
-<?php /*a:3:{s:56:"D:\wamp64\www\NEWX\application\admin\view\apply\lst.html";i:1551440629;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551428493;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551451623;}*/ ?>
+<?php /*a:3:{s:56:"D:\wamp64\www\NEWX\application\admin\view\apply\lst.html";i:1551705088;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551705548;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551698467;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -22,6 +22,13 @@
 		<link href="http://localhost/newx/public/static/admin/style/animate.css" rel="stylesheet">
 		<link rel="shortcut icon" href="http://localhost/newx/public/static/admin/images/newx.ico" />
 		<link rel="stylesheet" href="http://localhost/newx/public/static/layui/css/layui.css">
+		<!--Basic Scripts-->
+		<script src="http://localhost/newx/public/static/admin/style/jquery_002.js"></script>
+		<script src="http://localhost/newx/public/static/admin/style/bootstrap.js"></script>
+		<script src="http://localhost/newx/public/static/admin/style/jquery.js"></script>
+		<!--Beyond Scripts-->
+		<script src="http://localhost/newx/public/static/admin/style/beyond.js"></script>
+		<script src="http://localhost/newx/public/static/layer/layer.js"></script>
 	</head>
 
 	<body>
@@ -65,8 +72,8 @@
                                         </a>
                                 </li>
                                 <li class="dropdown-footer">
-                                    <a href="<?php echo url('admin/edit',array('id'=>app('request')->session('uid'))); ?>">
-                                            修改密码
+                                    <a href="<?php echo url('admin/edit1',array('id'=>app('request')->session('uid'))); ?>">
+                                            修改资料
                                         </a>
                                 </li>
                             </ul>
@@ -96,119 +103,40 @@
 						<input class="searchinput" type="text" disabled="disabled">
 					</div>
 					<!-- /Page Sidebar Header -->
-					 <!-- Sidebar Menu -->
-                <ul class="nav sidebar-menu">
-                    <!--Dashboard-->
-                    <li>
-                        <a href="#" class="menu-dropdown">
-                            <i class="menu-icon fa fa-user"></i>
-                            <span class="menu-text">管理员</span>
-                            <i class="menu-expand"></i>
-                        </a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="<?php echo url('admin/lst'); ?>">
-                                    <span class="menu-text">
-                                        管理员列表                                    </span>
-                                    <i class="menu-expand"></i>
-                                </a>
-                            </li>
-                        </ul>                            
-                    </li> 
-					 <li>
-                        <a href="#" class="menu-dropdown">
-                            <i class="menu-icon fa fa-vcard"></i>
-                            <span class="menu-text">用户管理</span>
-                            <i class="menu-expand"></i>
-                        </a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="<?php echo url('user/lst'); ?>">
-                                    <span class="menu-text">
-                                        用户列表                                    </span>
-                                    <i class="menu-expand"></i>
-                                </a>
-                            </li>
-                        </ul>                            
-                    </li> 
-                    <li>
-                        <a href="#" class="menu-dropdown">
-                            <i class="menu-icon fa fa-file-text"></i>
-                            <span class="menu-text">报名管理</span>
-                            <i class="menu-expand"></i>
-                        </a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="<?php echo url('apply/lst'); ?>">
-                                    <span class="menu-text">
-                                        报名列表                                    </span>
-                                    <i class="menu-expand"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="<?php echo url('apply/chart'); ?>">
-                                    <span class="menu-text">
-                                        报名统计                                    </span>
-                                    <i class="menu-expand"></i>
-                                </a>
-                            </li>
-                        </ul>                            
-                    </li> 
-                    <li>
-                        <a href="#" class="menu-dropdown">
-                            <i class="menu-icon fa fa-newspaper-o"></i>
-                            <span class="menu-text">新闻动态</span>
-                            <i class="menu-expand"></i>
-                        </a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="<?php echo url('links/lst'); ?>">
-                                    <span class="menu-text">
-                            新闻列表                                   </span>
-                                    <i class="menu-expand"></i>
-                                </a>
-                            </li>
-                        </ul>                            
-                    </li> 
-                    <li>
-                        <a href="#" class="menu-dropdown">
-                            <i class="menu-icon fa fa fa-edit"></i>
-                            <span class="menu-text">作品展示</span>
-                            <i class="menu-expand"></i>
-                        </a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="<?php echo url('links/lst'); ?>">
-                                    <span class="menu-text">
-                            作品管理                                   </span>
-                                    <i class="menu-expand"></i>
-                                </a>
-                            </li>
-                        </ul>                            
-                    </li> 
+					<!-- Sidebar Menu -->
+<ul class="nav sidebar-menu">
+	<!--Dashboard-->
 
-                    <li>
-                        <a href="#" class="menu-dropdown">
-                            <i class="menu-icon fa fa-gear"></i>
-                            <span class="menu-text">系统</span>
-                            <i class="menu-expand"></i>
-                        </a>
-                        <ul class="submenu">
-                            <li>
-                                <a href="<?php echo url('tags/lst'); ?>">
-                                    <span class="menu-text">
-                                        个人资料修改                                   </span>
-                                    <i class="menu-expand"></i>
-                                </a>
-                            </li>
-                        </ul>                            
-                    </li>                        
-                    
-                                           
-                    
-                </ul>
-                <!-- /Sidebar Menu -->
-            </div>
+	<?php if(is_array($itemRes) || $itemRes instanceof \think\Collection || $itemRes instanceof \think\Paginator): $i = 0; $__LIST__ = $itemRes;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
+	<li>
+
+		<?php if($vo['level'] == 0): ?>
+		<a href="#" class="menu-dropdown">
+			<i class="menu-icon fa fa-user"></i>
+			<span class="menu-text"><?php echo htmlentities($vo['title']); ?></span>
+			<i class="menu-expand"></i>
+		</a>
+		
+
+		<ul class="submenu">
+			<?php foreach($itemRes as $k=>$vo1): if($vo1['pid'] == $vo['id']): ?>
+			<li>
+				<a href="<?php echo url($vo1['name']); ?>">
+					<span class="menu-text"><?php echo htmlentities($vo1['title']); ?></span>
+					<i class="menu-expand"></i>
+				</a>
+			</li>
+			<?php endif; ?>
+			<?php endforeach; ?>
+		</ul>
+
+		
+	</li>
+	<?php endif; ?> <?php endforeach; endif; else: echo "" ;endif; ?>
+
+</ul>
+<!-- /Sidebar Menu -->
+</div>
 					<!-- /Page Sidebar -->
 					<!-- Page Content -->
 					<div class="page-content">
@@ -286,8 +214,12 @@
 																<a href="<?php echo url('apply/search',array('id'=>$vo['id'])); ?>" class="btn btn-primary btn-sm shiny">
 																	<i class="fa fa-edit"></i> 查看
 																</a>
-
-																<a href="#" id="del" onClick="warning('确实要删除吗', '<?php echo url("apply/del",array('id'=>$vo['id'])); ?>')" class="btn btn-danger btn-sm shiny">
+																<!--
+                                                                	作者：1570128795@qq.com
+                                                                	时间：2019-03-04
+                                                                	描述：onClick="warning('确实要删除吗', '<?php echo url("apply/del",array('id'=>$vo['id'])); ?>')"
+                                                                -->
+																<a href="#" id="del" <?php if($auth == 0): ?> onClick="layer.open({title: '没有权限',content:'没有权限',icon: 5,anim: 6});" <?php else: ?> onClick="warning('确实要删除吗', '<?php echo url("apply/del",array('id'=>$vo['id'])); ?>')" <?php endif; ?> class="btn btn-danger btn-sm shiny">
 																	<i class="fa fa-trash-o"></i> 删除
 																</a>
 
@@ -317,14 +249,6 @@
 					<!-- /Page Content -->
 				</div>
 			</div>
-
-			<!--Basic Scripts-->
-			<script src="http://localhost/newx/public/static/admin/style/jquery_002.js"></script>
-			<script src="http://localhost/newx/public/static/admin/style/bootstrap.js"></script>
-			<script src="http://localhost/newx/public/static/admin/style/jquery.js"></script>
-			<!--Beyond Scripts-->
-			<script src="http://localhost/newx/public/static/admin/style/beyond.js"></script>
-			
 
 	</body>
 

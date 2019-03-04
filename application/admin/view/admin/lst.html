@@ -64,14 +64,16 @@
                             <tr>
                                 <th class="text-center">ID</th>
                                 <th class="text-center">管理员名称</th>
+                                <th class="text-center">所属用户组</th>
                                 <th class="text-center">操作</th>
                             </tr>
                         </thead>
                         <tbody>
-                        	{volist name="list" id="vo"}
+                        	{volist name="adminres" id="vo"}
                             <tr>
                                 <td align="center">{$vo.id}</td>
                                 <td align="center">{$vo.username}</td>
+                                <td align="center">{$vo.groupTitle}</td>
                                 <td align="center">
                                     <a href="{:url('admin/edit',array('id'=>$vo['id']))}" class="btn btn-primary btn-sm shiny">
                                         <i class="fa fa-edit"></i> 编辑
@@ -100,7 +102,7 @@
                </div>
                
                <div style="text-align: right;margin-top: 10px;">
-               	   {$list|raw}
+               	   {$adminres|raw}
                </div>
             </div>
         </div>
