@@ -29,6 +29,11 @@ class AuthRule extends Base
             }else{
                $data['level']=0; 
             }
+            if(input('visibility') == 'on'){
+    			$data['visibility'] = 1;
+    		}else{
+    			$data['visibility'] = 0;
+    		}
             $add=db('auth_rule')->insert($data);
             if($add){
                 $this->success('添加权限成功！',url('lst'));
@@ -52,6 +57,11 @@ class AuthRule extends Base
             }else{
                $data['level']=0; 
             }
+            if(input('visibility') == 'on'){
+    			$data['visibility'] = 1;
+    		}else{
+    			$data['visibility'] = 0;
+    		}
             $save=db('auth_rule')->update($data);
             if($save!==false){
                 $this->success('修改权限成功！',url('lst'));

@@ -1,9 +1,9 @@
-<?php /*a:3:{s:58:"D:\wamp64\www\NEWX\application\admin\view\index\index.html";i:1551085820;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551705548;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1552270767;}*/ ?>
+<?php /*a:3:{s:57:"D:\wamp64\www\NEWX\application\admin\view\admin\edit.html";i:1551681346;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551705548;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1552270767;}*/ ?>
 <!DOCTYPE html>
 <html><head>
 	    <meta charset="utf-8">
-    <title>NEWX-后台管理系统</title>
-	
+    <title>NEWX·后台管理 - 编辑管理员</title>
+
     <meta name="description" content="Dashboard">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -80,6 +80,7 @@
     </div>
 </div>
 
+
 	<!-- /头部 -->
 	
 	<div class="main-container container-fluid">
@@ -89,10 +90,9 @@
                 <!-- Page Sidebar Header-->
                 <div class="sidebar-header-wrapper">
                     <input class="searchinput" type="text" disabled="disabled">
-                   
                 </div>
                 <!-- /Page Sidebar Header -->
-               <!-- Sidebar Menu -->
+              <!-- Sidebar Menu -->
 <ul class="nav sidebar-menu">
 	<!--Dashboard-->
 
@@ -129,7 +129,13 @@
                 <!-- Page Breadcrumb -->
                 <div class="page-breadcrumbs">
                     <ul class="breadcrumb">
-                                        <li class="active">控制面板</li>
+                                        <li>
+                        <a href="#">系统</a>
+                    </li>
+                                        <li>
+                        <a href="<?php echo url('admin/lst'); ?>">管理员管理</a>
+                    </li>
+                                        <li class="active">编辑管理员</li>
                                         </ul>
                 </div>
                 <!-- /Page Breadcrumb -->
@@ -137,11 +143,79 @@
                 <!-- Page Body -->
                 <div class="page-body">
                     
-				<div style="text-align:center; line-height:1000%; font-size:24px;">
-                NEWX · 大学生网络文化工作室<br>
-                <p style="color:#aaa;">后台管理系统</p></div>
+<div class="row">
+    <div class="col-lg-12 col-sm-12 col-xs-12">
+        <div class="widget">
+            <div class="widget-header bordered-bottom bordered-blue">
+                <span class="widget-caption">编辑管理员</span>
+            </div>
+            <div class="widget-body">
+                <div id="horizontal-form">
+                    <form class="form-horizontal" role="form" action="" enctype="multipart/form-data" method="post">
+                    	<input type="hidden" name="id" value="<?php echo htmlentities($admins['id']); ?>" />
+                    	
+                        <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label no-padding-right">管理员登录名</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="username" placeholder="" name="username" disabled="disabled" value="<?php echo htmlentities($admins['username']); ?>" type="text">
+                            </div>
+                        </div>
+
+                       <div class="form-group">
+                            <label for="username" class="col-sm-2 control-label no-padding-right">所属用户组</label>
+                            <div class="col-sm-6">
+                                <select name="group_id">
+                                    <?php if(is_array($authGroupRes) || $authGroupRes instanceof \think\Collection || $authGroupRes instanceof \think\Paginator): $i = 0; $__LIST__ = $authGroupRes;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$authGroupRes): $mod = ($i % 2 );++$i;?>
+                                        <option <?php if($authGroupRes['id'] == $groupId): ?>selected="selected"<?php endif; ?> value="<?php echo htmlentities($authGroupRes['id']); ?>"><?php echo htmlentities($authGroupRes['title']); ?></option>
+                                    <?php endforeach; endif; else: echo "" ;endif; ?>
+                                </select>
+                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label no-padding-right">管理员昵称</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="name" placeholder="昵称" name="name" value="<?php echo htmlentities($admins['name']); ?>" type="text">  
+                            </div>
+                        </div>  
+                        <div class="form-group">
+                            <label for="email" class="col-sm-2 control-label no-padding-right">管理员邮箱</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="email" placeholder="邮箱" name="email" value="<?php echo htmlentities($admins['email']); ?>"  type="text">  
+                            </div>
+                        </div>  
+                        <div class="form-group">
+                            <label for="desca" class="col-sm-2 control-label no-padding-right">管理员描述</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="desca" placeholder="描述" name="desca" value="<?php echo htmlentities($admins['desca']); ?>" type="text">  
+                            </div>
+                        </div>  
+                        <div class="form-group">
+                            <label for="group_id" class="col-sm-2 control-label no-padding-right">管理员密码</label>
+                            <div class="col-sm-6">
+                                <input class="form-control" id="password" placeholder="" name="password"  type="text">  
+                            </div>
+                        </div>  
+                        <div class="form-group">
+                            <label for="pic" class="col-sm-2 control-label no-padding-right">管理员头像</label>
+                            
+                            <div class="col-sm-6">
+                             <input  id="pic" placeholder="" name="pic"  type="file" style="display: inline">
+                             <img src="http://localhost/newx/public/static/<?php echo htmlentities($admins['pic']); ?>" / width="60" height="60" >
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-default">更新信息</button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                
+            </div>
+        </div>
+    </div>
+</div>
 
                 </div>
                 <!-- /Page Body -->

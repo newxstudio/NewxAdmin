@@ -2,11 +2,12 @@
 namespace app\admin\controller;
 use app\admin\controller\Base;
 use think\Db;
+use think\File;
 use app\admin\model\Admin as AdminModel;
 use think\captcha;
 class Admin extends Base
 {
-
+	
     public function lst()
     {
     	$auth=new Auth();
@@ -27,26 +28,23 @@ class Admin extends Base
     }
 	public function add()
     {
-    	if(request()->isPost()){
+    	if(request()->isAjax()){
+    		$post = input('post.');
+    		
     		
     		$data=[
-    			'username'=>input('username'),
-    			'password'=>md5(input('password')),
-    			'email'=>input('email'),
-    			'desca'=>input('desca'),
-    			'name'=>input('name'),
+    			'username'=>$post['username'],
+    			'password'=>md5($post['password']),
+    			'email'=>$post['email'],
+    			'desca'=>$post['desca'],
+    			'name'=>$post['name'],
+    			'pic' =>cookie('url'),
     		];
     		$access = [
-    			'group_id'=>input('group_id'),
+    			'group_id'=>$post['group_id'],
     		];
     		
-    		if($_FILES['pic']['tmp_name']){
-    			$file = request()->file('pic');
-    			$info = $file->move( 'static/uploads');
     			
-    			$data['pic'] =  'uploads/'.$info->getSaveName();
-    			
-    		}
     		
     		$validate = new \app\admin\validate\Admin;
 
@@ -54,21 +52,23 @@ class Admin extends Base
 	        	$this->error($validate->getError());
 	            die();
 	        }
-	       
+    		
     		if(Db::name('admin')->insert($data)){
     			$user = db('admin')->where('username',input('username'))->select();
     			$access['uid'] = $user[0]['id'];
+    			
     			if(db('auth_group_access')->insert($access)){
-    				return $this->success('添加管理员成功！','lst');
+    				$this->success('添加管理员成功！','lst');
     			}
     			
     		}else{
-    			return $this->error('添加管理员失败！');
+    			$this->error('添加管理员失败！');
     		}
     		
     	}
     	$authGroupRes=db('auth_group')->select();
         $this->assign('authGroupRes',$authGroupRes);
+       
         return $this->fetch();
     }
 	public function edit()
@@ -203,6 +203,24 @@ class Admin extends Base
    		session(null);
    		$this->redirect('login/index');
    }
+   public function upload()
+    {
+        $img = request()->file('file');
+        // 移动到框架应用根目录/public/uploads/ 目录下
+        $info = $img->move('static/uploads');
+        $url = 'uploads/' . $info->getSaveName();
+        
+        if($info){
+        	cookie('url',$url,60);
+            // 成功上传后 获取上传信息
+            return json(['code' => 0, 'msg' => '上传成功!', 'url' => 'uploads/' . $info->getSaveName()]);
+        }else{
+            // 上传失败获取错误信息
+            return json(['code' => 1, 'msg' => $img->getError(), 'url' => '']);
+        }
+        
+
+	}
 }
 
 ?>

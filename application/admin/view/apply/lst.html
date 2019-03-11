@@ -19,14 +19,14 @@
 		<link href="__PUBLIC__/admin/style/demo.css" rel="stylesheet">
 		<link href="__PUBLIC__/admin/style/typicons.css" rel="stylesheet">
 		<link href="__PUBLIC__/admin/style/animate.css" rel="stylesheet">
-		<link rel="shortcut icon" href="__PUBLIC__/admin/images/newx.ico" />
+		
 		<link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css">
 		<!--Basic Scripts-->
 		<script src="__PUBLIC__/admin/style/jquery_002.js"></script>
 		
 		<script src="__PUBLIC__/layer/layer.js"></script>
 		
-		
+		<link rel="shortcut icon" href="__PUBLIC__/admin/images/newx.ico" />
 	</head>
 
 	<body>
@@ -122,7 +122,7 @@
 																	<i class="fa fa-edit"></i> 查看
 																</a>
 																
-																<a href="#" id="del" {if condition="$auth eq 0" } onClick="layer.open({title: '没有权限',content:'没有权限',icon: 5,anim: 6});" {else /} onClick="warning('确实要删除吗', '{:url("apply/del",array('id'=>$vo['id']))}')" {/if} class="btn btn-danger btn-sm shiny">
+																<a href="#" id="del" {if condition="$auth eq 0" } onClick="layer.open({title: '{$groupTitle}',content:'没有权限',icon: 5,anim: 6});" {else /} onClick="warning('确实要删除吗', '{:url("apply/del",array('id'=>$vo['id']))}')" {/if} class="btn btn-danger btn-sm shiny">
 																	<i class="fa fa-trash-o"></i> 删除
 																</a>
 

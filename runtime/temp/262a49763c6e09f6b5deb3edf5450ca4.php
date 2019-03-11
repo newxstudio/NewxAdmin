@@ -1,4 +1,4 @@
-<?php /*a:3:{s:56:"D:\wamp64\www\NEWX\application\admin\view\apply\lst.html";i:1551707841;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551705548;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1551707380;}*/ ?>
+<?php /*a:3:{s:56:"D:\wamp64\www\NEWX\application\admin\view\apply\lst.html";i:1551886932;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551705548;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1552270767;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -20,14 +20,14 @@
 		<link href="http://localhost/newx/public/static/admin/style/demo.css" rel="stylesheet">
 		<link href="http://localhost/newx/public/static/admin/style/typicons.css" rel="stylesheet">
 		<link href="http://localhost/newx/public/static/admin/style/animate.css" rel="stylesheet">
-		<link rel="shortcut icon" href="http://localhost/newx/public/static/admin/images/newx.ico" />
+		
 		<link rel="stylesheet" href="http://localhost/newx/public/static/layui/css/layui.css">
 		<!--Basic Scripts-->
 		<script src="http://localhost/newx/public/static/admin/style/jquery_002.js"></script>
 		
 		<script src="http://localhost/newx/public/static/layer/layer.js"></script>
 		
-		
+		<link rel="shortcut icon" href="http://localhost/newx/public/static/admin/images/newx.ico" />
 	</head>
 
 	<body>
@@ -109,7 +109,7 @@
 	<?php if(is_array($itemRes) || $itemRes instanceof \think\Collection || $itemRes instanceof \think\Paginator): $i = 0; $__LIST__ = $itemRes;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
 	<li>
 
-		<?php if($vo['level'] == 0): ?>
+		<?php if(($vo['level'] == 0 ) and ($vo['visibility'] == 1)): ?>
 		<a href="#" class="menu-dropdown">
 			<i class="menu-icon <?php switch($vo['id']): case "8": ?>fa fa-user<?php break; case "13": ?>fa fa-vcard<?php break; ?><?php endswitch; ?>"></i>
 			<span class="menu-text"><?php echo htmlentities($vo['title']); ?></span>
@@ -117,7 +117,7 @@
 		</a>
 
 		<ul class="submenu">
-			<?php foreach($itemRes as $k=>$vo1): if($vo1['pid'] == $vo['id']): ?>
+			<?php foreach($itemRes as $k=>$vo1): if(($vo1['pid'] == $vo['id'])   and ($vo['visibility'] == 1)): ?>
 			<li>
 				<a href="<?php echo url($vo1['name']); ?>">
 					<span class="menu-text"><?php echo htmlentities($vo1['title']); ?></span>
@@ -211,7 +211,7 @@
 																	<i class="fa fa-edit"></i> 查看
 																</a>
 																
-																<a href="#" id="del" <?php if($auth == 0): ?> onClick="layer.open({title: '没有权限',content:'没有权限',icon: 5,anim: 6});" <?php else: ?> onClick="warning('确实要删除吗', '<?php echo url("apply/del",array('id'=>$vo['id'])); ?>')" <?php endif; ?> class="btn btn-danger btn-sm shiny">
+																<a href="#" id="del" <?php if($auth == 0): ?> onClick="layer.open({title: '<?php echo htmlentities($groupTitle); ?>',content:'没有权限',icon: 5,anim: 6});" <?php else: ?> onClick="warning('确实要删除吗', '<?php echo url("apply/del",array('id'=>$vo['id'])); ?>')" <?php endif; ?> class="btn btn-danger btn-sm shiny">
 																	<i class="fa fa-trash-o"></i> 删除
 																</a>
 

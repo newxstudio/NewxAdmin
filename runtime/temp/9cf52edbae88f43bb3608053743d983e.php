@@ -1,4 +1,4 @@
-<?php /*a:1:{s:58:"D:\wamp64\www\NEWX\application\admin\view\login\login.html";i:1551438912;}*/ ?>
+<?php /*a:1:{s:58:"D:\wamp64\www\NEWX\application\admin\view\login\login.html";i:1551782225;}*/ ?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<!--Head-->
@@ -35,7 +35,7 @@
 						<input class="form-control" placeholder="密码" name="password" type="password">
 					</div>
 					<div class="loginbox-textbox">
-						<input class="form-control" name="code" type="text" style="width: 80px; float: left;">
+						<input class="form-control" placeholder="验证码" name="code" type="text" style="width: 80px; float: left;">
 						<img src="<?php echo captcha_src(); ?>" alt="captcha" onclick="this.src=this.src+'?'" style="float: left;cursor: pointer;width: 140px;" />
 					</div>
 					<div class="loginbox-submit">
