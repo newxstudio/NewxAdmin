@@ -21,7 +21,10 @@ class AuthRule extends Base
     }
 
     public function add(){
-        if(request()->isPost()){
+    	$authRule=new AuthRuleModel();
+        $authRuleRes=$authRule->authRuleTree();
+        $this->assign('authRuleRes',$authRuleRes);
+        if(request()->isAjax()){
             $data=input('post.');
             $plevel=db('auth_rule')->where('id',$data['pid'])->field('level')->find();
             if($plevel){
@@ -42,14 +45,19 @@ class AuthRule extends Base
             }
             return;
         }
-        $authRule=new AuthRuleModel();
-        $authRuleRes=$authRule->authRuleTree();
-        $this->assign('authRuleRes',$authRuleRes);
+        
         return view();
     }
 
     public function edit(){
-        if(request()->isPost()){
+    	$authRule=new AuthRuleModel();
+        $authRuleRes=$authRule->authRuleTree();
+        $authRules=$authRule->find(input('id'));
+        $this->assign(array(
+            'authRuleRes'=>$authRuleRes,
+            'authRules'=>$authRules,
+            ));
+        if(request()->isAjax()){
             $data=input('post.');
             $plevel=db('auth_rule')->where('id',$data['pid'])->field('level')->find();
             if($plevel){
@@ -70,13 +78,7 @@ class AuthRule extends Base
             }
             return;
         }
-        $authRule=new AuthRuleModel();
-        $authRuleRes=$authRule->authRuleTree();
-        $authRules=$authRule->find(input('id'));
-        $this->assign(array(
-            'authRuleRes'=>$authRuleRes,
-            'authRules'=>$authRules,
-            ));
+        
         return view();
     }
 
@@ -87,11 +89,8 @@ class AuthRule extends Base
         $authRuleIds=$authRule->getchilrenid(input('id'));
         $authRuleIds[]=input('id');
         $del= AuthRuleModel::destroy($authRuleIds);
-        if($del){
-            $this->success('删除权限成功！',url('lst'));
-        }else{
-            $this->error('删除权限失败！');
-        }
+        $this->redirect('lst');
+        
     }
 
 

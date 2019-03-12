@@ -14,25 +14,31 @@ class AuthGroup extends Base
     }
 	public function add()
     {
-    	if(request()->isPost()){
+    	$authRule=new \app\admin\model\AuthRule();
+        $authRuleRes=$authRule->authRuleTree();
+        $this->assign('authRuleRes',$authRuleRes);
+    	if(request()->isAjax()){
     		$data = input('post.');
     		if($data['rules']){
                 $data['rules']=implode(',', $data['rules']);
             }
     		$add = db('auth_group')->insert($data);
     		if($add){
-    			$this->success('添加成功','lst');
+    			$this->success('添加用户组成功','lst');
     		}else{
-    			$this->error('添加失败');
+    			$this->error('添加用户组失败');
     		}
     	}
-    	$authRule=new \app\admin\model\AuthRule();
-        $authRuleRes=$authRule->authRuleTree();
-        $this->assign('authRuleRes',$authRuleRes);
+    	
         return $this->fetch();
     }
 	public function edit(){
-        if(request()->isPost()){
+		$authgroups=db('auth_group')->find(input('id'));
+        $this->assign('authgroups',$authgroups);
+       	$authRule=new \app\admin\model\AuthRule();
+        $authRuleRes=$authRule->authRuleTree();
+        $this->assign('authRuleRes',$authRuleRes);
+        if(request()->isAjax()){
             $data=input('post.');
             if($data['rules']){
                 $data['rules']=implode(',', $data['rules']);
@@ -52,22 +58,16 @@ class AuthGroup extends Base
             }
             return;
         }
-        $authgroups=db('auth_group')->find(input('id'));
-        $this->assign('authgroups',$authgroups);
-       	$authRule=new \app\admin\model\AuthRule();
-        $authRuleRes=$authRule->authRuleTree();
-        $this->assign('authRuleRes',$authRuleRes);
+        
         return view();
     }
 
    
     public function del(){
             $del=db('auth_group')->delete(input('id'));
-            if($del){
-                $this->success('删除用户组成功！',url('lst'));
-            }else{
-                $this->error('删除用户组失败！');
-            }
+            
+            $this->redirect('lst');
+            
     }
    
    

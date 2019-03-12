@@ -116,9 +116,13 @@
 															<td align="center">{$vo.volunteer1}</td>
 															<td align="center">{$vo.volunteer2}</td>
 															<td align="center">{$vo.adjust}</td>
-
+															<!--
+                                                            	作者：1570128795@qq.com
+                                                            	时间：2019-03-11
+                                                            	描述：href="{:url('apply/search',array('id'=>$vo['id']))}"
+                                                            -->
 															<td align="center">
-																<a href="{:url('apply/search',array('id'=>$vo['id']))}" class="btn btn-primary btn-sm shiny">
+																<a onClick="layer.open({type: 2,title: false,closeBtn: 1,shadeClose: true, area: ['750px', '700px'],content: '{:url('apply/search',array('id'=>$vo['id']))}'});" class="btn btn-primary btn-sm shiny">
 																	<i class="fa fa-edit"></i> 查看
 																</a>
 																
@@ -156,6 +160,9 @@
 			<script src="__PUBLIC__/admin/style/jquery.js"></script>
 			<!--Beyond Scripts-->
 			<script src="__PUBLIC__/admin/style/beyond.js"></script>
+			<script type="text/javascript">
+				
+			</script>
 	</body>
 
 </html>

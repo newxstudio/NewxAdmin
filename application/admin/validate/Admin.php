@@ -30,7 +30,7 @@ use think\Validate;
 	     // edit 验证场景定义
     	public function sceneEdit()
     	{
-    		return $this->remove('username','require')->remove('password','require')->remove('name','require');
+    		return $this->only(['password','name','email','desca']);
     	}    
 	    
 	}

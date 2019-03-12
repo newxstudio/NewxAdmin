@@ -16,7 +16,7 @@ class User extends Base
     }
     public function signin()
     {
-    	if(request()->isPost()){
+    	if(request()->isAjax()){
     		
     		$data=[
     			'username'=>input('username'),
@@ -41,6 +41,7 @@ class User extends Base
     	}
         return $this->fetch();
     }
+    /*
 	public function add()
     {
     	if(request()->isPost()){
@@ -76,43 +77,43 @@ class User extends Base
     	}
         return $this->fetch();
     }
+    */
 	public function edit()
     {
     	$id = input('id');
-    	$users = db('user')->find($id);
-    	if(request()->isPost())
-    	{
-    		$data = [
-    			'id'=>input('id'),
-    			'username'=>input('username'),
-    			'password'=>input('password'),
-    			'name'=>input('name'),
-    			'sex'=>input('sex'),
-    			'date'=>input('date'),
-    			'phone'=>input('phone'),
-    			'department'=>input('department'),
-    			'class'=>input('class'),
-    			'id_number'=>input('id_number'),
-    			'bedroom'=>input('bedroom'),
-    			'email'=>input('email'),
-    		
-    		];
-    		if(input('password'))
-    		{
-    			$data['password'] = md5(input('password'));
-    		}else{
-    			$data['password'] = $admins['password'];
-    		}
-    		
-    		$save = db('user')->update($data);
-    		
-    		if($save !== false)
-    		{
-    			$this->success('修改管理员成功！','lst');
-    		}else{
-    			$this->error('修改管理员失败！');
-    		}
-    		return;
+	    $users = db('user')->find($id);
+    	if(request()->isAjax()){
+	    	
+	    	$data = [
+	    		'id'=>input('id'),
+	    		'password'=>input('password'),
+	    		'name'=>input('name'),
+	    		'sex'=>input('sex'),
+	    		'date'=>input('date'),
+	    		'phone'=>input('phone'),
+	    		'department'=>input('department'),
+	    		'class'=>input('class'),
+	    		'id_number'=>input('id_number'),
+	    		'bedroom'=>input('bedroom'),
+	    		'email'=>input('email'),
+	    	
+	    	];
+	    	if(input('password'))
+	    	{
+	    		$data['password'] = md5(input('password'));
+	    	}else{
+	    		$data['password'] = $users['password'];
+	    	}
+	    	
+	    	$save = db('user')->update($data);
+	    	
+	    	if($save !== false)
+	    	{
+	    		$this->success('修改用户信息成功！','lst');
+	    	}else{
+	    		$this->error('修改用户信息失败！');
+	    	}
+	    	return;
     	}
     	
     	$this->assign('users',$users);
@@ -126,9 +127,7 @@ class User extends Base
    		
    		if(db('user')->delete($id))
    		{
-   			$this->success("删除用户成功",'user/lst');
-   		}else{
-   			$this->error("删除用户失败");
+   			$this->redirect('user/lst');
    		}
    		
    	

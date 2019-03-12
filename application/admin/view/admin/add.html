@@ -162,7 +162,7 @@
 				layui.use('upload', function() {
 					var upload = layui.upload;
 					var layer = layui.layer;
-
+					var count = 0;
 					//执行实例
 					var uploadInst = upload.render({
 						elem: '#pic' //绑定元素
@@ -176,6 +176,13 @@
 						choose: function(obj) {
 							//预读本地文件示例，不支持ie8
 							obj.preview(function(index, file, result) { //在当前ID为“demo2”的区域显示图片
+								count++;
+								console.log(count);
+								if(count > 1 )
+								{
+									layer.msg("只允许上传一张图片");
+									error();
+								}
 								var files = obj.pushFile();
 								layui.use(['jquery', 'layer'], function() {
 									var $ = layui.$ //重点处

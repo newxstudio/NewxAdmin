@@ -75,100 +75,92 @@ class Admin extends Base
     {
     	$id = input('id');
     	$admins = db('admin')->find($id);
-    	if(request()->isPost())
-    	{
-    		$data = [
-    			'id'=>input('id'),
-    			'email'=>input('email'),
-    			'desca'=>input('desca'),
-    			'name'=>input('name'),
-    		
-    		];
-    		$access = [
-    			
-    			'group_id'=>input('group_id'),
-    		];
-    		if(input('password'))
-    		{
-    			$data['password'] = md5(input('password'));
-    		}else{
-    			$data['password'] = $admins['password'];
-    		}
-    		
-    		if($_FILES['pic']['tmp_name']){
-    			$file = request()->file('pic');
-    			$info = $file->move( 'static/uploads');
-    			$data['pic'] =  'uploads/'.$info->getSaveName();
-    			
-    		}
-    		$validate = new \app\admin\validate\Admin;
-
-	        if (!$validate->scene('edit')->check($data)) {
-	        	$this->error($validate->getError());
-	            die();
-	        }
-    		$save = db('admin')->update($data);
-    		
-    		if($save !== false)
-    		{
-    			db('auth_group_access')->where('uid',$id)->update($access);
-    			
-    			return $this->success('修改管理员成功！','lst');
-    			
-    		}else{
-    			$this->error('修改管理员失败！');
-    		}
-    		return;
-    	}
     	$authGroupAccess=db('auth_group_access')->where(array('uid'=>$id))->find();
-    	$authGroupRes=db('auth_group')->select();
-        $this->assign('authGroupRes',$authGroupRes);
-    	$this->assign('admins',$admins);
-    	$this->assign('groupId',$authGroupAccess['group_id']);
-        return $this->fetch();
+	    $authGroupRes=db('auth_group')->select();
+	    $this->assign('authGroupRes',$authGroupRes);
+	    $this->assign('admins',$admins);
+	    $this->assign('groupId',$authGroupAccess['group_id']);
+    	if(request()->isAjax()){
+		    
+		    $post = input('post.');
+		    $id = $post['id'];
+		    
+		    $data = [
+		    	'id'=>$post['id'],
+		    	'email'=>$post['email'],
+		    	'desca'=>$post['desca'],
+		    	'name'=>$post['name'],
+		    ];
+		    $access = [
+		    	'group_id'=>$post['group_id'],
+		    ];
+		    if($post['password'])
+		    {
+		    	$data['password'] = md5($post['password']);
+		    }else{
+		    	$data['password'] = $admins['password'];
+		    }
+		    
+		    if(cookie('url')){
+		    	$data['pic'] = cookie('url');
+		    }else{
+		    	$data['pic'] = $admins['pic'];
+		    }
+		    $validate = new \app\admin\validate\Admin;
+		
+			if (!$validate->scene('edit')->check($data)) {
+				$this->error($validate->getError());
+			    die();
+			}
+		    $save = db('admin')->update($data);
+		    
+		    if($save !== false)
+		    {
+		    	db('auth_group_access')->where('uid',$id)->update($access);
+		    	
+		    	$this->success('修改管理员成功！','lst');
+		    	
+		    }else{
+		    	$this->error('修改管理员失败！');
+		    }
+		    
+		    
+	        
+    	}
+    	
+    	return $this->fetch();
+    	
     }
 	public function edit1()
     {
     	$id = input('id');
     	$admins = db('admin')->find($id);
-    	if(request()->isPost())
+    	if(request()->isAjax())
     	{
     		$data = [
     			'id'=>input('id'),
     			'email'=>input('email'),
     			'desca'=>input('desca'),
     			'name'=>input('name'),
+    		];
     		
-    		];
-    		$access = [
-    			
-    			'group_id'=>input('group_id'),
-    		];
     		if(input('password'))
     		{
     			$data['password'] = md5(input('password'));
     		}else{
     			$data['password'] = $admins['password'];
     		}
-    		
-    		if($_FILES['pic']['tmp_name']){
-    			$file = request()->file('pic');
-    			$info = $file->move( 'static/uploads');
-    			$data['pic'] =  'uploads/'.$info->getSaveName();
-    			
-    		}
-    		$validate = new \app\admin\validate\Admin;
-
-	        if (!$validate->scene('edit')->check($data)) {
-	        	$this->error($validate->getError());
-	            die();
-	        }
+    		if(cookie('url')){
+		    	$data['pic'] = cookie('url');
+		    }else{
+		    	$data['pic'] = $admins['pic'];
+		    }
+		    
     		$save = db('admin')->update($data);
     		
     		if($save !== false)
     		{
-    			
-    			return $this->success('修改管理员成功！','index/index');
+    			$this->success('修改管理员成功！','index/index');
     			
     		}else{
     			$this->error('修改管理员失败！');
@@ -185,17 +177,13 @@ class Admin extends Base
    {
    	
    		$id = input('id');
-   		if($id != 1)
+   		
+   		if(db('admin')->delete($id) && db('auth_group_access')->where('uid',$id)->delete())
    		{
-   			if(db('admin')->delete($id))
-   			{
-   				$this->success("删除管理员成功",'admin/lst');
-   			}else{
-   				$this->error("删除管理员失败");
-   			}
-   		}else{
-   			$this->error("初始管理员不可删除");
+   			$this->redirect('admin/lst');
+   			
    		}
+   		
    	
    	
    }
@@ -203,6 +191,7 @@ class Admin extends Base
    		session(null);
    		$this->redirect('login/index');
    }
+   
    public function upload()
     {
         $img = request()->file('file');
@@ -211,9 +200,15 @@ class Admin extends Base
         $url = 'uploads/' . $info->getSaveName();
         
         if($info){
-        	cookie('url',$url,60);
+        	if(cookie('url')){
+        		cookie('url',null);
+        	}
+        	cookie('url',$url);
+        	if(cookie('url')){
+            	return json(['code' => 0, 'msg' => '上传成功!', 'url' => 'static/uploads/' . $info->getSaveName()]);
+        	}
             // 成功上传后 获取上传信息
-            return json(['code' => 0, 'msg' => '上传成功!', 'url' => 'uploads/' . $info->getSaveName()]);
+
         }else{
             // 上传失败获取错误信息
             return json(['code' => 1, 'msg' => $img->getError(), 'url' => '']);
@@ -221,6 +216,7 @@ class Admin extends Base
         
 
 	}
+	
 }
 
 ?>

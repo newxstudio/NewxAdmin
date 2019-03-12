@@ -1,10 +1,10 @@
-<?php /*a:3:{s:56:"D:\wamp64\www\NEWX\application\admin\view\admin\add.html";i:1552277306;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551705548;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1552270767;}*/ ?>
+<?php /*a:3:{s:58:"D:\wamp64\www\NEWX\application\admin\view\admin\edit1.html";i:1552392954;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1552389751;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1552270767;}*/ ?>
 <!DOCTYPE html>
 <html>
 
 	<head>
 		<meta charset="utf-8">
-		<title>NEWX·后台管理 - 添加管理员</title>
+		<title>NEWX·后台管理 - 资料修改</title>
 
 		<meta name="description" content="Dashboard">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -49,8 +49,8 @@
                     <ul class="account-area">
                         <li>
                             <a class="login-area dropdown-toggle" data-toggle="dropdown">
-                                <div class="avatar" title="View your public profile">
-                                    <img src="http://localhost/newx/public/static/admin/images/newx.jpg">
+                                <div class="avatar" title="View your public profile" style="border: none;">
+                                    <img src="http://localhost/newx/public/static/<?php echo htmlentities($adminsPic['pic']); ?>">
                                 </div>
                                 <section>
                                     <h2><span class="profile"><span><?php echo htmlentities(app('request')->session('username')); ?></span></span></h2>
@@ -65,7 +65,7 @@
                                         </a>
                                 </li>
                                 <li class="dropdown-footer">
-                                    <a href="<?php echo url('admin/edit1',array('id'=>app('request')->session('uid'))); ?>">
+                                    <a href="<?php echo url('admin/edit1',array('id'=>app('request')->session('id'))); ?>">
                                             修改资料
                                         </a>
                                 </li>
@@ -88,7 +88,7 @@
 		<!-- /头部 -->
 
 		<div class="main-container container-fluid">
-			<div class="page-container">·
+			<div class="page-container">
 				<!-- Page Sidebar -->
 				<div class="page-sidebar" id="sidebar">
 					<!-- Page Sidebar Header-->
@@ -137,9 +137,9 @@
 									<a href="#">系统</a>
 								</li>
 								<li>
-									<a href="<?php echo url('admin/lst'); ?>">管理员管理</a>
+									<a href="#">管理员管理</a>
 								</li>
-								<li class="active">添加管理员</li>
+								<li class="active">资料修改</li>
 							</ul>
 						</div>
 						<!-- /Page Breadcrumb -->
@@ -151,70 +151,51 @@
 								<div class="col-lg-12 col-sm-12 col-xs-12">
 									<div class="widget">
 										<div class="widget-header bordered-bottom bordered-blue">
-											<span class="widget-caption">新增管理员</span>
+											<span class="widget-caption">资料修改</span>
 										</div>
 										<div class="widget-body">
-
 											<div id="horizontal-form">
-												<form class="form-horizontal" role="form" action="" method="post" enctype="multipart/form-data">
-													<div class="form-group">
-														<label for="username" class="col-sm-2 control-label no-padding-right">所属用户组</label>
-														<div class="col-sm-6">
-															<select name="group_id">
-																<?php if(is_array($authGroupRes) || $authGroupRes instanceof \think\Collection || $authGroupRes instanceof \think\Paginator): $i = 0; $__LIST__ = $authGroupRes;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$authGroupRes): $mod = ($i % 2 );++$i;?>
-																<option value="<?php echo htmlentities($authGroupRes['id']); ?>"><?php echo htmlentities($authGroupRes['title']); ?></option>
-																<?php endforeach; endif; else: echo "" ;endif; ?>
-															</select>
-														</div>
-														<p class="help-block col-sm-4 red">* 必填</p>
-													</div>
-													<div class="form-group">
-														<label for="username" class="col-sm-2 control-label no-padding-right">管理员登录名</label>
-														<div class="col-sm-6">
-															<input class="form-control" id="username" placeholder="登录名" name="username" type="text" >
-														</div>
-														<p class="help-block col-sm-4 red">* 必填</p>
-													</div>
+												<form class="form-horizontal" role="form" action="" enctype="multipart/form-data" method="post">
+													<input type="hidden" name="id" value="<?php echo htmlentities($admins['id']); ?>" />
 
-													<div class="form-group">
-														<label for="password" class="col-sm-2 control-label no-padding-right">管理员密码</label>
-														<div class="col-sm-6">
-															<input class="form-control" id="password" placeholder="密码" name="password" type="text" >
-														</div>
-														<p class="help-block col-sm-4 red">* 必填</p>
-													</div>
 													<div class="form-group">
 														<label for="name" class="col-sm-2 control-label no-padding-right">管理员昵称</label>
 														<div class="col-sm-6">
-															<input class="form-control" id="name" placeholder="昵称" name="name" type="text" >
+															<input class="form-control" id="name" placeholder="昵称" name="name" value="<?php echo htmlentities($admins['name']); ?>" type="text">
 														</div>
-														<p class="help-block col-sm-4 red">* 必填</p>
 													</div>
 													<div class="form-group">
 														<label for="email" class="col-sm-2 control-label no-padding-right">管理员邮箱</label>
 														<div class="col-sm-6">
-															<input class="form-control" id="email" placeholder="邮箱" name="email" type="text" >
+															<input class="form-control" id="email" placeholder="邮箱" name="email" value="<?php echo htmlentities($admins['email']); ?>" type="text">
 														</div>
-														<p class="help-block col-sm-4 red">* 必填</p>
 													</div>
 													<div class="form-group">
 														<label for="desca" class="col-sm-2 control-label no-padding-right">管理员描述</label>
 														<div class="col-sm-6">
-															<input class="form-control" id="desca" placeholder="描述" name="desca" type="text" >
+															<input class="form-control" id="desca" placeholder="描述" name="desca" value="<?php echo htmlentities($admins['desca']); ?>" type="text">
 														</div>
-														<p class="help-block col-sm-4 red">* 必填</p>
 													</div>
-
 													<div class="form-group">
+														<label for="group_id" class="col-sm-2 control-label no-padding-right">管理员密码</label>
+														<div class="col-sm-6">
+															<input class="form-control" id="password" placeholder="" name="password" type="text">
+														</div>
+													</div>
+													<div class="form-group">
+
 														<div class="layui-upload">
 															<label for="pic" class="col-sm-2 control-label no-padding-right">管理员头像</label>
 															<div class="col-sm-6">
+
 																<button type="button" class="layui-btn layui-btn-normal" id="pic">添加图片</button>
+																<img src="http://localhost/newx/public/static/<?php echo htmlentities($admins['pic']); ?>" width="100" height="100" style="float: right;">
+
 																<p class="help-block col-sm-4 red" style="float: right;">点击图片放大预览</p>
 																<div id="img_sel">
 
 																</div>
-																<button type="button" class="layui-btn" id="test8" style="margin-top: 10px;" >上传</button>
+																<button type="button" class="layui-btn" id="test8" style="margin-top: 10px;">上传</button>
 																<p class="help-block col-sm-4 red" style="float: right;">* 请点击上传</p>
 															</div>
 
@@ -223,7 +204,7 @@
 													</div>
 													<div class="form-group">
 														<div class="col-sm-offset-2 col-sm-10">
-															<button type="submit" class="btn btn-default" id="toSave">保存信息</button>
+															<button type="submit" class="btn btn-default" id="toSave">更新信息</button>
 														</div>
 													</div>
 												</form>
@@ -251,7 +232,7 @@
 				layui.use('upload', function() {
 					var upload = layui.upload;
 					var layer = layui.layer;
-
+					var count = 0;
 					//执行实例
 					var uploadInst = upload.render({
 						elem: '#pic' //绑定元素
@@ -265,6 +246,13 @@
 						choose: function(obj) {
 							//预读本地文件示例，不支持ie8
 							obj.preview(function(index, file, result) { //在当前ID为“demo2”的区域显示图片
+								count++;
+								console.log(count);
+								if(count > 1 )
+								{
+									layer.msg("只允许上传一张图片");
+									error();
+								}
 								var files = obj.pushFile();
 								layui.use(['jquery', 'layer'], function() {
 									var $ = layui.$ //重点处
@@ -275,6 +263,7 @@
 
 									$("#upload_img_" + index).bind('click', function() {
 										delete files[index];
+										count--;
 										$("#container" + index).remove();
 									});
 									//某图片放大预览
@@ -321,7 +310,7 @@
 				$(function() {
 					$('#toSave').click(function() {
 						$.ajax({
-							url: "<?php echo url('admin/add'); ?>",
+							url: "<?php echo url('admin/edit1'); ?>",
 							type: 'post',
 							data: $('form').serialize(),
 							dataType: 'json',
@@ -336,7 +325,7 @@
 									});
 								} else {
 									layer.open({
-										title: '添加管理员失败',
+										title: '修改信息失败',
 										content: data.msg,
 										icon: 5,
 										anim: 6
@@ -345,7 +334,7 @@
 							},
 							error: function(data) {
 								console.log(data);
-								
+
 							}
 						});
 						return false;

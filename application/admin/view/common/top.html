@@ -22,8 +22,8 @@
                     <ul class="account-area">
                         <li>
                             <a class="login-area dropdown-toggle" data-toggle="dropdown">
-                                <div class="avatar" title="View your public profile">
-                                    <img src="__PUBLIC__/admin/images/newx.jpg">
+                                <div class="avatar" title="View your public profile" style="border: none;">
+                                    <img src="__PUBLIC__/{$adminsPic['pic']}">
                                 </div>
                                 <section>
                                     <h2><span class="profile"><span>{$Request.session.username}</span></span></h2>
@@ -38,7 +38,7 @@
                                         </a>
                                 </li>
                                 <li class="dropdown-footer">
-                                    <a href="{:url('admin/edit1',array('id'=>$Request.session.uid))}">
+                                    <a href="{:url('admin/edit1',array('id'=>$Request.session.id))}">
                                             修改资料
                                         </a>
                                 </li>

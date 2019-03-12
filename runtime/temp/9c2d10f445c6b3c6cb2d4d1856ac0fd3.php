@@ -1,8 +1,8 @@
-<?php /*a:3:{s:57:"D:\wamp64\www\NEWX\application\admin\view\admin\edit.html";i:1551681346;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551705548;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1552270767;}*/ ?>
+<?php /*a:3:{s:62:"D:\wamp64\www\NEWX\application\admin\view\auth_group\edit.html";i:1552390794;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1552389751;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1552270767;}*/ ?>
 <!DOCTYPE html>
 <html><head>
 	    <meta charset="utf-8">
-    <title>NEWX·后台管理 - 编辑管理员</title>
+    <title>NEWX·后台管理 - 编辑用户组</title>
 
     <meta name="description" content="Dashboard">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,6 +18,7 @@
     <link href="http://localhost/newx/public/static/admin/style/demo.css" rel="stylesheet">
     <link href="http://localhost/newx/public/static/admin/style/typicons.css" rel="stylesheet">
     <link href="http://localhost/newx/public/static/admin/style/animate.css" rel="stylesheet">
+    <link href="http://localhost/newx/public/static/layui/css/layui.css" rel="stylesheet">
     <link rel="shortcut icon" href="http://localhost/newx/public/static/admin/images/newx.ico" /> 
 </head>
 <body>
@@ -45,8 +46,8 @@
                     <ul class="account-area">
                         <li>
                             <a class="login-area dropdown-toggle" data-toggle="dropdown">
-                                <div class="avatar" title="View your public profile">
-                                    <img src="http://localhost/newx/public/static/admin/images/newx.jpg">
+                                <div class="avatar" title="View your public profile" style="border: none;">
+                                    <img src="http://localhost/newx/public/static/<?php echo htmlentities($adminsPic['pic']); ?>">
                                 </div>
                                 <section>
                                     <h2><span class="profile"><span><?php echo htmlentities(app('request')->session('username')); ?></span></span></h2>
@@ -61,7 +62,7 @@
                                         </a>
                                 </li>
                                 <li class="dropdown-footer">
-                                    <a href="<?php echo url('admin/edit1',array('id'=>app('request')->session('uid'))); ?>">
+                                    <a href="<?php echo url('admin/edit1',array('id'=>app('request')->session('id'))); ?>">
                                             修改资料
                                         </a>
                                 </li>
@@ -133,9 +134,9 @@
                         <a href="#">系统</a>
                     </li>
                                         <li>
-                        <a href="<?php echo url('admin/lst'); ?>">管理员管理</a>
+                        <a href="<?php echo url('lst'); ?>">用户组管理</a>
                     </li>
-                                        <li class="active">编辑管理员</li>
+                                        <li class="active">修改用户组</li>
                                         </ul>
                 </div>
                 <!-- /Page Breadcrumb -->
@@ -147,67 +148,64 @@
     <div class="col-lg-12 col-sm-12 col-xs-12">
         <div class="widget">
             <div class="widget-header bordered-bottom bordered-blue">
-                <span class="widget-caption">编辑管理员</span>
+                <span class="widget-caption">修改用户组</span>
             </div>
             <div class="widget-body">
                 <div id="horizontal-form">
-                    <form class="form-horizontal" role="form" action="" enctype="multipart/form-data" method="post">
-                    	<input type="hidden" name="id" value="<?php echo htmlentities($admins['id']); ?>" />
-                    	
-                        <div class="form-group">
-                            <label for="username" class="col-sm-2 control-label no-padding-right">管理员登录名</label>
-                            <div class="col-sm-6">
-                                <input class="form-control" id="username" placeholder="" name="username" disabled="disabled" value="<?php echo htmlentities($admins['username']); ?>" type="text">
-                            </div>
-                        </div>
-
+                    <form class="form-horizontal" role="form" action="" method="post">
+                        <input type="hidden" name="id" value="<?php echo htmlentities($authgroups['id']); ?>" />
                        <div class="form-group">
-                            <label for="username" class="col-sm-2 control-label no-padding-right">所属用户组</label>
+                            <label for="username" class="col-sm-2 control-label no-padding-right">用户组名称</label>
                             <div class="col-sm-6">
-                                <select name="group_id">
-                                    <?php if(is_array($authGroupRes) || $authGroupRes instanceof \think\Collection || $authGroupRes instanceof \think\Paginator): $i = 0; $__LIST__ = $authGroupRes;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$authGroupRes): $mod = ($i % 2 );++$i;?>
-                                        <option <?php if($authGroupRes['id'] == $groupId): ?>selected="selected"<?php endif; ?> value="<?php echo htmlentities($authGroupRes['id']); ?>"><?php echo htmlentities($authGroupRes['title']); ?></option>
-                                    <?php endforeach; endif; else: echo "" ;endif; ?>
-                                </select>
+                                <input class="form-control"  placeholder="" value="<?php echo htmlentities($authgroups['title']); ?>" name="title" required="" type="text">
                             </div>
                             <p class="help-block col-sm-4 red">* 必填</p>
                         </div>
                         <div class="form-group">
-                            <label for="name" class="col-sm-2 control-label no-padding-right">管理员昵称</label>
+                            <label for="username" class="col-sm-2 control-label no-padding-right">启用状态</label>
                             <div class="col-sm-6">
-                                <input class="form-control" id="name" placeholder="昵称" name="name" value="<?php echo htmlentities($admins['name']); ?>" type="text">  
+                            <p class="help-block col-sm-4 red">
+                                <label>
+                                    <input class="checkbox-slider colored-darkorange" name="status" value="1"  <?php if($authgroups['status'] == 1): ?>checked="checked"<?php endif; ?> type="checkbox">
+                                    <span class="text"></span>
+                                </label>
+                            </p>
                             </div>
-                        </div>  
-                        <div class="form-group">
-                            <label for="email" class="col-sm-2 control-label no-padding-right">管理员邮箱</label>
-                            <div class="col-sm-6">
-                                <input class="form-control" id="email" placeholder="邮箱" name="email" value="<?php echo htmlentities($admins['email']); ?>"  type="text">  
-                            </div>
-                        </div>  
-                        <div class="form-group">
-                            <label for="desca" class="col-sm-2 control-label no-padding-right">管理员描述</label>
-                            <div class="col-sm-6">
-                                <input class="form-control" id="desca" placeholder="描述" name="desca" value="<?php echo htmlentities($admins['desca']); ?>" type="text">  
-                            </div>
-                        </div>  
-                        <div class="form-group">
-                            <label for="group_id" class="col-sm-2 control-label no-padding-right">管理员密码</label>
-                            <div class="col-sm-6">
-                                <input class="form-control" id="password" placeholder="" name="password"  type="text">  
-                            </div>
-                        </div>  
-                        <div class="form-group">
-                            <label for="pic" class="col-sm-2 control-label no-padding-right">管理员头像</label>
-                            
-                            <div class="col-sm-6">
-                             <input  id="pic" placeholder="" name="pic"  type="file" style="display: inline">
-                             <img src="http://localhost/newx/public/static/<?php echo htmlentities($admins['pic']); ?>" / width="60" height="60" >
-                            </div>
+                            <p class="help-block col-sm-4 red">* 必填</p>
                         </div>
-                        
+                       	<div class="form-group">
+                            <label for="username" class="col-sm-2 control-label no-padding-right"></label>
+                            <div class="col-sm-6">
+                               <table class="table table-hover">
+                                    <thead class="bordered-darkorange">
+                                        <tr>
+                                            <th>
+                                                配置权限
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <?php if(is_array($authRuleRes) || $authRuleRes instanceof \think\Collection || $authRuleRes instanceof \think\Paginator): $i = 0; $__LIST__ = $authRuleRes;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$authRule): $mod = ($i % 2 );++$i;?>
+                                            <tr>
+                                                <td>
+                                                    <label>
+                                                        <?php echo str_repeat('&nbsp;', $authRule['level']*3);?>
+                                                        <input name="rules[]" value="<?php echo htmlentities($authRule['id']); ?>"
+                                                        <?php $arr=explode(',', $authgroups['rules']); if(in_array($authRule['id'], $arr)){echo 'checked="checked"';} ?>
+                                                         dataid="id-<?php echo htmlentities($authRule['dataid']); ?>" class="inverted checkbox-parent <?php if($authRule['level'] != 0): ?> checkbox-child <?php endif; ?> " type="checkbox">
+                                                        <span <?php if($authRule['level'] == 0): ?> style="font-weight:bold; font-size:14px;" <?php endif; ?> class="text"><?php echo htmlentities($authRule['title']); ?></span>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach; endif; else: echo "" ;endif; ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                        </div>
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-default">更新信息</button>
+                                <button type="submit" class="btn btn-default" id="toSave">保存信息</button>
                             </div>
                         </div>
                     </form>
@@ -230,7 +228,83 @@
     <script src="http://localhost/newx/public/static/admin/style/jquery.js"></script>
     <!--Beyond Scripts-->
     <script src="http://localhost/newx/public/static/admin/style/beyond.js"></script>
-    
+    <script src="http://localhost/newx/public/static/layui/layui.js"></script>
+    <script type="text/javascript">
+				/* 权限配置 */
+				$(function() {
+					//动态选择框，上下级选中状态变化
+					$('input.checkbox-parent').on('change', function() {
+						var dataid = $(this).attr("dataid");
+						$('input[dataid^=' + dataid + ']').prop('checked', $(this).is(':checked'));
+					});
+					$('input.checkbox-child').on('change', function() {
+						var dataid = $(this).attr("dataid");
+						dataid = dataid.substring(0, dataid.lastIndexOf("-"));
+						var parent = $('input[dataid=' + dataid + ']');
+						if($(this).is(':checked')) {
+							parent.prop('checked', true);
+							//循环到顶级
+							while(dataid.lastIndexOf("-") != 2) {
+								dataid = dataid.substring(0, dataid.lastIndexOf("-"));
+								parent = $('input[dataid=' + dataid + ']');
+								parent.prop('checked', true);
+							}
+						} else {
+							//父级
+							if($('input[dataid^=' + dataid + '-]:checked').length == 0) {
+								parent.prop('checked', false);
+								//循环到顶级
+								while(dataid.lastIndexOf("-") != 2) {
+									dataid = dataid.substring(0, dataid.lastIndexOf("-"));
+									parent = $('input[dataid=' + dataid + ']');
+									if($('input[dataid^=' + dataid + '-]:checked').length == 0) {
+										parent.prop('checked', false);
+									}
+								}
+							}
+						}
+					});
+				});
+			</script>
+			<script type="text/javascript">
+				$(function() {
+					layui.use('layer', function() {
+						var layer = layui.layer;
+						$('#toSave').click(function() {
+							$.ajax({
+								url: "<?php echo url('authGroup/edit'); ?>",
+								type: 'post',
+								data: $('form').serialize(),
+								dataType: 'json',
+								success: function(data) {
+									console.log(data);
+									if(data.code == 1) {
+										layer.msg(data.msg, {
+											icon: 6,
+											time: 2000
+										}, function() {
+											location.href = data.url;
+										});
+									} else {
+										layer.open({
+											title: '修改用户组失败',
+											content: data.msg,
+											icon: 5,
+											anim: 6
+										});
+									}
+								},
+								error: function(data) {
+									console.log(data);
 
+								}
+							});
+							return false;
+						});
+
+					});
+
+				});
+			</script>
 
 </body></html>

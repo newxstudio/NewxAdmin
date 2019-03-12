@@ -91,7 +91,7 @@
 																<a href="{:url('user/edit',array('id'=>$vo['id']))}" class="btn btn-primary btn-sm shiny">
 																	<i class="fa fa-edit"></i> 编辑
 																</a>
-																<a href="#"{if condition="$auth eq 0" } onClick="layer.open({title: '{$groupTitle}',content:'没有权限',icon: 5,anim: 6});" {else /} onClick="warning('确实要删除吗', '{:url(" user/del ",array('id'=>$vo['id']))}')" {/if} class="btn btn-danger btn-sm shiny">
+																<a href="#"{if condition="$auth eq 0" } onClick="layer.open({title: '{$groupTitle}',content:'没有权限',icon: 5,anim: 6});" {else /} onClick="warning('确实要删除吗', '{:url("user/del",array('id'=>$vo['id']))}')" {/if} class="btn btn-danger btn-sm shiny">
 																	<i class="fa fa-trash-o"></i> 删除
 																</a>
 

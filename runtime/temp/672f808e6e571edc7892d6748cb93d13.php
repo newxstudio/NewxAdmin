@@ -1,10 +1,10 @@
-<?php /*a:3:{s:56:"D:\wamp64\www\NEWX\application\admin\view\apply\lst.html";i:1551886932;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551705548;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1552270767;}*/ ?>
+<?php /*a:3:{s:61:"D:\wamp64\www\NEWX\application\admin\view\auth_group\lst.html";i:1552390534;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1552389751;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1552270767;}*/ ?>
 <!DOCTYPE html>
 <html>
 
 	<head>
 		<meta charset="utf-8">
-		<title>NEWX·后台管理 -报名列表 </title>
+		<title>NEWX·后台管理 - 用户组列表</title>
 
 		<meta name="description" content="Dashboard">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,14 +20,12 @@
 		<link href="http://localhost/newx/public/static/admin/style/demo.css" rel="stylesheet">
 		<link href="http://localhost/newx/public/static/admin/style/typicons.css" rel="stylesheet">
 		<link href="http://localhost/newx/public/static/admin/style/animate.css" rel="stylesheet">
-		
+		<link rel="shortcut icon" href="http://localhost/newx/public/static/admin/images/newx.ico" />
 		<link rel="stylesheet" href="http://localhost/newx/public/static/layui/css/layui.css">
 		<!--Basic Scripts-->
 		<script src="http://localhost/newx/public/static/admin/style/jquery_002.js"></script>
-		
+
 		<script src="http://localhost/newx/public/static/layer/layer.js"></script>
-		
-		<link rel="shortcut icon" href="http://localhost/newx/public/static/admin/images/newx.ico" />
 	</head>
 
 	<body>
@@ -55,8 +53,8 @@
                     <ul class="account-area">
                         <li>
                             <a class="login-area dropdown-toggle" data-toggle="dropdown">
-                                <div class="avatar" title="View your public profile">
-                                    <img src="http://localhost/newx/public/static/admin/images/newx.jpg">
+                                <div class="avatar" title="View your public profile" style="border: none;">
+                                    <img src="http://localhost/newx/public/static/<?php echo htmlentities($adminsPic['pic']); ?>">
                                 </div>
                                 <section>
                                     <h2><span class="profile"><span><?php echo htmlentities(app('request')->session('username')); ?></span></span></h2>
@@ -71,7 +69,7 @@
                                         </a>
                                 </li>
                                 <li class="dropdown-footer">
-                                    <a href="<?php echo url('admin/edit1',array('id'=>app('request')->session('uid'))); ?>">
+                                    <a href="<?php echo url('admin/edit1',array('id'=>app('request')->session('id'))); ?>">
                                             修改资料
                                         </a>
                                 </li>
@@ -142,7 +140,7 @@
 								<li>
 									<a href="#">系统</a>
 								</li>
-								<li class="active">报名管理</li>
+								<li class="active">用户组管理</li>
 							</ul>
 						</div>
 						<!-- /Page Breadcrumb -->
@@ -150,85 +148,53 @@
 						<!-- Page Body -->
 						<div class="page-body">
 
-							<form action="<?php echo url('apply/select1'); ?>" method="get">
-								<span>第一志愿:</span>
-								<select name="department1" id="select1" style="margin-bottom: 10px;">
-									<option value="">全部</option>
-									<option value="视频部">视频部</option>
-									<option value="采风部">采风部</option>
-									<option value="图文部">图文部</option>
-									<option value="采编部">采编部</option>
-									<option value="运营部">运营部</option>
-									<option value="网站部">网站部</option>
-									<option value="办公室">办公室</option>
-								</select>
-								<span style="margin-left: 15px;">第二志愿:</span>
-								<select name="department2" id="select2" style="margin-bottom: 10px;">
-									<option value="">全部</option>
-									<option value="视频部">视频部</option>
-									<option value="采风部">采风部</option>
-									<option value="图文部">图文部</option>
-									<option value="采编部">采编部</option>
-									<option value="运营部">运营部</option>
-									<option value="网站部">网站部</option>
-									<option value="办公室">办公室</option>
-								</select>
-								<button class="btn btn-primary btn-sm shiny" type="submit">筛选</button>
-							</form>
+							<button type="button" tooltip="添加用户组" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '<?php echo url('add'); ?>'"> <i class="fa fa-plus"></i> Add
+</button>
 							<div class="row">
 								<div class="col-lg-12 col-sm-12 col-xs-12">
 									<div class="widget">
 										<div class="widget-body">
 											<div class="flip-scroll">
-												<table class="table table-bordered table-hover">
-													<thead class="">
-														<tr>
-															<th class="text-center">ID</th>
-															<th class="text-center">姓名</th>
-															<th class="text-center">性别</th>
-															<th class="text-center">院系</th>
-															<th class="text-center">班级</th>
-															<th class="text-center">第一志愿</th>
-															<th class="text-center">第二志愿</th>
-															<th class="text-center">是否服从调剂</th>
-															<th class="text-center">操作</th>
-														</tr>
-													</thead>
-													<tbody>
-														<?php if(is_array($list) || $list instanceof \think\Collection || $list instanceof \think\Paginator): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-														<tr>
-															<td align="center"><?php echo htmlentities($vo['id']); ?></td>
-															<td align="center"><?php echo htmlentities($vo['user']['name']); ?></td>
-															<td align="center"><?php echo htmlentities($vo['user']['sex']); ?></td>
-															<td align="center"><?php echo htmlentities($vo['user']['department']); ?></td>
-															<td align="center"><?php echo htmlentities($vo['user']['class']); ?></td>
-															<td align="center"><?php echo htmlentities($vo['volunteer1']); ?></td>
-															<td align="center"><?php echo htmlentities($vo['volunteer2']); ?></td>
-															<td align="center"><?php echo htmlentities($vo['adjust']); ?></td>
-
-															<td align="center">
-																<a href="<?php echo url('apply/search',array('id'=>$vo['id'])); ?>" class="btn btn-primary btn-sm shiny">
-																	<i class="fa fa-edit"></i> 查看
-																</a>
-																
-																<a href="#" id="del" <?php if($auth == 0): ?> onClick="layer.open({title: '<?php echo htmlentities($groupTitle); ?>',content:'没有权限',icon: 5,anim: 6});" <?php else: ?> onClick="warning('确实要删除吗', '<?php echo url("apply/del",array('id'=>$vo['id'])); ?>')" <?php endif; ?> class="btn btn-danger btn-sm shiny">
-																	<i class="fa fa-trash-o"></i> 删除
-																</a>
-
-															</td>
-														</tr>
-
-														<?php endforeach; endif; else: echo "" ;endif; ?>
-													</tbody>
-
-												</table>
-
+												<form action="" method="post">
+													<table class="table table-bordered table-hover">
+														<thead class="">
+															<tr>
+																<th class="text-center" width="10%">ID</th>
+																<th class="text-center">用户组名称</th>
+																<th class="text-center">启用状态</th>
+																<th class="text-center" width="20%">操作</th>
+															</tr>
+														</thead>
+														<tbody>
+															<?php if(is_array($authGroupRes) || $authGroupRes instanceof \think\Collection || $authGroupRes instanceof \think\Paginator): $i = 0; $__LIST__ = $authGroupRes;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$authGroup): $mod = ($i % 2 );++$i;?>
+															<tr>
+																<td align="center"><?php echo htmlentities($authGroup['id']); ?></td>
+																<td align="center"><?php echo htmlentities($authGroup['title']); ?></td>
+																<td align="center">
+																	<?php if($authGroup['status'] == 1): ?>
+																	<a class="btn btn-success btn-sm" href="javascript:void(0);">启用</a>
+																	<?php else: ?>
+																	<a class="btn btn-darkorange btn-sm" href="javascript:void(0);">禁用</a>
+																	<?php endif; ?>
+																</td>
+																<td align="center">
+																	<a href="<?php echo url('edit',array('id'=>$authGroup['id'])); ?>" class="btn btn-primary btn-sm shiny">
+																		<i class="fa fa-edit"></i> 编辑
+																	</a>
+																	<a href="#" <?php if($auth == 0): ?> onClick="layer.open({title: '<?php echo htmlentities($groupTitle); ?>',content:'没有权限',icon: 5,anim: 6});" <?php else: ?>  onClick="warning('确实要删除吗', '<?php echo url('del',array('id'=>$authGroup['id'])); ?>')" <?php endif; ?> class="btn btn-danger btn-sm shiny">
+																		<i class="fa fa-trash-o"></i> 删除
+																	</a>
+																</td>
+															</tr>
+															<?php endforeach; endif; else: echo "" ;endif; ?>
+														</tbody>
+													</table>
+												</form>
 											</div>
-
-											<div style="text-align: right;margin-top: 10px;">
-
-												<?php echo $list; ?>
-
+											<div style="text-align: right;padding-top:10px;">
+												<?php echo $authGroupRes; ?>
+											</div>
+											<div>
 											</div>
 										</div>
 									</div>
@@ -241,10 +207,14 @@
 					<!-- /Page Content -->
 				</div>
 			</div>
+
+			<!--Basic Scripts-->
+			<script src="http://localhost/newx/public/static/admin/style/jquery_002.js"></script>
 			<script src="http://localhost/newx/public/static/admin/style/bootstrap.js"></script>
 			<script src="http://localhost/newx/public/static/admin/style/jquery.js"></script>
 			<!--Beyond Scripts-->
 			<script src="http://localhost/newx/public/static/admin/style/beyond.js"></script>
+
 	</body>
 
 </html>

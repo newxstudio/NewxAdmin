@@ -1,10 +1,10 @@
-<?php /*a:3:{s:56:"D:\wamp64\www\NEWX\application\admin\view\admin\lst.html";i:1552271982;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1551705548;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1552270767;}*/ ?>
+<?php /*a:3:{s:60:"D:\wamp64\www\NEWX\application\admin\view\auth_rule\add.html";i:1552391116;s:57:"D:\wamp64\www\NEWX\application\admin\view\common\top.html";i:1552389751;s:58:"D:\wamp64\www\NEWX\application\admin\view\common\left.html";i:1552270767;}*/ ?>
 <!DOCTYPE html>
 <html>
 
 	<head>
 		<meta charset="utf-8">
-		<title>NEWX·后台管理 - 管理员列表</title>
+		<title>NEWX·后台管理 - 添加管理员</title>
 
 		<meta name="description" content="Dashboard">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,13 +20,8 @@
 		<link href="http://localhost/newx/public/static/admin/style/demo.css" rel="stylesheet">
 		<link href="http://localhost/newx/public/static/admin/style/typicons.css" rel="stylesheet">
 		<link href="http://localhost/newx/public/static/admin/style/animate.css" rel="stylesheet">
+		<link href="http://localhost/newx/public/static/layui/css/layui.css" rel="stylesheet">
 		<link rel="shortcut icon" href="http://localhost/newx/public/static/admin/images/newx.ico" />
-		<link rel="stylesheet" href="http://localhost/newx/public/static/layui/css/layui.css">
-		<link rel="stylesheet" href="http://localhost/newx/public/static/layui/css/layui.css">
-		<!--Basic Scripts-->
-		<script src="http://localhost/newx/public/static/admin/style/jquery_002.js"></script>
-
-		<script src="http://localhost/newx/public/static/layer/layer.js"></script>
 	</head>
 
 	<body>
@@ -54,8 +49,8 @@
                     <ul class="account-area">
                         <li>
                             <a class="login-area dropdown-toggle" data-toggle="dropdown">
-                                <div class="avatar" title="View your public profile">
-                                    <img src="http://localhost/newx/public/static/admin/images/newx.jpg">
+                                <div class="avatar" title="View your public profile" style="border: none;">
+                                    <img src="http://localhost/newx/public/static/<?php echo htmlentities($adminsPic['pic']); ?>">
                                 </div>
                                 <section>
                                     <h2><span class="profile"><span><?php echo htmlentities(app('request')->session('username')); ?></span></span></h2>
@@ -70,7 +65,7 @@
                                         </a>
                                 </li>
                                 <li class="dropdown-footer">
-                                    <a href="<?php echo url('admin/edit1',array('id'=>app('request')->session('uid'))); ?>">
+                                    <a href="<?php echo url('admin/edit1',array('id'=>app('request')->session('id'))); ?>">
                                             修改资料
                                         </a>
                                 </li>
@@ -93,7 +88,7 @@
 		<!-- /头部 -->
 
 		<div class="main-container container-fluid">
-			<div class="page-container">
+			<div class="page-container">·
 				<!-- Page Sidebar -->
 				<div class="page-sidebar" id="sidebar">
 					<!-- Page Sidebar Header-->
@@ -141,7 +136,10 @@
 								<li>
 									<a href="#">系统</a>
 								</li>
-								<li class="active">管理员管理</li>
+								<li>
+									<a href="<?php echo url('lst'); ?>">权限管理</a>
+								</li>
+								<li class="active">添加权限</li>
 							</ul>
 						</div>
 						<!-- /Page Breadcrumb -->
@@ -149,51 +147,57 @@
 						<!-- Page Body -->
 						<div class="page-body">
 
-							<button type="button" tooltip="添加管理员" class="btn btn-sm btn-azure btn-addon" onClick="javascript:window.location.href = '<?php echo url('admin/add'); ?>'"> <i class="fa fa-plus"></i> Add
-</button>
 							<div class="row">
 								<div class="col-lg-12 col-sm-12 col-xs-12">
 									<div class="widget">
+										<div class="widget-header bordered-bottom bordered-blue">
+											<span class="widget-caption">新增权限</span>
+										</div>
 										<div class="widget-body">
-											<div class="flip-scroll">
-												<table class="table table-bordered table-hover">
-													<thead class="">
-														<tr>
-															<th class="text-center">ID</th>
-															<th class="text-center">管理员名称</th>
-															<th class="text-center">所属用户组</th>
-															<th class="text-center">操作</th>
-														</tr>
-													</thead>
-													<tbody>
-														<?php if(is_array($adminres) || $adminres instanceof \think\Collection || $adminres instanceof \think\Paginator): $i = 0; $__LIST__ = $adminres;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
-														<tr>
-															<td align="center"><?php echo htmlentities($vo['id']); ?></td>
-															<td align="center"><?php echo htmlentities($vo['username']); ?></td>
-															<td align="center"><?php echo htmlentities($vo['groupTitle']); ?></td>
-															<td align="center">
-																<a href="<?php echo url('admin/edit',array('id'=>$vo['id'])); ?>" class="btn btn-primary btn-sm shiny">
-																	<i class="fa fa-edit"></i> 编辑
-																</a>
-																<?php if($vo['id'] != 1): ?>
-
-																<a href="#" id="del" <?php if($auth == 0): ?> onClick="layer.open({title: '<?php echo htmlentities($groupTitle); ?>',content:'没有权限',icon: 5,anim: 6});" <?php else: ?> onClick="warning('确实要删除吗', '<?php echo url(" admin/del ",array('id'=>$vo['id'])); ?>')" <?php endif; ?> class="btn btn-danger btn-sm shiny">
-																	<i class="fa fa-trash-o"></i> 删除
-																</a>
-
-																<?php endif; ?>
-															</td>
-														</tr>
-
-														<?php endforeach; endif; else: echo "" ;endif; ?>
-													</tbody>
-
-												</table>
-
-											</div>
-
-											<div style="text-align: right;margin-top: 10px;">
-												<?php echo $adminres; ?>
+											<div id="horizontal-form">
+												<form class="form-horizontal" role="form" action="" method="post">
+													<div class="form-group">
+														<label for="username" class="col-sm-2 control-label no-padding-right">上级权限</label>
+														<div class="col-sm-6">
+															<select name="pid">
+																<option value="0">顶级权限</option>
+																<?php if(is_array($authRuleRes) || $authRuleRes instanceof \think\Collection || $authRuleRes instanceof \think\Paginator): $i = 0; $__LIST__ = $authRuleRes;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$authRule): $mod = ($i % 2 );++$i;?>
+																<option value="<?php echo htmlentities($authRule['id']); ?>">
+																	<?php if($authRule['level']!=0){echo '|';} echo str_repeat('—', $authRule['level']*3)?><?php echo htmlentities($authRule['title']); ?></option>
+																<?php endforeach; endif; else: echo "" ;endif; ?>
+															</select>
+														</div>
+														<p class="help-block col-sm-4 red">* 必填</p>
+													</div>
+													<div class="form-group">
+														<label for="username" class="col-sm-2 control-label no-padding-right">权限名称</label>
+														<div class="col-sm-6">
+															<input class="form-control" placeholder="" name="title" required="" type="text">
+														</div>
+														<p class="help-block col-sm-4 red">* 必填</p>
+													</div>
+													<div class="form-group">
+														<label for="username" class="col-sm-2 control-label no-padding-right">控/方</label>
+														<div class="col-sm-6">
+															<input class="form-control" placeholder="" name="name" required="" type="text">
+														</div>
+														<p class="help-block col-sm-4 red">* 必填</p>
+													</div>
+													<div class="form-group">
+														<label for="state" class="col-sm-2 control-label no-padding-right">是否可见</label>
+														<div class="col-sm-6">
+															<label>
+                                    <input class="checkbox-slider colored-darkorange" name="visibility"  type="checkbox">
+                                    <span class="text"></span>
+                                 </label>
+														</div>
+													</div>
+													<div class="form-group">
+														<div class="col-sm-offset-2 col-sm-10">
+															<button type="submit" class="btn btn-default" id="toSave">保存信息</button>
+														</div>
+													</div>
+												</form>
 											</div>
 										</div>
 									</div>
@@ -213,6 +217,47 @@
 			<script src="http://localhost/newx/public/static/admin/style/jquery.js"></script>
 			<!--Beyond Scripts-->
 			<script src="http://localhost/newx/public/static/admin/style/beyond.js"></script>
+			<script src="http://localhost/newx/public/static/layui/layui.js"></script>
+			<script type="text/javascript">
+				$(function() {
+					layui.use('layer', function() {
+						var layer = layui.layer;
+						$('#toSave').click(function() {
+							$.ajax({
+								url: "<?php echo url('authRule/add'); ?>",
+								type: 'post',
+								data: $('form').serialize(),
+								dataType: 'json',
+								success: function(data) {
+									console.log(data);
+									if(data.code == 1) {
+										layer.msg(data.msg, {
+											icon: 6,
+											time: 2000
+										}, function() {
+											location.href = data.url;
+										});
+									} else {
+										layer.open({
+											title: '添加权限失败',
+											content: data.msg,
+											icon: 5,
+											anim: 6
+										});
+									}
+								},
+								error: function(data) {
+									console.log(data);
+
+								}
+							});
+							return false;
+						});
+
+					});
+
+				});
+			</script>
 
 	</body>
 

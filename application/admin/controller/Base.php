@@ -7,6 +7,8 @@ class Base extends Controller
         if(!session('username')){
             $this->redirect('Login/index');
         }
+        $adminsPic = db('admin')->find(session('id'));
+        $this->assign("adminsPic",$adminsPic);
         $auth=new Auth();
         $request=request();
         $con=$request->controller();
