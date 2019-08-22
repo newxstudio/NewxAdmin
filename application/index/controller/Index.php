@@ -8,6 +8,6 @@ class Index extends Controller
 {
     public function index()
     {
-    	return $this->fetch();//指向application/index/view/index/index.html
+    	return view();//指向application/index/view/index/index.html
     }
 }

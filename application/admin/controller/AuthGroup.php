@@ -3,70 +3,113 @@ namespace app\admin\controller;
 
 use think\Db;
 use app\admin\model\AuthGroup as AuthGroupModel;
+use think\facade\Request;
+
 class AuthGroup extends Base
 {
-   
-    public function lst()
+
+    public function rulegroupdata()
     {
-    	$authGroupRes = AuthGroupModel::paginate(2);
-    	$this->assign('authGroupRes',$authGroupRes);
-        return $this->fetch();
+    	$authGroupRes = AuthGroupModel::select();
+    	return [
+            "code" => 0,
+            "msg" => "",
+            "data" => $authGroupRes
+        ];
     }
-	public function add()
+    public function rulegroup()
     {
-    	$authRule=new \app\admin\model\AuthRule();
+        return view();
+    }
+    public function addrulegroup()
+    {
+        $authRule=new \app\admin\model\AuthRule();
         $authRuleRes=$authRule->authRuleTree();
         $this->assign('authRuleRes',$authRuleRes);
-    	if(request()->isAjax()){
+        return view();
+    }
+	public function addrulegroupdata()
+    {
     		$data = input('post.');
     		if($data['rules']){
                 $data['rules']=implode(',', $data['rules']);
             }
+            if(!key_exists('status',$data)){
+                $data['status'] = 0;
+            }else{
+                $data['status'] = 1;
+            }
     		$add = db('auth_group')->insert($data);
     		if($add){
-    			$this->success('添加用户组成功','lst');
+                return [
+                    "code" => 0,
+                    "msg" => "添加用户组成功",
+                    "data" => ""
+                ];
     		}else{
-    			$this->error('添加用户组失败');
+                return [
+                    "code" => -1,
+                    "msg" => "添加用户组失败",
+                    "data" => ""
+                ];
     		}
-    	}
-    	
-        return $this->fetch();
+        return view();
     }
-	public function edit(){
+	public function editrulegroup(){
 		$authgroups=db('auth_group')->find(input('id'));
         $this->assign('authgroups',$authgroups);
        	$authRule=new \app\admin\model\AuthRule();
         $authRuleRes=$authRule->authRuleTree();
         $this->assign('authRuleRes',$authRuleRes);
-        if(request()->isAjax()){
-            $data=input('post.');
-            if($data['rules']){
-                $data['rules']=implode(',', $data['rules']);
-            }
-            $_data=array();
-            foreach ($data as $k => $v) {
-                $_data[]=$k;
-            }
-            if(!in_array('status', $_data)){
-                $data['status']=0;
-            }
-            $save=db('auth_group')->update($data);
-            if($save!==false){
-                $this->success('修改用户组成功！',url('lst'));
-            }else{
-                $this->error('修改用户组失败！');
-            }
-            return;
-        }
-        
         return view();
+    }
+    public function editrulegroupdata(){
+        $id = Request::param('id');
+        $data=input('post.');
+        $data['id'] = $id;
+        if(!key_exists('rules',$data)){
+            $data['rules']=implode(',', array());
+        }else{
+            $data['rules']=implode(',', $data['rules']);
+        }
+        if(!key_exists('status',$data)){
+            $data['status'] = 0;
+        }else{
+            $data['status'] = 1;
+        }
+        $save=db('auth_group')->update($data);
+        if($save!==false){
+            return [
+                "code" => 0,
+                "msg" => "修改用户组成功",
+                "data" => ""
+            ];
+        }else{
+            return [
+                "code" => -1,
+                "msg" => "修改用户组失败",
+                "data" => ""
+            ];
+        }
     }
 
    
     public function del(){
-            $del=db('auth_group')->delete(input('id'));
-            
-            $this->redirect('lst');
+        $id = Request::param('id');
+        $del=db('auth_group')->delete($id);
+        if($del!==false){
+            return [
+                "code" => 0,
+                "msg" => "删除用户组成功",
+                "data" => ""
+            ];
+        }else{
+            return [
+                "code" => -1,
+                "msg" => "删除用户组失败",
+                "data" => ""
+            ];
+        }
             
     }
    

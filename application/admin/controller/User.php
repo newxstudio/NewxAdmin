@@ -1,141 +1,88 @@
 <?php
+
 namespace app\admin\controller;
-use app\admin\controller\Base;
-use think\Db;
+
 use app\admin\model\User as UserModel;
-use think\captcha;
+use think\Db;
+use think\facade\Request;
+
 class User extends Base
 {
-
-    public function lst()
-    {
-    	$list = UserModel::paginate(5);
-		// 把分页数据赋值给模板变量list
-		$this->assign('list', $list);
-        return $this->fetch();
-    }
+    /*
+     * username:学号
+     * password:密码
+     * */
     public function signin()
     {
-    	if(request()->isAjax()){
-    		
-    		$data=[
-    			'username'=>input('username'),
-    			'password'=>md5(input('password')),
-    			'name'=>input('name'),
-    			'sex'=>input('sex'),
-    			'date'=>input('date'),
-    			'phone'=>input('phone'),
-    			'department'=>input('department'),
-    			'class'=>input('class'),
-    			'id_number'=>input('id_number'),
-    			'bedroom'=>input('bedroom'),
-    			'email'=>input('email'),
-    			
-    		];
-    		
-    		if(Db::name('user')->insert($data)){
-    			return $this->success('注册成功！','lst');
-    		}else{
-    			return $this->error('注册失败！');
-    		}
-    	}
-        return $this->fetch();
-    }
-    /*
-	public function add()
-    {
-    	if(request()->isPost()){
-    		
-    		$data=[
-    			'username'=>input('username'),
-    			'password'=>input('password'),
-    			'email'=>input('email'),
-    			'desca'=>input('desca'),
-    			'name'=>input('name'),
-    		];
-    		
-    		
-    		if($_FILES['pic']['tmp_name']){
-    			$file = request()->file('pic');
-    			$info = $file->move( 'static/uploads');
-    			
-    			$data['pic'] =  'uploads/'.$info->getSaveName();
-    			
-    		}
-    		
-    		$validate = new \app\admin\validate\Admin;
+        $data = Request::param('');
+        $username = $data['username'];
+        $userSearch = UserModel::where('username','=',$username)->find();
+        if(!$userSearch){
+            $password = md5($data['password']);
+            $user = new UserModel();
+            $user->username = $username;
+            $user->password = $password;
+            $res = $user->save();
+            if($res){
+                return [
+                    'code' => 0,
+                    'msg' => '注册成功',
+                    'data'=> ''
+                ];
+            }
+        }else{
+            return [
+                'code' => -1,
+                'msg' => '该学号已被注册，若非本人注册，请联系管理员',
+                'data'=> ''
+            ];
+        }
 
-	        if (!$validate->scene('add')->check($data)) {
-	        	$this->error($validate->getError());
-	            die();
-	        }
-    		if(Db::name('admin')->insert($data)){
-    			return $this->success('添加管理员成功！','lst');
-    		}else{
-    			return $this->error('添加管理员失败！');
-    		}
-    	}
-        return $this->fetch();
+
     }
-    */
-	public function edit()
+    public function login()
     {
-    	$id = input('id');
-	    $users = db('user')->find($id);
-    	if(request()->isAjax()){
-	    	
-	    	$data = [
-	    		'id'=>input('id'),
-	    		'password'=>input('password'),
-	    		'name'=>input('name'),
-	    		'sex'=>input('sex'),
-	    		'date'=>input('date'),
-	    		'phone'=>input('phone'),
-	    		'department'=>input('department'),
-	    		'class'=>input('class'),
-	    		'id_number'=>input('id_number'),
-	    		'bedroom'=>input('bedroom'),
-	    		'email'=>input('email'),
-	    	
-	    	];
-	    	if(input('password'))
-	    	{
-	    		$data['password'] = md5(input('password'));
-	    	}else{
-	    		$data['password'] = $users['password'];
-	    	}
-	    	
-	    	$save = db('user')->update($data);
-	    	
-	    	if($save !== false)
-	    	{
-	    		$this->success('修改用户信息成功！','lst');
-	    	}else{
-	    		$this->error('修改用户信息失败！');
-	    	}
-	    	return;
-    	}
-    	
-    	$this->assign('users',$users);
-        return $this->fetch();
+        $data = Request::param('');
+        $user = Db::name('user')->where('username','=',$data['username'])->find();
+        if($user){
+            if($user['password'] == md5($data['password']))
+            {
+                // 赋值（当前作用域）
+                session('username',$user['username'] );
+                session('id',$user['id'] );
+                $token = self::generateToken();
+                $user1 = UserModel::get($user['id']);
+                $user1->token = $token;
+                $res = $user1->save();
+                if($res){
+                    return [
+                        'code' => 1,
+                        'msg' => '信息正确，登陆成功',
+                        'data'=> [
+                            'token'=> $token
+                        ]
+                    ];
+                }
+            }else{
+                return [
+                    'code' => 2,
+                    'msg' => '用户名或密码错误',
+                    'data'=> ''
+                ];
+            }
+        }else{
+            return [
+                'code' => 3,
+                'msg' => '用户不存在，请先注册',
+                'data'=> ''
+            ];
+        }
     }
-   
-   public function del()
-   {
-   	
-   		$id = input('id');
-   		
-   		if(db('user')->delete($id))
-   		{
-   			$this->redirect('user/lst');
-   		}
-   		
-   	
-   }
-   public function logout(){
-   		session(null);
-   		$this->success('退出成功!','login/index');
-   }
+    public function logout()
+    {
+        session(null);
+        $this->success('退出成功!', 'login/index');
+    }
+
 }
 
-?>

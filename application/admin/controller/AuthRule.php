@@ -1,96 +1,115 @@
 <?php
 namespace app\admin\controller;
 use app\admin\model\AuthRule as AuthRuleModel;
-use app\admin\controller\Base;
+use think\facade\Request;
+
 class AuthRule extends Base
 {
-
-    public function lst(){
+    public function getRuleData(){
         $authRule=new AuthRuleModel();
-        if(request()->isPost()){
-            $sorts=input('post.');
-            foreach ($sorts as $k => $v) {
-                $authRule->update(['id'=>$k,'sort'=>$v]);
-            }
-            $this->success('更新排序成功！',url('lst'));
-            return;
-        }
         $authRuleRes=$authRule->authRuleTree();
-        $this->assign('authRuleRes',$authRuleRes);
+        return [
+            "code" => 0,
+            "msg" => "",
+            "data" => $authRuleRes
+        ];
+
+    }
+    public function role(){
         return view();
     }
-
-    public function add(){
-    	$authRule=new AuthRuleModel();
-        $authRuleRes=$authRule->authRuleTree();
-        $this->assign('authRuleRes',$authRuleRes);
-        if(request()->isAjax()){
+    public function addroleform(){
             $data=input('post.');
             $plevel=db('auth_rule')->where('id',$data['pid'])->field('level')->find();
-            if($plevel){
-                $data['level']=$plevel['level']+1;
+            if(!key_exists('visibility',$data)){
+                $data['visibility'] = 0;
             }else{
-               $data['level']=0; 
+                $data['visibility'] = 1;
             }
-            if(input('visibility') == 'on'){
-    			$data['visibility'] = 1;
-    		}else{
-    			$data['visibility'] = 0;
-    		}
+            if($plevel){
+                $data['level']=$plevel['level'] + 1;
+            }else{
+                $data['level'] = 0;
+            }
             $add=db('auth_rule')->insert($data);
             if($add){
                 $this->success('添加权限成功！',url('lst'));
             }else{
                 $this->error('添加权限失败！');
             }
-            return;
-        }
-        
+            return [
+                "code" => 0,
+                "msg" => "添加规则成功",
+                "data" => ""
+            ];
+
+    }
+
+    public function roleform(){
+        $authRule=new AuthRuleModel();
+        $authRuleRes=$authRule->authRuleTree();
+        $this->assign('authRuleRes',$authRuleRes);
         return view();
     }
 
-    public function edit(){
+    public function editroleform(){
     	$authRule=new AuthRuleModel();
         $authRuleRes=$authRule->authRuleTree();
-        $authRules=$authRule->find(input('id'));
+        $id = Request::param('id');
+        $authRules=$authRule->find($id);
         $this->assign(array(
             'authRuleRes'=>$authRuleRes,
             'authRules'=>$authRules,
             ));
-        if(request()->isAjax()){
-            $data=input('post.');
-            $plevel=db('auth_rule')->where('id',$data['pid'])->field('level')->find();
-            if($plevel){
-                $data['level']=$plevel['level']+1;
-            }else{
-               $data['level']=0; 
-            }
-            if(input('visibility') == 'on'){
-    			$data['visibility'] = 1;
-    		}else{
-    			$data['visibility'] = 0;
-    		}
-            $save=db('auth_rule')->update($data);
-            if($save!==false){
-                $this->success('修改权限成功！',url('lst'));
-            }else{
-                $this->error('修改权限失败！');
-            }
-            return;
-        }
-        
         return view();
     }
+    public function editroleformdata(){
+            $data=input('post.');
 
+            $id = Request::param('id');
+            $data['id'] = $id;
+            if(!key_exists('visibility',$data)){
+                $data['visibility'] = 0;
+            }else{
+                $data['visibility'] = 1;
+            }
+            $save=db('auth_rule')->update($data);
+            if($save!==false){
+                return [
+                    "code" => 0,
+                    "msg" => "修改规则成功",
+                    "data" => ""
+                ];
+            }else{
+                return [
+                    "code" => -1,
+                    "msg" => "修改规则失败",
+                    "data" => ""
+                ];
+            }
+    }
 
     public function del(){
         $authRule=new AuthRuleModel();
-        $authRule->getparentid(input('id'));
-        $authRuleIds=$authRule->getchilrenid(input('id'));
-        $authRuleIds[]=input('id');
+        $id = Request::param('id');
+        $authRule->getparentid($id);
+        $authRuleIds=$authRule->getchilrenid($id);
+        $authRuleIds[]=$id;
         $del= AuthRuleModel::destroy($authRuleIds);
-        $this->redirect('lst');
-        
+        if($del){
+            return [
+                "code" => 0,
+                "msg" => "删除规则成功",
+                "data" => ""
+            ];
+        }else{
+            return [
+                "code" => -1,
+                "msg" => "删除规则失败",
+                "data" => ""
+            ];
+        }
+
     }
 
 

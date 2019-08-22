@@ -1,9 +1,10 @@
 <?php
 namespace app\admin\controller;
+use app\admin\model\Image;
 use think\Controller;
 class Base extends Controller
 {
-    public function initialize(){
+    public function aainitialize(){
         if(!session('username')){
             $this->redirect('Login/index');
         }
@@ -15,7 +16,7 @@ class Base extends Controller
         $action=$request->action();
         $name=$con.'/'.$action;
         $notCheck=array('Admin/edit1');
-        if(session('id')!=1){
+        
        		if(!in_array($name, $notCheck)){
          		if(!$auth->check($name,session('id'))){
          			$flag = 0;
@@ -24,9 +25,6 @@ class Base extends Controller
 		    	 	$flag = 1;
 		    	 }
          	}
-        	
-        }
-       
         $flag = (!$auth->check($name,session('id')));
 		if(session('id')==1){
        		$flag = 1;
@@ -55,5 +53,54 @@ class Base extends Controller
         $this->assign("itemRes",$itemRes);
         $this->assign("groupTitle",$_groupTitle[0]["title"]);
         
+    }
+
+    public function upload($name, $path)
+    {
+        //根据name属性获取file属性
+        $img = request()->file($name);
+        // 移动到框架应用根目录/public/uploads/$path 目录下
+        $info = $img->move('static/uploads/'.$path);
+        $url = 'static/uploads/'.$path . $info->getSaveName();
+        $img = new Image();
+        $img->url = $url;
+        $res = $img->save();
+        if($info && $res){
+            // 成功上传后 获取上传信息
+            return [
+                'code' => 0,
+                'msg' => '上传成功!',
+                'url' => 'static/uploads/'.$path . $info->getSaveName()
+            ];
+        }else{
+            // 上传失败获取错误信息
+            return [
+                'code' => -1,
+                'msg' => $img->getError(),
+                'url' => ''
+            ];
+        }
+    }
+    public  static  function getRandChar($length)
+    {
+        $str = null;
+        $strPol = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz";
+        $max = strlen($strPol) - 1;
+
+        for ($i = 0;
+             $i < $length;
+             $i++) {
+            $str .= $strPol[rand(0, $max)];
+        }
+
+        return $str;
+    }
+    // 生成令牌
+    public static function generateToken()
+    {
+        $randChar = self::getRandChar(32);
+        $timestamp = $_SERVER['REQUEST_TIME_FLOAT'];
+        $tokenSalt = 'GJUHMkojsojsnafftswiwiwDEDeqfshqs12445627672ksoksow';
+        return md5($randChar . $timestamp . $tokenSalt);
     }
 }

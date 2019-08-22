@@ -1,0 +1,24 @@
+<svg width="150" height="150" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <g>
+  <title>background</title>
+  <rect fill="none" id="canvas_background" height="152" width="152" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <ellipse stroke="#000" ry="41.499999" rx="51.5" id="svg_17" cy="59.000001" cx="55" stroke-opacity="null" stroke-width="0" fill="#00bf00"/>
+  <ellipse stroke="#000" ry="34.500003" rx="42" id="svg_29" cy="87.999998" cx="98.5" stroke-opacity="null" stroke-width="0" fill="#ffffff"/>
+  <path id="svg_9" d="m508.5,131" opacity="0.5" stroke-width="10" stroke="#000" fill="#8CD79F"/>
+  <ellipse stroke="#000" ry="34.5" rx="42.5" id="svg_18" cy="91" cx="104" stroke-opacity="null" stroke-width="0" fill="#00bf00"/>
+  <ellipse ry="5.5" rx="5.5" id="svg_19" cy="48" cx="40" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffffff"/>
+  <ellipse id="svg_20" cy="47.5" cx="71.5" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffffff"/>
+  <ellipse ry="5.5" rx="5.5" id="svg_22" cy="48" cx="72" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffffff"/>
+  <ellipse ry="5.5" rx="5.5" id="svg_23" cy="79" cx="116" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffffff"/>
+  <ellipse ry="5.5" rx="5.5" id="svg_24" cy="79" cx="89" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffffff"/>
+  <ellipse stroke="#000" transform="rotate(-54.10163879394531 27.432596206665046,99.69828796386719) " ry="5" rx="9.782684" id="svg_26" cy="99.698292" cx="27.432596" stroke-opacity="null" stroke-width="0" fill="#00bf00"/>
+  <ellipse stroke="#000" transform="rotate(145.37887573242188 124.00000000000001,121.50000000000001) " ry="9.973441" rx="5.660791" id="svg_27" cy="121.5" cx="124" stroke-opacity="null" stroke-width="0" fill="#00bf00"/>
+ </g>
+</svg>

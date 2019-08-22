@@ -3,8 +3,8 @@
  */
 var curIndex = 0;
 var container = $("#container");
+var canvas = $("#bg canvas");
 var $li = $("#nav_collapse li");
-console.log($li);
 var sumCount = $(".section").length;
 var $window = $(window);
 var duration = 500;
@@ -38,43 +38,100 @@ var scrollFunc = function(e) {
 		}
 	}
 };
+$("#navWidth a").click(function() {
+	var a = $(this).attr("id");
+	curIndex = a;
+	container.css("transform", "translate3D(0, -" + (curIndex) * $window.height() + "px, 0)");
+	$li.removeClass('active');
+	$($li[curIndex]).addClass('active');
+	if(curIndex == 3) {
+		$("#section4").children("img.pen").addClass("pen_z");
+		$("#section4").children("img.cutter").addClass("cutter_z");
+		$("#section4").children("img.coffee").addClass("coffee_z");
+		$("#section4").children("img.earphone").addClass("earphone_z");
+		$("#section4").children("img.marker").addClass("marker_z");
+		$("#section4").children("img.notebook").addClass("notebook_z");
+		$("#section4").children("img.wallet").addClass("wallet_z");
+		$("#section4").children("img.ipad").addClass("ipad_z");
+		var timer = setTimeout(function() {
+			var ipad = document.getElementById("ipad");
+			ipad.style.backgroundColor = "white";
+		}, 3200);
+	}
+	return false;
+});
 
 function moveNext() {
 	//获取动画开始时的时间
 	aniTime = new Date().getTime();
+	var a = $("#navWidth li.active a").attr("id");
+	curIndex = a;
 	container.css("transform", "translate3D(0, -" + (++curIndex) * $window.height() + "px, 0)");
-	console.log($li[curIndex]);
 	$li.removeClass('active');
 	$($li[curIndex]).addClass('active');
 	switch(curIndex) {
 		case 0:
-			
+
 		case 1:
 
-			$("#section" + (curIndex + 1) + " .team_box").addClass("layui-anim layui-anim-upbit");
 			break;
 		case 3:
-
-			$("#section" + (curIndex + 1) + " p").addClass("layui-anim layui-anim-up");
-			$("#section" + (curIndex + 1) + " button").addClass("layui-anim layui-anim-up");
+			$("#section4").children("img.pen").addClass("pen_z");
+			$("#section4").children("img.cutter").addClass("cutter_z");
+			$("#section4").children("img.coffee").addClass("coffee_z");
+			$("#section4").children("img.earphone").addClass("earphone_z");
+			$("#section4").children("img.marker").addClass("marker_z");
+			$("#section4").children("img.notebook").addClass("notebook_z");
+			$("#section4").children("img.wallet").addClass("wallet_z");
+			$("#section4").children("img.ipad").addClass("ipad_z");
+			var timer = setTimeout(function() {
+				var ipad = document.getElementById("ipad");
+				ipad.style.backgroundColor = "white";
+			}, 3200);
 			break;
+		case 4:
 
+			break;
 		default:
 
 	}
-	if(curIndex == 0) {
-		$("#section" + curIndex + "p").css("transition", "all 1s ");
-	}
 
-	$("#section" + curIndex + "p").css("transform", "translateY(-30px)");
 }
 
 function movePrev() {
 	//获取动画开始时的时间
 	aniTime = new Date().getTime();
+	var a = $("#navWidth li.active a").attr("id");
+	curIndex = a;
 	container.css("transform", "translate3D(0, -" + (--curIndex) * $window.height() + "px, 0)");
 	$li.removeClass('active');
 	$($li[curIndex]).addClass('active');
+	switch(curIndex) {
+		case 0:
+
+		case 1:
+
+			break;
+		case 3:
+			
+		case 4:
+			$("#section4").children("img.pen").addClass("pen_z");
+			$("#section4").children("img.cutter").addClass("cutter_z");
+			$("#section4").children("img.coffee").addClass("coffee_z");
+			$("#section4").children("img.earphone").addClass("earphone_z");
+			$("#section4").children("img.marker").addClass("marker_z");
+			$("#section4").children("img.notebook").addClass("notebook_z");
+			$("#section4").children("img.wallet").addClass("wallet_z");
+			$("#section4").children("img.ipad").addClass("ipad_z");
+			var timer = setTimeout(function() {
+				var ipad = document.getElementById("ipad");
+				ipad.style.backgroundColor = "white";
+			}, 3200);
+			break;
+			
+		default:
+
+	}
 
 }
 
@@ -89,6 +146,12 @@ function init() {
 		"transition": "all 0.5s",
 		"-moz-transition": "all 0.5s",
 		"-webkit-transition": "all 0.5s"
+	});
+	canvas.css({
+		"top": $window.height() + "px"
+	});
+	$(".black_overlay_x").css({
+		"top": $window.height() + "px"
 	});
 }
 
