@@ -1,4 +1,4 @@
-<?php /*a:1:{s:62:"D:\wamp64\www\NewxAdmin\application\admin\view\apply\mail.html";i:1566480958;}*/ ?>
+<?php /*a:1:{s:62:"D:\wamp64\www\NewxAdmin\application\admin\view\apply\mail.html";i:1566485550;}*/ ?>
 
 
 <!DOCTYPE html>
@@ -78,7 +78,7 @@
           <div class="layui-form-item layui-layout-admin">
             <div class="layui-input-block">
               <div class="layui-footer" style="left: 0;">
-                <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+                <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即发送</button>
                 <button type="reset" class="layui-btn layui-btn-primary">重置</button>
               </div>
             </div>

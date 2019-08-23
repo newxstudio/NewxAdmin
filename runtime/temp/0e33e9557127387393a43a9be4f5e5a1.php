@@ -1,4 +1,4 @@
-<?php /*a:1:{s:62:"D:\wamp64\www\NewxAdmin\application\admin\view\apply\data.html";i:1566390559;}*/ ?>
+<?php /*a:1:{s:62:"D:\wamp64\www\NewxAdmin\application\admin\view\apply\data.html";i:1566574254;}*/ ?>
 
 
 <!DOCTYPE html>
@@ -26,37 +26,37 @@
                   <div carousel-item>
                     <ul class="layui-row layui-col-space10">
                       <li class="layui-col-xs4">
-                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 1, 'option_num' => 1)); ?>"  class="layadmin-backlog-body">
+                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 1, 'option_num' => 1)); ?>" lay-text="图文部 · 一志愿" class="layadmin-backlog-body">
                           <h3>图文部</h3>
                           <p><cite><?php echo htmlentities($option1_data[0]); ?></cite></p>
                         </a>
                       </li>
                       <li class="layui-col-xs4">
-                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 1, 'option_num' => 2)); ?>"  class="layadmin-backlog-body">
+                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 1, 'option_num' => 2)); ?>" lay-text="采风部 · 一志愿" class="layadmin-backlog-body">
                           <h3>采风部</h3>
                           <p><cite><?php echo htmlentities($option1_data[1]); ?></cite></p>
                         </a>
                       </li>
                       <li class="layui-col-xs4">
-                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 1, 'option_num' => 3)); ?>"  class="layadmin-backlog-body">
+                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 1, 'option_num' => 3)); ?>" lay-text="视频部 · 一志愿" class="layadmin-backlog-body">
                           <h3>视频部</h3>
                           <p><cite><?php echo htmlentities($option1_data[2]); ?></cite></p>
                         </a>
                       </li>
                       <li class="layui-col-xs4">
-                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 1, 'option_num' => 4)); ?>"  class="layadmin-backlog-body">
+                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 1, 'option_num' => 4)); ?>" lay-text="网站部 · 一志愿" class="layadmin-backlog-body">
                           <h3>网站部</h3>
                           <p><cite><?php echo htmlentities($option1_data[3]); ?></cite></p>
                         </a>
                       </li>
                       <li class="layui-col-xs4">
-                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 1, 'option_num' => 5)); ?>"  class="layadmin-backlog-body">
+                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 1, 'option_num' => 5)); ?>" lay-text="采编部 · 一志愿" class="layadmin-backlog-body">
                           <h3>采编部</h3>
                           <p><cite><?php echo htmlentities($option1_data[4]); ?></cite></p>
                         </a>
                       </li>
                       <li class="layui-col-xs4">
-                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 1, 'option_num' => 6)); ?>"  class="layadmin-backlog-body">
+                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 1, 'option_num' => 6)); ?>" lay-text="办公室 · 一志愿" class="layadmin-backlog-body">
                           <h3>办公室</h3>
                           <p><cite><?php echo htmlentities($option1_data[5]); ?></cite></p>
                         </a>
@@ -76,37 +76,37 @@
                   <div carousel-item>
                     <ul class="layui-row layui-col-space10">
                       <li class="layui-col-xs4">
-                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 2, 'option_num' => 1)); ?>"  class="layadmin-backlog-body">
+                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 2, 'option_num' => 1)); ?>" lay-text="图文部 · 二志愿" class="layadmin-backlog-body">
                           <h3>图文部</h3>
                           <p><cite><?php echo htmlentities($option2_data[0]); ?></cite></p>
                         </a>
                       </li>
                       <li class="layui-col-xs4">
-                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 2, 'option_num' => 2)); ?>"  class="layadmin-backlog-body">
+                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 2, 'option_num' => 2)); ?>" lay-text="采风部 · 二志愿" class="layadmin-backlog-body">
                           <h3>采风部</h3>
                           <p><cite><?php echo htmlentities($option2_data[1]); ?></cite></p>
                         </a>
                       </li>
                       <li class="layui-col-xs4">
-                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 2, 'option_num' => 3)); ?>"  class="layadmin-backlog-body">
+                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 2, 'option_num' => 3)); ?>" lay-text="视频部 · 二志愿" class="layadmin-backlog-body">
                           <h3>视频部</h3>
                           <p><cite><?php echo htmlentities($option2_data[2]); ?></cite></p>
                         </a>
                       </li>
                       <li class="layui-col-xs4">
-                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 2, 'option_num' => 4)); ?>"  class="layadmin-backlog-body">
+                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 2, 'option_num' => 4)); ?>" lay-text="网站部 · 二志愿" class="layadmin-backlog-body">
                           <h3>网站部</h3>
                           <p><cite><?php echo htmlentities($option2_data[3]); ?></cite></p>
                         </a>
                       </li>
                       <li class="layui-col-xs4">
-                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 2, 'option_num' => 5)); ?>"  class="layadmin-backlog-body">
+                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 2, 'option_num' => 5)); ?>" lay-text="采编部 · 二志愿" class="layadmin-backlog-body">
                           <h3>采编部</h3>
                           <p><cite><?php echo htmlentities($option2_data[4]); ?></cite></p>
                         </a>
                       </li>
                       <li class="layui-col-xs4">
-                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 2, 'option_num' => 6)); ?>"  class="layadmin-backlog-body">
+                        <a lay-href="<?php echo url('apply/showoptionapply',array('option_type'=> 2, 'option_num' => 6)); ?>" lay-text="办公室 · 二志愿" class="layadmin-backlog-body">
                           <h3>办公室</h3>
                           <p><cite><?php echo htmlentities($option2_data[5]); ?></cite></p>
                         </a>

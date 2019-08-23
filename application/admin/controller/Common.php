@@ -10,8 +10,6 @@ class Common extends Base
     public function left()
     {
     	$auth=new Auth();
-        
-        
         $_groupTitle=$auth->getGroups(session('id'));
         //dump($_groupTitle);
        	$groupRules= array();
@@ -24,14 +22,7 @@ class Common extends Base
         }
         $this->assign("itemRes",$itemRes);
         dump($itemRes);
-       
-       
-        //die();
-        //$this->assign('adminres',$adminres);
-    	//$list = AdminModel::paginate(5);
-		
-		
+
         
     }
 }
-?>

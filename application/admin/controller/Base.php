@@ -1,6 +1,7 @@
 <?php
 namespace app\admin\controller;
 use app\admin\model\Image;
+use Qiniu\Storage\UploadManager;
 use think\Controller;
 class Base extends Controller
 {
@@ -54,33 +55,34 @@ class Base extends Controller
         $this->assign("groupTitle",$_groupTitle[0]["title"]);
         
     }
-
-    public function upload($name, $path)
-    {
-        //根据name属性获取file属性
-        $img = request()->file($name);
-        // 移动到框架应用根目录/public/uploads/$path 目录下
-        $info = $img->move('static/uploads/'.$path);
-        $url = 'static/uploads/'.$path . $info->getSaveName();
-        $img = new Image();
-        $img->url = $url;
-        $res = $img->save();
-        if($info && $res){
-            // 成功上传后 获取上传信息
+    public static function image(){
+        if(empty($_FILES['file']['tmp_name'])){
             return [
-                'code' => 0,
-                'msg' => '上传成功!',
-                'url' => 'static/uploads/'.$path . $info->getSaveName()
-            ];
-        }else{
-            // 上传失败获取错误信息
-            return [
-                'code' => -1,
-                'msg' => $img->getError(),
-                'url' => ''
+                "code" => -1,
+                "msg" => "上传图片失败",
+                "data" => ""
             ];
         }
+        //要上传的文件
+        $file = $_FILES['file']['tmp_name'];
+        $ext = explode('.',$_FILES['file']['name']);
+        $ext = $ext[1];
+        //构建鉴权对象
+        $auth = new \Qiniu\Auth(config('qiniu.ak'),config('qiniu.sk'));
+        //生成token
+        $token = $auth->uploadToken(config('qiniu.bucket'));
+        //上传到七牛云后保存的文件名
+        $key = date('Y')."/".date('m')."/".substr(md5($file),0,5).date('YmdHis')
+            .rand(0,9999).'.'.$ext;
+        $uploadMgr = new UploadManager();
+        list($res,$err) = $uploadMgr->putFile($token,$key,$file);
+        if($err != null){
+            return null;
+        }else{
+            return $key;
+        }
     }
+
     public  static  function getRandChar($length)
     {
         $str = null;

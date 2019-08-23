@@ -103,9 +103,6 @@ layui.define(['laytpl', 'layer'], function(exports){
         else if(res[response.statusName] == statusCode.logout){
           view.exit();
         }
-        else if(res[response.statusName] == statusCode.error) {
-          layer.msg(res.msg);
-        }
         
         //其它异常
         else {

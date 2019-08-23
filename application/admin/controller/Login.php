@@ -7,7 +7,6 @@ class Login extends controller
    
     public function index()
     {
-    	
     	if(request()->isAjax()){
     		$admin = new Admin();
     		$data = input('post.');
@@ -29,5 +28,3 @@ class Login extends controller
    
    
 }
-
-?>

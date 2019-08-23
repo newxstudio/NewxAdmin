@@ -1,4 +1,4 @@
-<?php /*a:1:{s:63:"D:\wamp64\www\NewxAdmin\application\admin\view\index\index.html";i:1566481223;}*/ ?>
+<?php /*a:1:{s:63:"D:\wamp64\www\NewxAdmin\application\admin\view\index\index.html";i:1566571889;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -118,17 +118,18 @@
                         </dl>
                     </li>
                     <li data-name="app" class="layui-nav-item">
-                        <a href="javascript:;" lay-tips="新闻动态" lay-direction="2">
+                        <a href="javascript:;" lay-tips="网站前台" lay-direction="2">
                             <i class="layui-icon layui-icon-app"></i>
-                            <cite>新闻动态</cite>
+                            <cite>网站前台</cite>
                         </a>
 
                         <dl class="layui-nav-child">
-                            <dd data-name="list"><a lay-href="app/content/list.html">新闻列表</a></dd>
+                            <dd data-name="list"><a lay-href="<?php echo url('news/newslist'); ?>">新闻动态</a></dd>
+                            <dd data-name="list"><a lay-href="<?php echo url('carousel/carousellist'); ?>">首页轮播</a></dd>
                         </dl>
 
                     </li>
-                    
+
 
                 </ul>
             </div>
@@ -165,7 +166,7 @@
 <!--                <iframe src="<?php echo url('admin/adminlist'); ?>" frameborder="0" class="layadmin-iframe"></iframe>-->
 <!--            </div>-->
             <div class="layadmin-tabsbody-item layui-show">
-                <iframe src="<?php echo url('apply/mail'); ?>" frameborder="0" class="layadmin-iframe"></iframe>
+                <iframe src="<?php echo url('news/newslist'); ?>" frameborder="0" class="layadmin-iframe"></iframe>
             </div>
         </div>
 
