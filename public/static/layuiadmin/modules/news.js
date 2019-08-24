@@ -21,8 +21,8 @@ layui.define(['table', 'form'], function(exports){
       {field: 'id', width: 110, title: 'id', sort: true}
       ,{field: 'title', title: '标题'}
       ,{field: 'desca', title: '简介'}
-      ,{field: 'img', title: '缩略图', templet: '#imgTpl'}
-      ,{field: 'create_time', title: '发送时间', templet : "<div>{{layui.util.toDateString(d.create_time, 'yyyy-MM-dd HH:mm')}}</div>"}
+      ,{field: 'img', title: '缩略图', templet: '#imgTpl', align: 'center'}
+      ,{field: 'create_time', title: '发送时间',align: 'center', templet : "<div>{{layui.util.toDateString(d.create_time, 'yyyy-MM-dd HH:mm')}}</div>"}
       ,{title: '操作', width: 150, align: 'center', fixed: 'right', toolbar: '#table-useradmin-webuser'}
     ]]
     ,page: true
@@ -72,7 +72,18 @@ layui.define(['table', 'form'], function(exports){
           
         }
       })
-    }
+    }else if(obj.event === 'del'){
+     layer.confirm('确定删除吗？', function(index) {
+       $.ajax({
+         url:'http://localhost/newxadmin/public/index.php/admin/news/delnewsdata?id=' + data.id  ,
+         method:"GET",
+         success:function (res) {
+           table.reload('LAY-news-list'); //数据刷新
+           layer.msg('已删除');
+         }
+       });
+     });
+   }
   });
 
 

@@ -134,15 +134,15 @@
         //初始化编辑器
         $('textarea#editor').froalaEditor({
             language: 'zh_cn',
-            heightMin: 200,
-            heightMax: 300,
-            placeholderText: '不要忘了写日志哦~~',
+            heightMin: 400,
+            heightMax: 500,
+            placeholderText: '不要忘了写新闻稿哦~~',
+            imageUploadURL: "{:url('news/textupload')}",
             pastePlain: true,
             theme: 'dark',
             toolbarSticky: false,
         });
-
-
+        var img_url = "";
         croppers.render({
             elem: '#pic',
             saveW: 150 //保存宽度
@@ -152,51 +152,29 @@
             ,
             area: '900px' //弹窗宽度
             ,
-            url: "{:url('carousel/upload')}" //图片上传接口返回和（layui 的upload 模块）返回的JOSN一样
+            url: "{:url('news/upload')}" //图片上传接口返回和（layui 的upload 模块）返回的JOSN一样
             ,
-            done: function(res) { //上传完毕回调
-                table.reload('LAY-carousel-list'); //数据刷新
+            done: function(url) { //上传完毕回调
+                img_url = url;
+                $("#img_show").attr('src',url);
             }
         });
 
 
         /* 监听提交 */
         form.on('submit(component-form-demo1)', function (data) {
-            // parent.layer.alert(JSON.stringify(data.field), {
-            //   title: '最终的提交信息'
-            // })
-
-            var index1 = layer.load(1);
             $.ajax({
-                url: 'http://localhost/newxadmin/public/index.php/admin/apply/sendmail',
+                url: 'http://localhost/newxadmin/public/index.php/admin/news/addnewsdata',
                 method: "POST",
                 data: {
-                    'subject': data.field.subject,
-                    'status': data.field.status,
-                    'text': data.field.text,
-                    'option_num': 4
+                    'title':data.field.title,
+                    'desca':data.field.desca,
+                    'text':$('textarea#editor').froalaEditor('html.get'),
+                    'img':img_url
                 },
                 success: function (res) {
-                    layer.close(index1)
-                    console.log(res)
-                    layer.open({
-                        type: 2
-                        ,
-                        title: '邮件发送状态'
-                        ,
-                        content: 'http://localhost/newxadmin/public/index.php/admin/apply/emailstatus/#/id=' + res.data
-                        ,
-                        area: ['600px', '400px']
-                        ,
-                        yes: function (index, layero) {
-                            var iframeWindow = window['layui-layer-iframe' + index]
-                                , submitID = 'LAY-user-back-submit'
-                                , submit = layero.find('iframe').contents().find('#' + submitID);
-                        }
-                        ,
-                        success: function (layero, index) {
-                        }
-                    })
+                    parent.layui.admin.closeThisTabs();
+                    top.layui.index.openTabsPage('{:url("news/newslist")}', "新闻列表");  //完成页面跳转
                 }
             });
             return false;

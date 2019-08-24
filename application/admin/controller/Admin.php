@@ -2,6 +2,7 @@
 namespace app\admin\controller;
 use app\admin\model\Admin as AdminModel;
 use app\admin\model\AuthGroup as AuthGroupModel;
+use think\captcha\Captcha;
 use think\facade\Request;
 
 class Admin extends Base
@@ -161,10 +162,9 @@ class Admin extends Base
             ];
         }
    }
-   public function logout(){
-   		session(null);
-   		$this->redirect('login/index');
-   }
+
+
+
 }
 
 ?>

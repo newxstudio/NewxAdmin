@@ -1,4 +1,4 @@
-<?php /*a:1:{s:63:"D:\wamp64\www\NewxAdmin\application\admin\view\index\index.html";i:1566571889;}*/ ?>
+<?php /*a:1:{s:63:"D:\wamp64\www\NewxAdmin\application\admin\view\index\index.html";i:1566655719;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -54,7 +54,7 @@
                 </li>
                 <li class="layui-nav-item" lay-unselect style="margin-right: 30px;">
                     <a href="javascript:;">
-                        <cite>贤心</cite>
+                        <cite><?php echo htmlentities($admin['name']); ?></cite>
                     </a>
                     <dl class="layui-nav-child">
                         <dd><a lay-href="set/user/info.html">基本资料</a></dd>

@@ -100,7 +100,6 @@ layui.config({
                                 }else if(result.code == -1){
                                     layer.alert(result.msg,{icon: 2});
                                 }
-
                             }
                         });
                     });

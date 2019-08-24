@@ -5,10 +5,17 @@ use Qiniu\Storage\UploadManager;
 use think\Controller;
 class Base extends Controller
 {
-    public function aainitialize(){
-        if(!session('username')){
-            $this->redirect('Login/index');
+    public function initialize(){
+        if(cookie('username')){
+            $res = db('admin')->where('token',cookie('token'))->find();
+            $this->assign('admin',$res);
+        }else{
+            $res = 0;
         }
+        if(!$res){
+            $this->redirect('Login/login');
+        }
+        /*
         $adminsPic = db('admin')->find(session('id'));
         $this->assign("adminsPic",$adminsPic);
         $auth=new Auth();
@@ -53,6 +60,8 @@ class Base extends Controller
         
         $this->assign("itemRes",$itemRes);
         $this->assign("groupTitle",$_groupTitle[0]["title"]);
+
+        */
         
     }
     public static function image(){

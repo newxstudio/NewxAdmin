@@ -28,15 +28,15 @@ class Captcha
         // 中文验证码字符串
         'useImgBg' => false,
         // 使用背景图片
-        'fontSize' => 30,
+        'fontSize' => 20,
         // 验证码字体大小(px)
         'useCurve' => true,
         // 是否画混淆曲线
-        'useNoise' => true,
+        'useNoise' => false,
         // 是否添加杂点
-        'imageH'   => 0,
+        'imageH'   => 38,
         // 验证码图片高度
-        'imageW'   => 0,
+        'imageW'   => 135,
         // 验证码图片宽度
         'length'   => 4,
         // 验证码位数
