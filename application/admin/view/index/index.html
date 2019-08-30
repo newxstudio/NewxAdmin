@@ -56,10 +56,10 @@
                         <cite>{$admin.name}</cite>
                     </a>
                     <dl class="layui-nav-child">
-                        <dd><a lay-href="set/user/info.html">基本资料</a></dd>
-                        <dd><a lay-href="set/user/password.html">修改密码</a></dd>
+                        <dd><a lay-href="{:url('Set/info')}">基本资料</a></dd>
+                        <dd><a lay-href="{:url('Set/password')}">修改密码</a></dd>
                         <hr>
-                        <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
+                        <a href="{:url('Login/logout')}" style="text-align: center;">退出</a>
                     </dl>
                 </li>
 
@@ -71,64 +71,30 @@
         <!-- 侧边菜单 -->
         <div class="layui-side layui-side-menu">
             <div class="layui-side-scroll">
-                <div class="layui-logo" lay-href="{:url('auth_rule/role')}">
+                <div class="layui-logo" style="cursor: pointer">
                     <span>NEWX · 后台管理</span>
                 </div>
 
                 <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu"
                     lay-filter="layadmin-system-side-menu">
-                    <li data-name="home" class="layui-nav-item layui-nav-itemed">
-                        <a href="javascript:;" lay-tips="管理员管理" lay-direction="2">
-                            <i class="layui-icon layui-icon-home"></i>
-                            <cite>管理员管理</cite>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd data-name="console" class="layui-this">
-                                <a lay-href="{:url('auth_rule/role')}">权限列表</a>
-                            </dd>
-                            <dd data-name="console">
-                                <a lay-href="{:url('auth_group/rulegroup')}">用户组列表</a>
-                            </dd>
-                            <dd data-name="console">
-                                <a lay-href="{:url('admin/adminlist')}">管理员列表</a>
-                            </dd>
-                        </dl>
-                    </li>
 
-
-                    <li data-name="user" class="layui-nav-item">
-                        <a href="javascript:;" lay-tips="报名管理" lay-direction="2">
-                            <i class="layui-icon layui-icon-user"></i>
-                            <cite>报名管理</cite>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd>
-                                <a lay-href="{:url('apply/applylist')}">报名列表</a>
-                            </dd>
-                            <dd>
-                                <a lay-href="{:url('apply/data')}">数据统计</a>
-                            </dd>
-                            <dd>
-                                <a lay-href="{:url('apply/manageapply')}">报名管理</a>
-                            </dd>
-                            <dd>
-                                <a lay-href="{:url('apply/mail')}">邮件发送</a>
-                            </dd>
-                        </dl>
-                    </li>
+                    {volist name ="itemRes" id="vo"}
                     <li data-name="app" class="layui-nav-item">
+                        {if condition="($vo.level eq 0 ) and ($vo.visibility eq 1)"}
                         <a href="javascript:;" lay-tips="网站前台" lay-direction="2">
-                            <i class="layui-icon layui-icon-app"></i>
-                            <cite>网站前台</cite>
+                            <i class="layui-icon {switch $vo.id}{case 3 }layui-icon-home{/case}{case 7}layui-icon-user{/case}
+                            {case 12}layui-icon-app{/case}{/switch}"></i>
+                            <cite>{$vo.title}</cite>
                         </a>
 
                         <dl class="layui-nav-child">
-                            <dd data-name="list"><a lay-href="{:url('news/newslist')}">新闻动态</a></dd>
-                            <dd data-name="list"><a lay-href="{:url('carousel/carousellist')}">首页轮播</a></dd>
+                            {foreach $itemRes as $k=>$vo1 } {if condition="($vo1.pid eq $vo.id) and ($vo1.visibility eq 1)"}
+                            <dd data-name="list"><a lay-href="{:url($vo1.name)}">{$vo1.title}</a></dd>
+                            {/if} {/foreach}
                         </dl>
 
                     </li>
-
+                    {/if} {/volist}
 
                 </ul>
             </div>
@@ -152,7 +118,7 @@
             </div>
             <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
                 <ul class="layui-tab-title" id="LAY_app_tabsheader">
-                    <li lay-id="home/console.html" lay-attr="{:url('Admin/role')}" class="layui-this"><i
+                    <li lay-id="home/console.html" lay-attr="{:url('index/show')}" class="layui-this"><i
                             class="layui-icon layui-icon-home"></i></li>
                 </ul>
             </div>
@@ -165,7 +131,7 @@
 <!--                <iframe src="{:url('admin/adminlist')}" frameborder="0" class="layadmin-iframe"></iframe>-->
 <!--            </div>-->
             <div class="layadmin-tabsbody-item layui-show">
-                <iframe src="{:url('news/newslist')}" frameborder="0" class="layadmin-iframe"></iframe>
+                <iframe src="{:url('index/show')}" frameborder="0" class="layadmin-iframe"></iframe>
             </div>
         </div>
 

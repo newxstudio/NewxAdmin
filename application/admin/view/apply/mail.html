@@ -103,6 +103,26 @@
     ,form = layui.form,table = layui.table;
     
     form.render(null, 'component-form-group');
+
+
+
+      //读取cookie,获取部门编号
+      var option_num = "";
+      $(function(){
+          function getCookie(name) {
+              var cookies = document.cookie;
+              var list = cookies.split("; ");          // 解析出名/值对列表
+
+              for(var i = 0; i < list.length; i++) {
+                  var arr = list[i].split("=");          // 解析出名和值
+                  if(arr[0] == name)
+                      return decodeURIComponent(arr[1]);   // 对cookie值解码
+              }
+              return "";
+          }
+
+          option_num = getCookie('department');
+      });
     
     /* 自定义验证规则 */
     form.verify({
@@ -122,13 +142,13 @@
     form.on('select(component-form-select)', function(data){
       status = data.value
       table.reload('LAY-apply-mail-list',{
-        url: 'http://localhost/newxadmin/public/index.php/admin/apply/showmail?option_num=' + 4 + '&status=' + status
+        url: 'http://localhost/newxadmin/public/index.php/admin/apply/showmail?option_num=' + option_num + '&status=' + status
       }); //数据刷新
     });
     //邮件发送
     table.render({
       elem: '#LAY-apply-mail-list'
-      ,url: 'http://localhost/newxadmin/public/index.php/admin/apply/showmail?option_num=' + 4 + '&status=' + status
+      ,url: 'http://localhost/newxadmin/public/index.php/admin/apply/showmail?option_num=' + option_num + '&status=' + status
       ,cols: [[
         {field: 'name', title: '姓名',width:100}
         ,{field: 'student_id', width: 130, title: '学号', sort: true}

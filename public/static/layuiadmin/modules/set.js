@@ -36,8 +36,8 @@ layui.define(['form', 'upload'], function(exports){
     //我们既支持上述函数式的方式，也支持下述数组的形式
     //数组的两个值分别代表：[正则匹配、匹配不符时的提示文字]
     ,pass: [
-      /^[\S]{6,12}$/
-      ,'密码必须6到12位，且不能出现空格'
+      /^[\S]{6,20}$/
+      ,'密码必须6到20位，且不能出现空格'
     ]
     
     //确认密码
@@ -48,103 +48,37 @@ layui.define(['form', 'upload'], function(exports){
     }
   });
   
-  //网站设置
-  form.on('submit(set_website)', function(obj){
-    layer.msg(JSON.stringify(obj.field));
-    
-    //提交修改
-    /*
-    admin.req({
-      url: ''
-      ,data: obj.field
-      ,success: function(){
-        
-      }
-    });
-    */
-    return false;
-  });
-  
-  //邮件服务
-  form.on('submit(set_system_email)', function(obj){
-    layer.msg(JSON.stringify(obj.field));
-    
-    //提交修改
-    /*
-    admin.req({
-      url: ''
-      ,data: obj.field
-      ,success: function(){
-        
-      }
-    });
-    */
-    return false;
-  });
+
   
   
   //设置我的资料
   form.on('submit(setmyinfo)', function(obj){
-    layer.msg(JSON.stringify(obj.field));
-    
     //提交修改
-    /*
     admin.req({
-      url: ''
+      url: 'http://localhost/newxadmin/public/admin/Set/editInfo'
       ,data: obj.field
-      ,success: function(){
-        
+      ,success: function(res){
+        console.log(res);
+        if(res.code == 0){
+          layer.msg(res.msg);
+        }
       }
     });
-    */
     return false;
   });
 
-  //上传头像
-  var avatarSrc = $('#LAY_avatarSrc');
-  upload.render({
-    url: '/api/upload/'
-    ,elem: '#LAY_avatarUpload'
-    ,done: function(res){
-      if(res.status == 0){
-        avatarSrc.val(res.url);
-      } else {
-        layer.msg(res.msg, {icon: 5});
-      }
-    }
-  });
-  
-  //查看头像
-  admin.events.avartatPreview = function(othis){
-    var src = avatarSrc.val();
-    layer.photos({
-      photos: {
-        "title": "查看头像" //相册标题
-        ,"data": [{
-          "src": src //原图地址
-        }]
-      }
-      ,shade: 0.01
-      ,closeBtn: 1
-      ,anim: 5
-    });
-  };
-  
-  
   //设置密码
   form.on('submit(setmypass)', function(obj){
-    layer.msg(JSON.stringify(obj.field));
-    
     //提交修改
-    /*
     admin.req({
-      url: ''
+      url: 'http://localhost/newxadmin/public/admin/Set/editPassword'
       ,data: obj.field
-      ,success: function(){
-        
+      ,success: function(res){
+        if(res.code == 0){
+          layer.msg(res.msg);
+        }
       }
     });
-    */
     return false;
   });
   

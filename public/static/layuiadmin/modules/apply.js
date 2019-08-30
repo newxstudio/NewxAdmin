@@ -12,6 +12,25 @@ layui.define(['table', 'form'], function(exports){
   var $ = layui.$
   ,table = layui.table
   ,form = layui.form;
+  var option_num = "";
+  //读取cookie,获取部门编号
+
+  $(function(){
+    function getCookie(name) {
+      var cookies = document.cookie;
+      var list = cookies.split("; ");          // 解析出名/值对列表
+
+      for(var i = 0; i < list.length; i++) {
+        var arr = list[i].split("=");          // 解析出名和值
+        if(arr[0] == name)
+          return decodeURIComponent(arr[1]);   // 对cookie值解码
+      }
+      return "";
+    }
+
+    option_num = getCookie('department');
+  });
+
 
   //报名列表
   table.render({
@@ -56,17 +75,6 @@ layui.define(['table', 'form'], function(exports){
           //监听提交
           iframeWindow.layui.form.on('submit('+ submitID +')', function(data1){
             var field = data1.field; //获取提交的字段
-            
-            //提交 Ajax 成功后，静态更新表格中的数据
-            $.ajax({
-              url:'http://localhost/newxadmin/public/index.php/admin/admin/editadmindata?id=' + data.id,
-              method:"POST",
-              data: field,
-              success:function (res) {
-                table.reload('LAY-user-back-manage'); //数据刷新
-                layer.close(index); //关闭弹层
-              }
-            });
 
           });  
           
@@ -82,7 +90,7 @@ layui.define(['table', 'form'], function(exports){
   //各部门单独报名列表 - 志愿一
   table.render({
     elem: '#LAY-apply-part-list'
-    ,url: 'http://localhost/newxadmin/public/index.php/admin/apply/showoptiondata?option_type=1&option_num=' + 4
+    ,url: 'http://localhost/newxadmin/public/index.php/admin/apply/showoptiondata?option_type=1&option_num=' + option_num
     ,cols: [[
       {field: 'student_id', width: 110, title: '学号', sort: true}
       ,{field: 'name', title: '姓名'}
@@ -110,7 +118,7 @@ layui.define(['table', 'form'], function(exports){
     var data = obj.data;
     if(obj.event === 'statusTo2'){
       $.ajax({
-        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=2&id=' + data.id  + '&department=' + 4,
+        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=2&id=' + data.id  + '&department=' + option_num,
         method:"GET",
         success:function (res) {
           table.reload('LAY-apply-part-list'); //数据刷新
@@ -119,7 +127,7 @@ layui.define(['table', 'form'], function(exports){
       });
     }else if(obj.event === 'statusTo-1'){
       $.ajax({
-        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=-1&id=' + data.id  + '&department=' + 4,
+        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=-1&id=' + data.id  + '&department=' + option_num,
         method:"GET",
         success:function (res) {
           table.reload('LAY-apply-part-list'); //数据刷新
@@ -128,7 +136,7 @@ layui.define(['table', 'form'], function(exports){
       });
     }else if(obj.event === 'statusTo-2'){
       $.ajax({
-        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=-2&id=' + data.id + '&department=' + 4,
+        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=-2&id=' + data.id + '&department=' + option_num,
         method:"GET",
         success:function (res) {
           table.reload('LAY-apply-part-list'); //数据刷新
@@ -137,7 +145,7 @@ layui.define(['table', 'form'], function(exports){
       });
     }else if(obj.event === 'statusTo3'){
       $.ajax({
-        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=3&id=' + data.id  + '&department=' + 4,
+        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=3&id=' + data.id  + '&department=' + option_num,
         method:"GET",
         success:function (res) {
           table.reload('LAY-apply-part-list'); //数据刷新
@@ -146,7 +154,7 @@ layui.define(['table', 'form'], function(exports){
       });
     }else if(obj.event === 'statusTo1'){
       $.ajax({
-        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=1&id=' + data.id  + '&department=' + 4,
+        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=1&id=' + data.id  + '&department=' + option_num,
         method:"GET",
         success:function (res) {
           table.reload('LAY-apply-part-list'); //数据刷新
@@ -159,7 +167,7 @@ layui.define(['table', 'form'], function(exports){
   //各部门单独报名列表 - 志愿二
   table.render({
     elem: '#LAY-apply-part-list1'
-    ,url: 'http://localhost/newxadmin/public/index.php/admin/apply/showoptiondata?option_type=2&option_num=' + 4
+    ,url: 'http://localhost/newxadmin/public/index.php/admin/apply/showoptiondata?option_type=2&option_num=' + option_num
     ,cols: [[
       {field: 'student_id', width: 110, title: '学号', sort: true}
       ,{field: 'name', title: '姓名'}
@@ -187,7 +195,7 @@ layui.define(['table', 'form'], function(exports){
     var data = obj.data;
     if(obj.event === 'statusTo2'){
       $.ajax({
-        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=2&id=' + data.id  + '&department=' + 4,
+        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=2&id=' + data.id  + '&department=' + option_num,
         method:"GET",
         success:function (res) {
           table.reload('LAY-apply-part-list1'); //数据刷新
@@ -196,7 +204,7 @@ layui.define(['table', 'form'], function(exports){
       });
     }else if(obj.event === 'statusTo-1'){
       $.ajax({
-        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=-1&id=' + data.id  + '&department=' + 4,
+        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=-1&id=' + data.id  + '&department=' + option_num,
         method:"GET",
         success:function (res) {
           table.reload('LAY-apply-part-list1'); //数据刷新
@@ -205,7 +213,7 @@ layui.define(['table', 'form'], function(exports){
       });
     }else if(obj.event === 'statusTo-2'){
       $.ajax({
-        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=-2&id=' + data.id + '&department=' + 4,
+        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=-2&id=' + data.id + '&department=' + option_num,
         method:"GET",
         success:function (res) {
           table.reload('LAY-apply-part-list1'); //数据刷新
@@ -214,7 +222,7 @@ layui.define(['table', 'form'], function(exports){
       });
     }else if(obj.event === 'statusTo3'){
       $.ajax({
-        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=3&id=' + data.id  + '&department=' + 4,
+        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=3&id=' + data.id  + '&department=' + option_num,
         method:"GET",
         success:function (res) {
           table.reload('LAY-apply-part-list1'); //数据刷新
@@ -223,7 +231,7 @@ layui.define(['table', 'form'], function(exports){
       });
     }else if(obj.event === 'statusTo1'){
       $.ajax({
-        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=1&id=' + data.id  + '&department=' + 4,
+        url:'http://localhost/newxadmin/public/index.php/admin/apply/changeStatus?statusTo=1&id=' + data.id  + '&department=' + option_num,
         method:"GET",
         success:function (res) {
           table.reload('LAY-apply-part-list1'); //数据刷新

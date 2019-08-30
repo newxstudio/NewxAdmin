@@ -76,7 +76,7 @@ layui.define(function(exports){
               data:['图文部','采风部','视频部','网站部','采编部','办公室']
             },
             series : [{
-              name:'访问来源',
+              name:'人数分布',
               type:'pie',
               radius : '55%',
               center: ['50%', '50%'],
@@ -176,7 +176,7 @@ layui.define(function(exports){
               data:['图文部','采风部','视频部','网站部','采编部','办公室']
             },
             series : [{
-              name:'访问来源',
+              name:'人数分布',
               type:'pie',
               radius : '55%',
               center: ['50%', '50%'],

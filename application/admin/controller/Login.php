@@ -19,7 +19,7 @@ class Login extends controller
                 if($user['password'] == md5($password)){
                     if ($user['status'] == 1){
                         // 赋值（当前作用域）
-                        session('username',$user['username'] );
+                        session('username',$user['username']);
                         session('id',$user['id'] );
                         $token = self::generateToken();
                         if(input('remember')  == "on"){
@@ -27,6 +27,7 @@ class Login extends controller
                             cookie('token',null);
                             cookie('username',$username,3600*24*7);
                             cookie('token',$token,3600*24*7);
+                            cookie('department',$user['department'],3600*24*7);
                             $user->token = $token;
                             $user->save();
                         }else{
@@ -34,6 +35,7 @@ class Login extends controller
                             cookie('token',null);
                             cookie('username',$username);
                             cookie('token',$token);
+                            cookie('department',$user['department']);
                             $user->token = $token;
                             $user->save();
                         }

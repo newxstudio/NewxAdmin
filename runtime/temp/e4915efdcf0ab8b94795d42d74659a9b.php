@@ -1,4 +1,4 @@
-<?php /*a:1:{s:63:"D:\wamp64\www\NewxAdmin\application\admin\view\index\index.html";i:1566655719;}*/ ?>
+<?php /*a:1:{s:63:"D:\wamp64\www\NewxAdmin\application\admin\view\index\index.html";i:1566788238;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -57,10 +57,10 @@
                         <cite><?php echo htmlentities($admin['name']); ?></cite>
                     </a>
                     <dl class="layui-nav-child">
-                        <dd><a lay-href="set/user/info.html">基本资料</a></dd>
-                        <dd><a lay-href="set/user/password.html">修改密码</a></dd>
+                        <dd><a lay-href="<?php echo url('Set/info'); ?>">基本资料</a></dd>
+                        <dd><a lay-href="<?php echo url('Set/password'); ?>">修改密码</a></dd>
                         <hr>
-                        <dd layadmin-event="logout" style="text-align: center;"><a>退出</a></dd>
+                        <a href="<?php echo url('Login/logout'); ?>" style="text-align: center;">退出</a>
                     </dl>
                 </li>
 
@@ -72,64 +72,29 @@
         <!-- 侧边菜单 -->
         <div class="layui-side layui-side-menu">
             <div class="layui-side-scroll">
-                <div class="layui-logo" lay-href="<?php echo url('auth_rule/role'); ?>">
+                <div class="layui-logo" style="cursor: pointer">
                     <span>NEWX · 后台管理</span>
                 </div>
 
                 <ul class="layui-nav layui-nav-tree" lay-shrink="all" id="LAY-system-side-menu"
                     lay-filter="layadmin-system-side-menu">
-                    <li data-name="home" class="layui-nav-item layui-nav-itemed">
-                        <a href="javascript:;" lay-tips="管理员管理" lay-direction="2">
-                            <i class="layui-icon layui-icon-home"></i>
-                            <cite>管理员管理</cite>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd data-name="console" class="layui-this">
-                                <a lay-href="<?php echo url('auth_rule/role'); ?>">权限列表</a>
-                            </dd>
-                            <dd data-name="console">
-                                <a lay-href="<?php echo url('auth_group/rulegroup'); ?>">用户组列表</a>
-                            </dd>
-                            <dd data-name="console">
-                                <a lay-href="<?php echo url('admin/adminlist'); ?>">管理员列表</a>
-                            </dd>
-                        </dl>
-                    </li>
 
-
-                    <li data-name="user" class="layui-nav-item">
-                        <a href="javascript:;" lay-tips="报名管理" lay-direction="2">
-                            <i class="layui-icon layui-icon-user"></i>
-                            <cite>报名管理</cite>
-                        </a>
-                        <dl class="layui-nav-child">
-                            <dd>
-                                <a lay-href="<?php echo url('apply/applylist'); ?>">报名列表</a>
-                            </dd>
-                            <dd>
-                                <a lay-href="<?php echo url('apply/data'); ?>">数据统计</a>
-                            </dd>
-                            <dd>
-                                <a lay-href="<?php echo url('apply/manageapply'); ?>">报名管理</a>
-                            </dd>
-                            <dd>
-                                <a lay-href="<?php echo url('apply/mail'); ?>">邮件发送</a>
-                            </dd>
-                        </dl>
-                    </li>
+                    <?php if(is_array($itemRes) || $itemRes instanceof \think\Collection || $itemRes instanceof \think\Paginator): $i = 0; $__LIST__ = $itemRes;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?>
                     <li data-name="app" class="layui-nav-item">
+                        <?php if(($vo['level'] == 0 ) and ($vo['visibility'] == 1)): ?>
                         <a href="javascript:;" lay-tips="网站前台" lay-direction="2">
-                            <i class="layui-icon layui-icon-app"></i>
-                            <cite>网站前台</cite>
+                            <i class="layui-icon <?php switch($vo['id']): case "3": ?>layui-icon-home<?php break; case "7": ?>layui-icon-user<?php break; case "12": ?>layui-icon-app<?php break; ?><?php endswitch; ?>"></i>
+                            <cite><?php echo htmlentities($vo['title']); ?></cite>
                         </a>
 
                         <dl class="layui-nav-child">
-                            <dd data-name="list"><a lay-href="<?php echo url('news/newslist'); ?>">新闻动态</a></dd>
-                            <dd data-name="list"><a lay-href="<?php echo url('carousel/carousellist'); ?>">首页轮播</a></dd>
+                            <?php foreach($itemRes as $k=>$vo1): if(($vo1['pid'] == $vo['id']) and ($vo1['visibility'] == 1)): ?>
+                            <dd data-name="list"><a lay-href="<?php echo url($vo1['name']); ?>"><?php echo htmlentities($vo1['title']); ?></a></dd>
+                            <?php endif; ?> <?php endforeach; ?>
                         </dl>
 
                     </li>
-
+                    <?php endif; ?> <?php endforeach; endif; else: echo "" ;endif; ?>
 
                 </ul>
             </div>
@@ -153,7 +118,7 @@
             </div>
             <div class="layui-tab" lay-unauto lay-allowClose="true" lay-filter="layadmin-layout-tabs">
                 <ul class="layui-tab-title" id="LAY_app_tabsheader">
-                    <li lay-id="home/console.html" lay-attr="<?php echo url('Admin/role'); ?>" class="layui-this"><i
+                    <li lay-id="home/console.html" lay-attr="<?php echo url('index/show'); ?>" class="layui-this"><i
                             class="layui-icon layui-icon-home"></i></li>
                 </ul>
             </div>
@@ -166,7 +131,7 @@
 <!--                <iframe src="<?php echo url('admin/adminlist'); ?>" frameborder="0" class="layadmin-iframe"></iframe>-->
 <!--            </div>-->
             <div class="layadmin-tabsbody-item layui-show">
-                <iframe src="<?php echo url('news/newslist'); ?>" frameborder="0" class="layadmin-iframe"></iframe>
+                <iframe src="<?php echo url('index/show'); ?>" frameborder="0" class="layadmin-iframe"></iframe>
             </div>
         </div>
 

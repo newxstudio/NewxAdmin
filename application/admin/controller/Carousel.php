@@ -57,7 +57,6 @@ class Carousel extends Base
                 "data" => ""
             ];
         }
-
     }
 
 }

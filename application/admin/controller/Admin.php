@@ -13,7 +13,6 @@ class Admin extends Base
     	$auth=new Auth();
         $admin=new AdminModel();
         $adminres=$admin->getadmin();
-        
         foreach ($adminres as $k => $v) {
             $_groupTitle=$auth->getGroups($v['id']);
            
