@@ -1,3 +1,4 @@
+<?php /*a:1:{s:63:"D:\wamp64\www\NewxAdmin\application\index\view\index\index.html";i:1566959302;}*/ ?>
 <!DOCTYPE html>
 <html>
 
@@ -6,12 +7,12 @@
 		<title>NEWX·大学生网络文化工作室</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 		<!-- 引入swiper样式 -->
-		<link rel="stylesheet" type="text/css" href="__PUBLIC__/index/dist/css/swiper.min.css"/>
+		<link rel="stylesheet" type="text/css" href="http://localhost/newxadmin/public/static/index/dist/css/swiper.min.css"/>
 		
-		<link href="__PUBLIC__/index/css/main.css" rel="stylesheet">
-		<link href="__PUBLIC__/index/css/initial.css" rel="stylesheet">
-		<link rel="shortcut icon" href="__PUBLIC__/admin/images/newx.ico" />
-		<link rel="stylesheet" href="__PUBLIC__/layui/css/layui.css">
+		<link href="http://localhost/newxadmin/public/static/index/css/main.css" rel="stylesheet">
+		<link href="http://localhost/newxadmin/public/static/index/css/initial.css" rel="stylesheet">
+		<link rel="shortcut icon" href="http://localhost/newxadmin/public/static/admin/images/newx.ico" />
+		<link rel="stylesheet" href="http://localhost/newxadmin/public/static/layui/css/layui.css">
 		<!-- 新 Bootstrap 核心 CSS 文件 -->
 		<link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="https://cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.css">
@@ -20,14 +21,14 @@
 
 		<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
 		<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-		<script type="text/javascript" src="__PUBLIC__/index/js/jquery.min_x.js"></script>
-		<script type="text/javascript" src="__PUBLIC__/index/js/book_x.js"></script>
+		<script type="text/javascript" src="http://localhost/newxadmin/public/static/index/js/jquery.min_x.js"></script>
+		<script type="text/javascript" src="http://localhost/newxadmin/public/static/index/js/book_x.js"></script>
 		
 		<!-- 引入swiper JavaScript文件 -->
-		<script src="__PUBLIC__/index/dist/js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://localhost/newxadmin/public/static/index/dist/js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
 		
 		<!-- 引入layer JavaScript文件 -->
-		<script src="__PUBLIC__/layer/layer.js" type="text/javascript" charset="utf-8"></script>
+		<script src="http://localhost/newxadmin/public/static/layer/layer.js" type="text/javascript" charset="utf-8"></script>
 		
 		
 		
@@ -113,22 +114,22 @@
 			<div class="section" id="section1">
 				<!-- <div class="orderShowImgBigDiv_n">
 					<ul id="orderShowImgul_n">
-						<li><img class="moveimg_n" src="__PUBLIC__/index/images/1.jpg" /></li>
-						<li><img class="moveimg_n" src="__PUBLIC__/index/images/2.jpg" /></li>
-						<li><img class="moveimg_n" src="__PUBLIC__/index/images/3.jpg" /></li>
-						<li><img class="moveimg_n" src="__PUBLIC__/index/images/4.jpg" /></li>
+						<li><img class="moveimg_n" src="http://localhost/newxadmin/public/static/index/images/1.jpg" /></li>
+						<li><img class="moveimg_n" src="http://localhost/newxadmin/public/static/index/images/2.jpg" /></li>
+						<li><img class="moveimg_n" src="http://localhost/newxadmin/public/static/index/images/3.jpg" /></li>
+						<li><img class="moveimg_n" src="http://localhost/newxadmin/public/static/index/images/4.jpg" /></li>
 					</ul>
 					<div id="nvaDiv_n">
 					</div>
-					<div class="arrowsDiv_n" style="left: 2%;height: 20%;"><img src="__PUBLIC__/index/images/last.png" style="width: 100%;" /></div>
-					<div class="arrowsDiv_n" style="right:2%;height: 20%;"><img src="__PUBLIC__/index/images/last.png" style="width: 100%;transform: rotate(180deg)" /></div>
+					<div class="arrowsDiv_n" style="left: 2%;height: 20%;"><img src="http://localhost/newxadmin/public/static/index/images/last.png" style="width: 100%;" /></div>
+					<div class="arrowsDiv_n" style="right:2%;height: 20%;"><img src="http://localhost/newxadmin/public/static/index/images/last.png" style="width: 100%;transform: rotate(180deg)" /></div>
 				</div> -->
 				<div class="swiper-container">
 					<div class="swiper-wrapper">
-						<div class="swiper-slide"><img src="__PUBLIC__/index/images/1.jpg" ></div>
-						<div class="swiper-slide"><img src="__PUBLIC__/index/images/2.jpg" ></div>
-						<div class="swiper-slide"><img src="__PUBLIC__/index/images/3.jpg" ></div>
-						<div class="swiper-slide"><img src="__PUBLIC__/index/images/4.jpg" ></div>
+						<div class="swiper-slide"><img src="http://localhost/newxadmin/public/static/index/images/1.jpg" ></div>
+						<div class="swiper-slide"><img src="http://localhost/newxadmin/public/static/index/images/2.jpg" ></div>
+						<div class="swiper-slide"><img src="http://localhost/newxadmin/public/static/index/images/3.jpg" ></div>
+						<div class="swiper-slide"><img src="http://localhost/newxadmin/public/static/index/images/4.jpg" ></div>
 					</div>
 					<!-- 如果需要分页器 -->
 					<div class="swiper-pagination"></div>
@@ -554,19 +555,19 @@
 					<div id="newsImg_n">
 						<ul id="nwesUl_n">
 							<li class="newsLi_n newsLi0_n">
-								<div class="newsLiShdowLeft_n"></div><img style="width:100%;height:100%" src="__PUBLIC__/index/images/1.jpg" />
+								<div class="newsLiShdowLeft_n"></div><img style="width:100%;height:100%" src="http://localhost/newxadmin/public/static/index/images/1.jpg" />
 								<div class="newsLiShdowRight_n"></div>
 							</li>
 							<li class="newsLi_n newsLi3_n">
-								<div class="newsLiShdowLeft_n"></div><img style="width:100%;height:100%" src="__PUBLIC__/index/images/2.jpg" />
+								<div class="newsLiShdowLeft_n"></div><img style="width:100%;height:100%" src="http://localhost/newxadmin/public/static/index/images/2.jpg" />
 								<div class="newsLiShdowRight_n"></div>
 							</li>
 							<li class="newsLi_n newsLi3_n">
-								<div class="newsLiShdowLeft_n"></div><img style="width:100%;height:100%" src="__PUBLIC__/index/images/3.jpg" />
+								<div class="newsLiShdowLeft_n"></div><img style="width:100%;height:100%" src="http://localhost/newxadmin/public/static/index/images/3.jpg" />
 								<div class="newsLiShdowRight_n"></div>
 							</li>
 							<li class="newsLi_n newsLi3_n">
-								<div class="newsLiShdowLeft_n"></div><img style="width:100%;height:100%" src="__PUBLIC__/index/images/4.jpg" />
+								<div class="newsLiShdowLeft_n"></div><img style="width:100%;height:100%" src="http://localhost/newxadmin/public/static/index/images/4.jpg" />
 								<div class="newsLiShdowRight_n"></div>
 							</li>
 						</ul>
@@ -578,11 +579,11 @@
 								<p class="newsDateWord_n">01/May.</p>
 							</div>
 							<ul id="newsIndexUl_n">
-								<li class="newsIndexLi_n newsIndexLiOver_n"><img style="width:100%;height:100%;border-radius:15px;" src="__PUBLIC__/index/images/1.jpg" /></li>
-								<li class="newsIndexLi_n"><img style="width:100%;height:100%;border-radius:15px;" src="__PUBLIC__/index/images/2.jpg" /></li>
-								<li class="newsIndexLi_n"><img style="width:100%;height:100%;border-radius:15px;" src="__PUBLIC__/index/images/3.jpg" /></li>
-								<li class="newsIndexLi_n"><img style="width:100%;height:100%;border-radius:15px;" src="__PUBLIC__/index/images/4.jpg" /></li>
-								<li class="newsIndexLi_n newsIndexLiMore_n" style="height: 12%;margin-top: 10%;"><img src="__PUBLIC__/index/images/more.png" style="height: 100%;display: block;margin: 0 auto;" /></li>
+								<li class="newsIndexLi_n newsIndexLiOver_n"><img style="width:100%;height:100%;border-radius:15px;" src="http://localhost/newxadmin/public/static/index/images/1.jpg" /></li>
+								<li class="newsIndexLi_n"><img style="width:100%;height:100%;border-radius:15px;" src="http://localhost/newxadmin/public/static/index/images/2.jpg" /></li>
+								<li class="newsIndexLi_n"><img style="width:100%;height:100%;border-radius:15px;" src="http://localhost/newxadmin/public/static/index/images/3.jpg" /></li>
+								<li class="newsIndexLi_n"><img style="width:100%;height:100%;border-radius:15px;" src="http://localhost/newxadmin/public/static/index/images/4.jpg" /></li>
+								<li class="newsIndexLi_n newsIndexLiMore_n" style="height: 12%;margin-top: 10%;"><img src="http://localhost/newxadmin/public/static/index/images/more.png" style="height: 100%;display: block;margin: 0 auto;" /></li>
 							</ul>
 							<div class="newsIntWordDiv_n newsIntWordDiv0_n">
 								<p class="newsIntWord_n newsIntWord1_n">新闻标题1</p>
@@ -606,28 +607,28 @@
 			</div>
 <!--			&lt;!&ndash;第四屏 加入我们&ndash;&gt;-->
 <!--			<div class="section " id="section4">-->
-<!--				<img class="pen" src="__PUBLIC__/index/images/Pen.png">-->
-<!--				<img class="cutter" src="__PUBLIC__/index/images/Cutter.png">-->
-<!--				<img class="coffee" src="__PUBLIC__/index/images/Coffee%20cup.png">-->
-<!--				<img class="earphone" src="__PUBLIC__/index/images/Earphones.png">-->
-<!--				<img class="marker" src="__PUBLIC__/index/images/Marker.png">-->
-<!--				<img class="notebook" src="__PUBLIC__/index/images/Notebook.png">-->
-<!--				<img class="wallet" src="__PUBLIC__/index/images/Wallet.png">-->
+<!--				<img class="pen" src="http://localhost/newxadmin/public/static/index/images/Pen.png">-->
+<!--				<img class="cutter" src="http://localhost/newxadmin/public/static/index/images/Cutter.png">-->
+<!--				<img class="coffee" src="http://localhost/newxadmin/public/static/index/images/Coffee%20cup.png">-->
+<!--				<img class="earphone" src="http://localhost/newxadmin/public/static/index/images/Earphones.png">-->
+<!--				<img class="marker" src="http://localhost/newxadmin/public/static/index/images/Marker.png">-->
+<!--				<img class="notebook" src="http://localhost/newxadmin/public/static/index/images/Notebook.png">-->
+<!--				<img class="wallet" src="http://localhost/newxadmin/public/static/index/images/Wallet.png">-->
 <!--				&lt;!&ndash; <a href="" class="ipad-pro"><img src="img/ipad-pro-acc-apple-pencil-witb-pdp-201810.png" ></a> &ndash;&gt;-->
-<!--				<img id="ipad" class="ipad ipad-img" style="background: #242424 content-box;border-radius: 30px; border: 20px;" src="__PUBLIC__/index/images/ipad.png">-->
+<!--				<img id="ipad" class="ipad ipad-img" style="background: #242424 content-box;border-radius: 30px; border: 20px;" src="http://localhost/newxadmin/public/static/index/images/ipad.png">-->
 <!--				<h3>加入我们,正在开发中......</h3>-->
 <!--			</div>-->
 			<!--第四屏 加入我们-->
 			<div class="section " id="section4">
-				<img class="pen" src="__PUBLIC__/index/images/Pen.png">
-				<img class="cutter" src="__PUBLIC__/index/images/Cutter.png">
-				<img class="coffee" src="__PUBLIC__/index/images/Coffee%20cup.png">
-				<img class="earphone" src="__PUBLIC__/index/images/Earphones.png">
-				<img class="marker" src="__PUBLIC__/index/images/Marker.png">
-				<img class="notebook" src="__PUBLIC__/index/images/Notebook.png">
-				<img class="wallet" src="__PUBLIC__/index/images/Wallet.png">
+				<img class="pen" src="http://localhost/newxadmin/public/static/index/images/Pen.png">
+				<img class="cutter" src="http://localhost/newxadmin/public/static/index/images/Cutter.png">
+				<img class="coffee" src="http://localhost/newxadmin/public/static/index/images/Coffee%20cup.png">
+				<img class="earphone" src="http://localhost/newxadmin/public/static/index/images/Earphones.png">
+				<img class="marker" src="http://localhost/newxadmin/public/static/index/images/Marker.png">
+				<img class="notebook" src="http://localhost/newxadmin/public/static/index/images/Notebook.png">
+				<img class="wallet" src="http://localhost/newxadmin/public/static/index/images/Wallet.png">
 				<!-- <a href="" class="ipad-pro"><img src="img/ipad-pro-acc-apple-pencil-witb-pdp-201810.png" ></a> -->
-				<img id="ipad" class="ipad ipad-img" style="background: #242424 content-box;border-radius: 30px; border: 20px;margin: 0px auto;width: 800px;position: absolute;display: inline-block;" src="__PUBLIC__/index/images/ipad.png">
+				<img id="ipad" class="ipad ipad-img" style="background: #242424 content-box;border-radius: 30px; border: 20px;margin: 0px auto;width: 800px;position: absolute;display: inline-block;" src="http://localhost/newxadmin/public/static/index/images/ipad.png">
 
 				<script>
 					var ipadM=document.getElementById("ipad");
@@ -659,12 +660,12 @@
 					</div>
 				</div>
 			</div>
-			<script src="__PUBLIC__/index/js/news_n.js" type="text/javascript"></script>
-			<script type="text/javascript" src="__PUBLIC__/index/js/section5.js"></script>
+			<script src="http://localhost/newxadmin/public/static/index/js/news_n.js" type="text/javascript"></script>
+			<script type="text/javascript" src="http://localhost/newxadmin/public/static/index/js/section5.js"></script>
 			<script src="http://code.jquery.com/jquery-latest.js"></script>
-			<script src="__PUBLIC__/index/js/main.js"></script>
-			<script type="text/javascript" src="__PUBLIC__/index/js/bg_x.js"></script>
-			<script src="__PUBLIC__/index/js/award_n2.js" type="text/javascript"></script>
+			<script src="http://localhost/newxadmin/public/static/index/js/main.js"></script>
+			<script type="text/javascript" src="http://localhost/newxadmin/public/static/index/js/bg_x.js"></script>
+			<script src="http://localhost/newxadmin/public/static/index/js/award_n2.js" type="text/javascript"></script>
 
 	</body>
 

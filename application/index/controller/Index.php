@@ -10,4 +10,8 @@ class Index extends Controller
     {
     	return view();//指向application/index/view/index/index.html
     }
+	public function introduce()
+	{
+		return view();//指向application/index/view/index/introduce.html
+	}
 }
